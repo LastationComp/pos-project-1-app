@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('client_id');
             $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
             $table->string('username')->unique();
-            $table->integer('pin');
+            $table->string('pin');
             $table->string('name');
             $table->timestamps();
         });

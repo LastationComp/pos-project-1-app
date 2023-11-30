@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('license_key')->unique();
             $table->string('client_name');
             $table->string('client_code')->unique();
-            $table->boolean('is_active');
+            $table->boolean('is_active')->default(true);
             $table->timestamp('expired_at');
             $table->timestamps();
         });

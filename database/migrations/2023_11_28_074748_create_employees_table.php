@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('admin_id');
             $table->foreign('admin_id')->references('id')->on('admins')->onDelete('cascade');
             $table->string('employee_code')->unique();
-            $table->integer('pin');
+            $table->string('pin');
             $table->string('name');
             $table->string('avatar_url');
             $table->timestamps();

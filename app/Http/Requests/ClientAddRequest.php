@@ -22,7 +22,6 @@ class ClientAddRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "license_key" => "required",
             "client_name"=> "required",
             "client_code"=> "required",
             "expired_at"=> "required",

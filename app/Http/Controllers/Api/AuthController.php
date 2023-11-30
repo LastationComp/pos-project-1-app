@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use Carbon\Carbon;
 use App\Models\Client;
 use App\Models\super_admin;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -77,17 +78,30 @@ class AuthController extends Controller
         $date->addDays($validated['expired_at']);
         $date->format('Y-m-d');
 
+        $licenseKey = Str::uuid() . mt_rand(1010,10101010);
 
         $data = [
             'super_admin_id'=> $checkauth->id,
-            'license_key'=> $validated['license_key'],
+            'license_key'=> $licenseKey,
             'client_name'=> $validated['client_name'],
             'client_code'=> $validated['client_code'],
-            'is_active'=> true,
             'expired_at' => $date
         ];
 
-        Client::create($data);
+        $client = Client::create($data);
+
+        $dataAdmin = [
+            'name' => "Admin " . $validated['client_name'],
+            'username' => strtolower(preg_replace('/\s+/', '', $validated['client_name'])),
+            'pin' => Hash::make('12345678')
+        ];
+        $admin = $client->admin()->create($dataAdmin);
+
+        $dataSetting = [
+            "emp_can_login" => true
+        ];
+
+        $admin->setting()->create($dataSetting);
 
         return redirect('/client')-> with('success','Adding Data Successfully');
     }
