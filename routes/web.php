@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\ClientController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,12 +15,22 @@ use App\Http\Controllers\Api\AuthController;
 |
 */
 
-Route::get('/', function () {
-    return view('superAdmin.login');
+Route::get('/loginsuperadmin', [AuthController::class, 'login'])->name('login');
+Route::post('/superadmin/login', [AuthController::class, 'login_super_admin'])->name('login_super_admin');
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
+//
+
+Route::prefix('/superadmin/dashboard')->middleware(['superadmin.auth'])->group(function () {
+    Route::prefix('/client')->group(function () {
+        Route::get('/', [ClientController::class, 'show_data_client'])->name('client');
+        Route::get('/add', [ClientController::class, 'add_data_client'])->name('add_data_client');
+        Route::get('/{id}/update', [ClientController::class, 'update_data_client'])->name('update_data_client');
+        Route::get('/{id}/update/expired', [ClientController::class, 'update_expired_client'])->name('update_expired_client');
+        Route::post('/submitadddata', [ClientController::class, 'submit_add_data_client'])->name('submit_add_data_client');
+        Route::post('/submitupdatedata/{id}', [ClientController::class, 'submit_update_data_client'])->name('submit_update_data_client');
+        Route::post('/submitupdateexpired/{id}', [ClientController::class, 'submit_update_expired_client'])->name('submit_update_expired_client');
+    });
 });
-Route::post('/loginsuperadmin', [AuthController::class,'login_super_admin'])->name('login_super_admin');
-Route::get('/client', [AuthController::class,'show_data_client'])->name('client');
-Route::get('/client/add', [AuthController::class,'add_data_client'])->name('add_data_client');
-Route::post('/submitadddata', [AuthController::class,'submit_add_data_client'])->name('submit_add_data_client');
-Route::get('/client/{id}/update', [AuthController::class,'update_data_client'])->name('update_data_client');
-Route::post('/submitupdatedata/{id}', [AuthController::class,'submit_update_data_client'])->name('submit_update_data_client');
+
+
