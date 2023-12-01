@@ -17,7 +17,7 @@ class SuperAdminMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         $checkSuperAdmin = super_admin::find(session()->get('auth_id'));
-        if (!$checkSuperAdmin) return redirect()->route('login')->with('error','kamu tidak ada akses');
+        if (!$checkSuperAdmin) return redirect()->route('superadmin.login')->with('error','kamu tidak ada akses');
         return $next($request);
     }
 }
