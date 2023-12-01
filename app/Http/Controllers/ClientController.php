@@ -36,6 +36,9 @@ class ClientController extends Controller
         $checkClientCode = Client::where('client_code',$validated['client_code'])->first();
         if($checkClientCode) return redirect()->back()->with('error', 'clientcode sudah ada');
 
+        $checkClientCode = Client::where('client_name',$validated['client_name'])->first();
+        if($checkClientCode) return redirect()->back()->with('error', 'client name sudah ada');
+
         $date = Carbon::now();
         $date->addDays($validated['expired_at']);
         $date->format('Y-m-d');
@@ -65,7 +68,7 @@ class ClientController extends Controller
 
         $admin->setting()->create($dataSetting);    
 
-        return redirect()->route('client')-> with('success','Adding Data Successfully');
+        return redirect()->route('superadmin.client')-> with('success','Adding Data Successfully');
     }
 
     public function update_data_client($id){
@@ -102,7 +105,7 @@ class ClientController extends Controller
 
 
 
-        return redirect()->route('client')-> with('success','Updating Data Successfully');
+        return redirect()->route('superadmin.client')-> with('success','Updating Data Successfully');
 
     }
 
@@ -140,6 +143,6 @@ class ClientController extends Controller
         $data->update($inputanData);
 
         
-        return redirect()->route('client')  -> with('success','Updating Data Successfully');
+        return redirect()->route('superadmin.client')  -> with('success','Updating Data Successfully');
     }
 }
