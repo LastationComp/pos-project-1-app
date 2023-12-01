@@ -19,7 +19,7 @@
                         placeholder="Search for users">
                 </div>
                 <div>
-                    <a href="/client/add"
+                    <a href="{{ route('add_data_client') }}"
                         class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Add Data</a>
                 </div>
             </div>
@@ -77,8 +77,9 @@
                                 {{$item->expired_at}}
                             </td>
                             <td class="px-6 py-4">
-                                <a href="/client/{{$item->id}}/update" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit
+                                <a href="/superadmin/dashboard/client/{{$item->id}}/update" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit
                                     user</a>
+                                    <a href="/superadmin/dashboard/client/{{$item->id}}/update/expired" class="font-medium text-blue-600 dark:text-blue-500 hover:underline ml-3">Update Expired</a>
                             </td>
                         </tr>
                     @endforeach

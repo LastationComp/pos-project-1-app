@@ -7,6 +7,7 @@ use App\Models\Client;
 use App\Models\super_admin;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -30,6 +31,19 @@ class AuthController extends Controller
         ], $code);
     }
 
+    public function login() {
+        $checkauth = super_admin::where('id',session()->get('auth_id'))->first();
+        if($checkauth) return abort(403);
+
+        return view('superAdmin.login');
+    }
+
+    public function logout(){
+        Session::flush();
+
+        return redirect()->route('login')->with('success', 'Anda Berhasil Logout');
+    }
+
     public function register_super_admin(RegisterSuperAdminRequest $request){
         $validated = $request->validated();
 
@@ -46,107 +60,13 @@ class AuthController extends Controller
 
     public function login_super_admin(LoginSuperAdminRequest $request){
         $validated = $request->validated();
-        $user = super_admin::where('username', $validated['username'])->first();
-        if(!$user) return redirect('/')->with('error','Error saat masuk');
+        $user = DB::selectOne('SELECT * FROM pos_user WHERE username = ?', [$validated['username']]);
+        // $user = super_admin::where('username', $validated['username'])->first();
+        if(!$user) return redirect()->route('login')->with('error','Error saat masuk');
         if(!Hash::check($validated['password'],$user->password)) return redirect('/')->with('error','Error saat masuk');
         session()->put('auth_id' , $user->id);
-        return redirect('/client');
+        return redirect()->route('client');
     }
 
-    public function show_data_client(){
-        $checkauth = super_admin::where('id',session()->get('auth_id'))->first();
-        if(!$checkauth) return redirect('/')->with('error','kamu tidak ada akses');
-
-        $data = Client::all();
-
-        return view ('superAdmin.clientdata', compact ('data'));
-    }
-
-    public function add_data_client(){
-        $checkauth = super_admin::where('id',session()->get('auth_id'))->first();
-        if(!$checkauth) return redirect('/')->with('error','kamu tidak ada akses');
-
-        return view ('superAdmin.adddataclient');
-    }
-
-    public function submit_add_data_client(ClientAddRequest $request){
-        $checkauth = super_admin::where('id',session()->get('auth_id'))->first();
-        if(!$checkauth) return redirect('/')->with('error','kamu tidak ada akses');
-        $validated = $request->validated();
-
-        $date = Carbon::now();
-        $date->addDays($validated['expired_at']);
-        $date->format('Y-m-d');
-
-        $licenseKey = Str::uuid() . mt_rand(1010,10101010);
-
-        $data = [
-            'super_admin_id'=> $checkauth->id,
-            'license_key'=> $licenseKey,
-            'client_name'=> $validated['client_name'],
-            'client_code'=> $validated['client_code'],
-            'expired_at' => $date
-        ];
-
-        $client = Client::create($data);
-
-        $dataAdmin = [
-            'name' => "Admin " . $validated['client_name'],
-            'username' => strtolower(preg_replace('/\s+/', '', $validated['client_name'])),
-            'pin' => Hash::make('12345678')
-        ];
-        $admin = $client->admin()->create($dataAdmin);
-
-        $dataSetting = [
-            "emp_can_login" => true
-        ];
-
-        $admin->setting()->create($dataSetting);
-
-        return redirect('/client')-> with('success','Adding Data Successfully');
-    }
-
-    public function update_data_client($id){
-        $checkauth = super_admin::where('id',session()->get('auth_id'))->first();
-        if(!$checkauth) return redirect('/')->with('error','kamu tidak ada akses');
-
-        $data = Client::find($id);
-
-        return view ('superAdmin.updatedataclient', compact('data'));
-
-    }
-
-    public function submit_update_data_client (ClientAddRequest $request, $id){
-        $checkauth = super_admin::where('id',session()->get('auth_id'))->first();
-        if(!$checkauth) return redirect('/')->with('error','kamu tidak ada akses');
-        $validated = $request->validated();
-
-        $latestDate = Client::find($id)->latest()->first();
-        $latestDate->get(['expired_at']);
-        // dd($latestDate);
-        if(!$validated['expired_at'] == 0){
-            $date = $date = Carbon::create($latestDate->expired_at);
-            $date->addDays($validated['expired_at']);
-            $date->format('Y-m-d');
-        } else {
-            $date = Carbon::create($latestDate->expired_at);
-        }
-
-
-        $inputData = [
-            'super_admin_id'=> $checkauth->id,
-            'license_key'=> $validated['license_key'],
-            'client_name'=> $validated['client_name'],
-            'client_code'=> $validated['client_code'],
-            'is_active'=> true,
-            'expired_at' => $date
-        ];
-
-        $data = Client::find($id);
-        $data->update($inputData);
-
-
-        return redirect('/client')-> with('success','Updating Data Successfully');
-
-    }
+    
 }
