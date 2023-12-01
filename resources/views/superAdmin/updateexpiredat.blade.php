@@ -2,7 +2,7 @@
 
 @section('content')
     <div class=" flex justify-center py-[200px] ">
-        <form class="w-[500px] border border-solid p-10 border-black shadow-xl" method="POST" action="{{ route('submit_update_expired_client', $data->id) }}">
+        <form class="w-[500px] border border-solid p-10 border-black shadow-xl" method="POST" action="{{ route('superadmin.submit_update_expired_client', $data->id) }}">
             @csrf
             <div class="mb-5">
                 <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Rental Duration (DAY)</label>
