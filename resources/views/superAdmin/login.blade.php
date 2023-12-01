@@ -23,7 +23,7 @@
                     </ul>
                 </div>
             @endif
-            <form class="space-y-6" action="/loginsuperadmin" method="POST">
+            <form class="space-y-6" action="{{ route('login_super_admin') }}" method="POST">
                 @csrf
                 <h5 class="text-xl font-medium text-gray-900 dark:text-white">Login Into Super Admin Dashboard</h5>
                 <div>

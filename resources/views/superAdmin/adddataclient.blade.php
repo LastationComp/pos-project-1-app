@@ -2,7 +2,16 @@
 
 @section('content')
     <div class=" flex justify-center py-[200px] ">
-        <form class="w-[500px] border border-solid p-10 border-black shadow-xl" method="POST" action="/submitadddata">
+        <form class="w-[500px] border border-solid p-10 border-black shadow-xl" method="POST" action="{{ route('submit_add_data_client') }}">
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             @csrf
             <div class="mb-5">
                 <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Client Name</label>
