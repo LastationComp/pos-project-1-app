@@ -63,11 +63,11 @@ class AuthController extends Controller
         $user = DB::selectOne('SELECT * FROM pos_user WHERE username = ?', [$validated['username']]);
         // $user = super_admin::where('username', $validated['username'])->first();
         if(!$user) return redirect()->route('superadmin.login')->with('error','Error saat masuk');
-        if(!Hash::check($validated['password'],$user->password)) return redirect('/')->with('error','Error saat masuk');
+        if(!Hash::check($validated['password'],$user->password)) return redirect('superadmin.login')->with('error','Error saat masuk');
         session()->put('auth_id' , $user->id);
         session()->put('roles', $user->role);
         return redirect()->route('superadmin.client');
     }
 
-    
+
 }

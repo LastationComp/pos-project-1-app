@@ -1,8 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\licenseController;
+use App\Http\Controllers\Api\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,5 +33,8 @@ Route::prefix('/superadmin/dashboard')->middleware(['superadmin.auth'])->group(f
         Route::post('/submitupdateexpired/{id}', [ClientController::class, 'submit_update_expired_client'])->name('superadmin.submit_update_expired_client');
     });
 });
+
+Route::get('/', [licenseController::class, 'index'])->name('adminEmployeeLogin');
+Route::post('/checklicensekey', [licenseController::class, 'check_license_key'])->name('check_license_key');
 
 
