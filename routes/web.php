@@ -11,9 +11,24 @@ use App\Http\Controllers\ClientController;
 |
 | Here is where you can register web routes for your application. These
 | routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
+| be assigned to the "web" middleware groupW. Make something great!
 |
 */
+Route::get('/login', function() { return view('login'); });
+Route::get('/list-product', function() { return view('list-product'); });
+
+// login 1
+Route::get('/login-pin', function() { return view('login-1.login-pin'); });
+Route::get('/login-scan', function() { return view('login-1.login-scan'); });
+
+// login 2
+Route::get('/login-pin-2', function() { return view('login-2.login-pin'); });
+Route::get('/login-scan-2', function() { return view('login-2.login-scan'); });
+
+Route::get('/success-popup', function() { return view('success'); });
+Route::get('/checkout', function() { return view('checkout'); });
+Route::get('/transaction', function() { return view('transaction'); });
+
 
 Route::get('/loginsuperadmin', [AuthController::class, 'login'])->name('login');
 Route::post('/superadmin/login', [AuthController::class, 'login_super_admin'])->name('login_super_admin');
