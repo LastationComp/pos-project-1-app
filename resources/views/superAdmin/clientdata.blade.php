@@ -1,8 +1,8 @@
 @extends('layout_superAdmin.app')
 
 @section('content')
-    <div class="container flex justify-center py-[200px]">
-        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <div class=" flex justify-center  py-[100px]">
+        <div class="relative overflow-x-auto shadow-md sm:rounded-lg ">
             <div
                 class="flex items-center justify-between flex-column flex-wrap md:flex-row space-y-4 md:space-y-0 pb-4 bg-white dark:bg-gray-900">
                 <label for="table-search" class="sr-only">Search</label>
@@ -19,7 +19,7 @@
                         placeholder="Search for users">
                 </div>
                 <div>
-                    <a href="{{ route('add_data_client') }}"
+                    <a href="{{ route('superadmin.add_data_client') }}"
                         class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Add Data</a>
                 </div>
             </div>

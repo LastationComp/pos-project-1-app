@@ -2,7 +2,7 @@
 
 @section('content')
     <div class=" flex justify-center py-[200px] ">
-        <form class="w-[500px] border border-solid p-10 border-black shadow-xl" method="POST" action="{{ route('submit_add_data_client') }}">
+        <form class="w-[500px] border border-solid p-10 border-black shadow-xl" method="POST" action="{{ route('superadmin.submit_add_data_client') }}">
             @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>
@@ -10,6 +10,11 @@
                             <li>{{ $error }}</li>
                         @endforeach
                     </ul>
+                </div>
+            @endif
+            @if ($message = Session::get('error'))
+                <div class="alert alert-success" id="success-msg" role="alert">
+                    {{ $message }}
                 </div>
             @endif
             @csrf
