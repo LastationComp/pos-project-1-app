@@ -27,7 +27,6 @@ class licenseController extends Controller
 
     public function check_license_key(Request $request)
     {
-        $date = Carbon::now();
         $validated = $request->validate([
             'license_key' => 'required'
         ]);
