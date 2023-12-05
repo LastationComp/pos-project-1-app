@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\licenseController;
@@ -33,12 +34,13 @@ Route::get('/transaction', function() { return view('transaction'); });
 
 Route::get('/loginsuperadmin', [AuthController::class, 'login'])->name('superadmin.login');
 Route::post('/superadmin/login', [AuthController::class, 'login_super_admin'])->name('login_super_admin');
-Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
 
 //
 
-Route::prefix('/superadmin/dashboard')->middleware(['superadmin.auth'])->group(function () {
-    Route::prefix('/client')->group(function () {
+Route::prefix('/superadmin')->middleware(['superadmin.auth'])->group(function () {
+    Route::get('/logout', [AuthController::class, 'logout'])->name('superadmin.logout');
+    Route::prefix('dashboard/client')->group(function () {
         Route::get('/', [ClientController::class, 'show_data_client'])->name('superadmin.client');
         Route::get('/add', [ClientController::class, 'add_data_client'])->name('superadmin.add_data_client');
         Route::get('/{id}/update', [ClientController::class, 'update_data_client'])->name('superadmin.update_data_client');
@@ -49,7 +51,16 @@ Route::prefix('/superadmin/dashboard')->middleware(['superadmin.auth'])->group(f
     });
 });
 
-Route::get('/', [licenseController::class, 'index'])->name('adminEmployeeLogin');
+Route::get('/', [licenseController::class, 'index'])->name('adminEmployeeLogin')->middleware(['adminemployee.auth']);
 Route::post('/checklicensekey', [licenseController::class, 'check_license_key'])->name('check_license_key');
+Route::post('/loginadminemployee', [AuthController::class, 'login_admin_employee'])->name('login_admin_employee');
+
+Route::prefix('/admin/dashboard')->group(function () {
+    Route::get('/', [AdminController::class, 'index'])->name('dashboard_admin');
+    Route::prefix('/settings')->group(function () {
+        
+    });
+});
 
 
+Route::get('/test', [AdminController::class, 'submit_add_data_employee']);
