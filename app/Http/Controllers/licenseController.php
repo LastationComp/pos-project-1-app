@@ -22,7 +22,7 @@ class licenseController extends Controller
             }
         }
 
-        return view('admin.loginAdmin');
+        return view('admin.login-pin');
     }
 
     public function check_license_key(Request $request)
