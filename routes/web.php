@@ -24,12 +24,14 @@ Route::get('/login-pin', function() { return view('login-1.login-pin'); });
 Route::get('/login-scan', function() { return view('login-1.login-scan'); });
 
 // login 2
-Route::get('/login-pin-2', function() { return view('login-2.login-pin'); });
+Route::get('/login-pin-2', function() { return vsiew('login-2.login-pin'); });
 Route::get('/login-scan-2', function() { return view('login-2.login-scan'); });
 
 Route::get('/success-popup', function() { return view('success'); });
 Route::get('/checkout', function() { return view('checkout'); });
 Route::get('/transaction', function() { return view('transaction'); });
+
+Route::get('/dashboard', function() { return view('admin.dashboard'); });
 
 
 Route::get('/loginsuperadmin', [AuthController::class, 'login'])->name('superadmin.login');
