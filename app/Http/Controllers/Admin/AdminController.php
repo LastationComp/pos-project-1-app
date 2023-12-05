@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Admin;
+use App\Models\Client;
 use App\Models\Employee;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -11,7 +13,19 @@ use Illuminate\Support\Facades\Validator;
 class AdminController extends Controller
 {
     public function index(){
-        return view('admin.dashboard-admin');
+        
+        return view('admin.dashboard');
+    }
+
+
+    public function profile_update(){
+        $dataAdmin = Admin::with('client')
+        ->join('clients', 'admins.client_id', '=', 'clients.id')
+        ->where('name', session()->get('nameAdmin') )
+        ->get(['admins.name', 'clients.client_name', 'admins.username']);
+        // dd($dataAdmin);
+
+        return  view('admin.profile', compact('dataAdmin'));
     }
 
     public function submit_add_data_employee(Request $request) {

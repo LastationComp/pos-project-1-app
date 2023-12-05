@@ -24,7 +24,7 @@ Route::get('/login-pin', function() { return view('login-1.login-pin'); });
 Route::get('/login-scan', function() { return view('login-1.login-scan'); });
 
 // login 2
-Route::get('/login-pin-2', function() { return vsiew('login-2.login-pin'); });
+Route::get('/login-pin-2', function() { return view('login-2.login-pin'); });
 Route::get('/login-scan-2', function() { return view('login-2.login-scan'); });
 
 Route::get('/success-popup', function() { return view('success'); });
@@ -59,8 +59,11 @@ Route::post('/loginadminemployee', [AuthController::class, 'login_admin_employee
 
 Route::prefix('/admin/dashboard')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('dashboard_admin');
+    Route::prefix('/profile')->group(function () {
+        Route::get('/{id}', [AdminController::class, 'profile_update'])->name('profile_update');
+    });
     Route::prefix('/settings')->group(function () {
-        
+        Route::get('/', [])->name('settings_admin_page');
     });
 });
 
