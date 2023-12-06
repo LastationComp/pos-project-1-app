@@ -103,8 +103,6 @@ class ClientController extends Controller
         $data->admin()->update($dataAdmin);
 
 
-
-
         return redirect()->route('superadmin.client')-> with('success','Updating Data Successfully');
 
     }

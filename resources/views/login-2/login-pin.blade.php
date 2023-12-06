@@ -14,13 +14,13 @@
         <div class="left-slide w-[50%] h-[100vh] flex flex-col gap-5 justify-center items-center">
             <h2 class="mb-3 font-bold text-3xl">Sign In Members</h2>
             <form action="" method="POST" class="flex flex-col justify-center items-center">
-                @if('error')
+                @if('error' == 'eror')
                 <div class="relative px-4 py-3 leading-normal text-red-700 bg-red-100 rounded-lg mb-3 w-full" role="alert">
                     <span class="absolute inset-y-0 left-0 flex items-center ml-4">
                       <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" fill-rule="evenodd"></path></svg>
                     </span>
                     <p class="ml-6">ini error cuy</p>
-                  </div>
+                </div>
                 @endif
 
                 <div class="input-group border border-black rounded-lg overflow-hidden mb-5">
