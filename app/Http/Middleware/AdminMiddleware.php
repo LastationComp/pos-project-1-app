@@ -2,12 +2,11 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\super_admin;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class SuperAdminMiddleware
+class AdminMiddleware
 {
     /**
      * Handle an incoming request.
@@ -16,8 +15,8 @@ class SuperAdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $checkSuperAdmin = session()->get('roles');
-        if (!$checkSuperAdmin == 'super_admin') return redirect()->route('superadmin.login')->with('error','kamu tidak ada akses');
+        $checkAdmin = session()->get('role');
+        if (!$checkAdmin == 'admin') return redirect()->route('adminEmployeeLogin')->with('error','kamu tidak ada akses');
         return $next($request);
     }
 }

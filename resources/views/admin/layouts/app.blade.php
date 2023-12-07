@@ -5,7 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Transaction</title>
+    <title>@if (Request::is('admin/dashboard'))
+        Dashboard
+     @elseif  (Request::is('admin/dashboard/settings/*'))
+        Setting
+    @elseif (Request::is('admin/dashboard/profile/*'))
+        Profile
+    @endif</title>
     @vite('resources/css/app.css')
     {{-- font awesome --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
@@ -37,13 +43,13 @@
 
                 <ul class="flex gap-3 items-center mt-3 text-sm ml-14">
                     <li class="{{ Request::is('admin/dashboard') ? 'border-b-2 border-green-400' : '' }}"><a href="{{ route('dashboard_admin') }}">Home</a></li>
-                    <li><a href="#">Settings</a></li>
+                    <li class="{{Request::is('admin/dashboard/settings/*') ? 'border-b-2 border-green-400' : ''}}"><a href="{{ route('settings_admin_page', session()->get('adminUsername')) }}">Settings</a></li>
                     <li class="{{ Request::is('admin/dashboard/profile/*') ? 'border-b-2 border-green-400' : ''}}"><a href="{{ route('profile_update', session()->get('adminUsername'))}}">Profile</a></li>
                 </ul>
             </div>
 
             <div class="right-side">
-                <a href=""
+                <a href="{{route('admin_logout')}}"
                     class="font-semibold text-center px-4 py-2 mr-5 bg-white text-black rounded-md text-sm">LogOut</a>
             </div>
         </div>
