@@ -42,7 +42,7 @@ class AuthController extends Controller
     public function logout(){
         Session::flush();
 
-        return redirect()->route('login')->with('success', 'Anda Berhasil Logout');
+        return redirect()->route('superadmin.login')->with('success', 'Anda Berhasil Logout');
     }
 
     public function register_super_admin(RegisterSuperAdminRequest $request){
@@ -78,7 +78,8 @@ class AuthController extends Controller
 
         $validated = $validator->validated();
 
-        $user = DB::selectOne('SELECT * FROM pos_users WHERE username = ? AND roles = ? AND license_key = ?', [$validated['username'], $request->role,session()->get('license_key')]);
+        $user = DB::selectOne('SELECT * FROM pos_users WHERE BINARY username = ? AND roles = BINARY ? AND license_key = ?', [$validated['username'], strval($request->role),session()->get('license_key')]);
+        // dd($user);
         if(!$user) return redirect()->route('adminEmployeeLogin')->with('error', 'Akun Anda Tidak Terdaftar');
         if(!Hash::check($validated['password'],$user->password)) return redirect()->route('adminEmployeeLogin')->with('error', 'Akun Anda Tidak Terdaftar');
         // dd($request->role);
@@ -95,7 +96,7 @@ class AuthController extends Controller
         }else {
             return redirect()->route('adminEmployeeLogin')->with('error', 'test');
         }
-        
+
     }
 
 

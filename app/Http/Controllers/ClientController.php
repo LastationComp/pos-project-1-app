@@ -41,7 +41,6 @@ class ClientController extends Controller
 
         $date = Carbon::now();
         $date->addDays($validated['expired_at']);
-        $date->format('Y-m-d');
 
         $licenseKey = Str::uuid() . mt_rand(1010,10101010);
 
@@ -50,7 +49,8 @@ class ClientController extends Controller
             'license_key'=> $licenseKey,
             'client_name'=> $validated['client_name'],
             'client_code'=> $validated['client_code'],
-            'expired_at' => $date
+            'expired_at' => $date,
+            'is_active' => true
         ];
 
         $client = Client::create($data);
@@ -66,7 +66,7 @@ class ClientController extends Controller
             "emp_can_login" => true
         ];
 
-        $admin->setting()->create($dataSetting);    
+        $admin->setting()->create($dataSetting);
 
         return redirect()->route('superadmin.client')-> with('success','Adding Data Successfully');
     }
@@ -89,7 +89,7 @@ class ClientController extends Controller
             'super_admin_id'=> session()->get('auth_id'),
             'client_name'=> $validated['client_name'],
             'client_code'=> $validated['client_code'],
-            
+
         ];
 
         $data = Client::find($id);
@@ -142,7 +142,7 @@ class ClientController extends Controller
         $data = Client::find($id);
         $data->update($inputanData);
 
-        
+
         return redirect()->route('superadmin.client')  -> with('success','Updating Data Successfully');
     }
 }

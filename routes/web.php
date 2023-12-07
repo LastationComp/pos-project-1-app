@@ -57,13 +57,16 @@ Route::get('/', [licenseController::class, 'index'])->name('adminEmployeeLogin')
 Route::post('/checklicensekey', [licenseController::class, 'check_license_key'])->name('check_license_key');
 Route::post('/loginadminemployee', [AuthController::class, 'login_admin_employee'])->name('login_admin_employee');
 
-Route::prefix('/admin/dashboard')->group(function () {
+Route::prefix('/admin/dashboard')->middleware(['admin.auth'])->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('dashboard_admin');
+    Route::get('/logout', [AdminController::class, 'admin_logout'])->name('admin_logout');
     Route::prefix('/profile')->group(function () {
-        Route::get('/{id}', [AdminController::class, 'profile_update'])->name('profile_update');
+        Route::get('/{username}', [AdminController::class, 'profile_update'])->name('profile_update');
+        Route::post('/{username}/updateprofile', [AdminController::class, 'submit_profile_update'])->name('submit_profile_update');
     });
     Route::prefix('/settings')->group(function () {
-        Route::get('/', [])->name('settings_admin_page');
+        Route::get('/{username}', [AdminController::class, 'settings_admin_page'])->name('settings_admin_page');
+        Route::post('/{username}/updatesetting', [AdminController::class, 'submit_update_setting_admin'])->name('submit_update_setting_admin');
     });
 });
 
