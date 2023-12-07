@@ -13,7 +13,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach ( $persons as $person )
+        <!-- @foreach ( $persons as $person ) -->
         <tr class="">
             <td class="border-[2px] border-slate-300">{{ $loop->iteration }}</td>
             <td class="border-[2px] border-slate-300">{{ $person['name'] }}</td>
@@ -28,12 +28,12 @@
                         @csrf
                         @method('delete')
 
-                        <button type="submit" onclick="return confirm('Yakin ingin menghapus data {{ $person['name'] }} ?')" class="flex justify-center items-center w-[25px] h-[25px] rounded-full text-white bg-red-500"><i class="fa fa-trash text-xs"></i></button>
+                        <button type="submit" onclick="return confirm('Yakin ingin menghapus data {{ $person['name']; }}?')" class="flex justify-center items-center w-[25px] h-[25px] rounded-full text-white bg-red-500"><i class="fa fa-trash text-xs"></i></button>
                     </form>
                 </div>
             </td>
         </tr>
-        @endforeach
+        <!-- @endforeach -->
     </tbody>
 </table>
 @endsection

@@ -18,10 +18,10 @@ use App\Http\Controllers\TestingAdminController;
 |
 */
 // ON PROGRESS
-Route::get('/login', function() { return view('login'); })->name('login');
-Route::resource('/admin/dashboard', TestingAdminController::class);
-Route::get('/admin/settings', [TestingAdminController::class, 'settings']);
-Route::get('/admin/profile', [TestingAdminController::class, 'profile']);
+// Route::get('/login', function() { return view('login'); })->name('login');
+// Route::resource('/admin/dashboard', TestingAdminController::class);
+// Route::get('/admin/dashboard/settings', [TestingAdminController::class, 'settings']);
+// Route::get('/admin/dashboard/profile', [TestingAdminController::class, 'profile']);
 
 // just tampilan
 Route::get('/list-product', function() { return view('list-product'); });
@@ -43,10 +43,6 @@ Route::get('/transaction', function() { return view('transaction'); });
 
 Route::get('/loginsuperadmin', [AuthController::class, 'login'])->name('superadmin.login');
 Route::post('/superadmin/login', [AuthController::class, 'login_super_admin'])->name('login_super_admin');
-<<<<<<< HEAD
-Route::get('/logout', [AuthController::class, 'logout'])->name('superadmin.logout');
-=======
->>>>>>> 39c2773a2fd73f9e5dfd0de8a97718abcf6292e4
 
 
 //

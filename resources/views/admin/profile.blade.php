@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-@extends('admin.layouts.main')
-
-@section('content')
-<h2>Profile</h2>
-@endsection
-=======
 @extends('admin.layouts.app')
 
 @section('content')
@@ -57,4 +50,3 @@
           </form>
     </div>
 @endsection
->>>>>>> 39c2773a2fd73f9e5dfd0de8a97718abcf6292e4
