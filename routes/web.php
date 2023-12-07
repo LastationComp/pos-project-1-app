@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\licenseController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\TestingAdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +17,13 @@ use App\Http\Controllers\Api\AuthController;
 | be assigned to the "web" middleware groupW. Make something great!
 |
 */
-Route::get('/login', function() { return view('login'); });
+// ON PROGRESS
+// Route::get('/login', function() { return view('login'); })->name('login');
+// Route::resource('/admin/dashboard', TestingAdminController::class);
+// Route::get('/admin/dashboard/settings', [TestingAdminController::class, 'settings']);
+// Route::get('/admin/dashboard/profile', [TestingAdminController::class, 'profile']);
+
+// just tampilan
 Route::get('/list-product', function() { return view('list-product'); });
 
 // login 1
@@ -31,7 +38,7 @@ Route::get('/success-popup', function() { return view('success'); });
 Route::get('/checkout', function() { return view('checkout'); });
 Route::get('/transaction', function() { return view('transaction'); });
 
-Route::get('/dashboard', function() { return view('admin.dashboard'); });
+
 
 
 Route::get('/loginsuperadmin', [AuthController::class, 'login'])->name('superadmin.login');
