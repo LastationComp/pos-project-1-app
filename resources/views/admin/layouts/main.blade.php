@@ -22,7 +22,7 @@
 
     {{-- navbar --}}
     <nav class="w-full h-fit bg-blue-500">
-        <div class="header-wrapper w-full h-fit p-3 text-white relative z-10 flex items-center justify-between">
+        <div class="header-wrapper w-full h-fit p-3 text-white relative z-10 flex items-center justify-between ml">
             <div class="left-side">
                 <div class="flex gap-3 ">
                     <h2 class="font-mono text-2xl font-bold ml-10">Dashboard</h2>
@@ -31,8 +31,8 @@
     
                 <ul class="flex gap-3 items-center mt-3 text-sm ml-14">
                     <li class="{{ Request::is('admin/dashboard') ? 'border-b-2 border-green-400' : '' }}"><a href="{{ url('admin/dashboard') }}">Home</a></li>
-                    <li class="{{ Request::is('admin/settings') ? 'border-b-2 border-green-400' : '' }}"><a href="{{ url('admin/settings') }}">Settings</a></li>
-                    <li class="{{ Request::is('admin/profile') ? 'border-b-2 border-green-400' : '' }}"><a href="{{ url('admin/profile') }}">Profile</a></li>
+                    <li class="{{ Request::is('admin/dashboard/profile') ? 'border-b-2 border-green-400' : '' }}"><a href="{{ url('admin/dashboard/profile') }}">Profile</a></li>
+                    <li class="{{ Request::is('admin/dashboard/settings') ? 'border-b-2 border-green-400' : '' }}"><a href="{{ url('admin/dashboard/settings') }}">Settings</a></li>
                 </ul>
             </div>
 
@@ -45,12 +45,12 @@
             </div>
         </div>
 
-        <div class="sidebar fixed left-0 top-0 h-full bg-blue-500 p-3 -z-10 rounded-br-full">
+        <div class="sidebar fixed left-0 top-0 h-full bg-blue-500 p-3 z-10 rounded-br-full">
             <div class="sidebar-wrapper h-full">
                 <ul class="flex flex-col translate-y-20 mt-10 gap-5">
-                    <li class="bg-white rounded-full w-[30px] h-[30px] flex justify-center items-center"><a href="" class=""><i class="fa fa-th-large "></i></a></li>
-                    <li class="text-white rounded-full w-[30px] h-[30px] flex justify-center items-center"><a href="" class=""><i class="fa fa-clock "></i></a></li>
-                    <li class="text-white rounded-full w-[30px] h-[30px] flex justify-center items-center"><a href="" class=""><i class="fa fa-trash "></i></a></li>
+                    <li class="{{ Request::is('admin/dashboard') ? 'bg-white text-black' : 'text-white' }} rounded-full w-[30px] h-[30px] flex justify-center items-center transition-all"><a href="{{ url('admin/dashboard') }}" class=""><i class="fa fa-desktop "></i></a></li>
+                    <li class="{{ Request::is('admin/profile') ? 'bg-white text-black' : 'text-white' }} rounded-full w-[30px] h-[30px] flex justify-center items-center transition-all"><a href="{{ url('admin/profile') }}" class=""><i class="fa fa-users "></i></a></li>
+                    <li class="{{ Request::is('admin/settings') ? 'bg-white text-black' : 'text-white' }} rounded-full w-[30px] h-[30px] flex justify-center items-center transition-all"><a href="{{ url('admin/settings') }}" class=""><i class="fa fa-cog "></i></a></li>
                 </ul>
             </div>
         </div>

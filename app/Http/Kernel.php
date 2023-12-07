@@ -36,6 +36,7 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \RealRashid\SweetAlert\ToSweetAlert::class,
         ],
 
         'api' => [
@@ -64,6 +65,8 @@ class Kernel extends HttpKernel
         'signed' => \App\Http\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'superadmin.auth' => \App\Http\Middleware\SuperAdminMiddleware::class
+        'superadmin.auth' => \App\Http\Middleware\SuperAdminMiddleware::class,
+        'adminemployee.auth' => \App\Http\Middleware\AuthenticatedMiddleware::class,
+        'admin.auth' => \App\Http\Middleware\AdminMiddleware::class,
     ];
 }
