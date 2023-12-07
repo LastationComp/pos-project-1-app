@@ -75,6 +75,9 @@ Route::prefix('/admin/dashboard')->middleware(['admin.auth'])->group(function ()
         Route::get('/{username}', [AdminController::class, 'settings_admin_page'])->name('settings_admin_page');
         Route::post('/{username}/updatesetting', [AdminController::class, 'submit_update_setting_admin'])->name('submit_update_setting_admin');
     });
+    Route::prefix('/employee')->group(function (){
+        Route::get('/add', [AdminController::class, 'add_data_employee'])->name('add_data_employee');
+    });
 });
 
 

@@ -15,8 +15,10 @@ class AdminController extends Controller
 {
 
     public function index(){
+        $dataEmployee= Employee::where('admin_id', session()->get('auth_id'))
+        ->get(['employee_code', 'name', 'is_active']);
 
-        return view('admin.dashboard');
+        return view('admin.dashboard', compact('dataEmployee'));
     }
 
 
@@ -54,7 +56,7 @@ class AdminController extends Controller
         ->join('admins', 'settings.admin_id', '=', 'admins.id')
         ->where('admins.username', $username)
         ->get(['settings.emp_can_login', 'settings.emp_can_create', 'settings.emp_can_update', 'settings.emp_can_delete', 'admins.name', 'settings.shop_open', 'settings.shop_close']);
-
+        // dd($dataSetting);
         if(count($dataSetting) == 0) return abort(403);
 
         return view('admin.setting', [
@@ -81,13 +83,16 @@ class AdminController extends Controller
         ];
 
         Settings::with('admin')->join('admins', 'settings.admin_id', '=', 'admins.id')
-        ->where('admins.username', $username)->first()
+        ->where('admins.username', $username)
         ->update($dataInput);
 
         return redirect()->route('settings_admin_page', $username)->with('success', 'Setting Berhasil Dirubah');
 
     }
 
+    public function add_data_employee (){
+        return view('admin.crud_dataEmployee.create');
+    }
     public function submit_add_data_employee(Request $request) {
         $client_code = "SK";
         $find_employeeCode = Employee::where("admin_id", session()->get('auth_id'))->orderBy('created_at', 'desc')->first();

@@ -31,11 +31,6 @@
                 <input type="text" name="name" id="name" class="border-2 rounded-xl focus:outline-blue-500 h-[40px] w-full p-3 text-slate-400">
             </div>
 
-            <div class="input-group text-white-500 w-full mb-3 rounded-full ">
-                <label for="other" class="text-slate-600">Other</label>
-                <input type="text" name="other" id="other" class="border-2 rounded-xl focus:outline-blue-500 h-[40px] w-full p-3 text-slate-400">
-            </div>
-
             <button type="submit" class="border-2 border-white bg-sky-500 text-white rounded-xl px-3 py-1 mt-5">create</button>
         </form>
     </div>
