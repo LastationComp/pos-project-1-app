@@ -13,7 +13,7 @@
         </tr>
     </thead>
     <tbody>
-        <!-- @foreach ( $persons as $person ) -->
+        @foreach ( $persons as $person )
         <tr class="">
             <td class="border-[2px] border-slate-300">{{ $loop->iteration }}</td>
             <td class="border-[2px] border-slate-300">{{ $person['name'] }}</td>
@@ -33,7 +33,7 @@
                 </div>
             </td>
         </tr>
-        <!-- @endforeach -->
+        @endforeach
     </tbody>
 </table>
 @endsection
