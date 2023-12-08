@@ -21,7 +21,7 @@
 <body class="overflow-hidden">
 
     <div class="form-wrapper w-[600px] h-fit absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 shadow-sm p-5 bg-slate-200 rounded-lg">
-        <form action="{{ url('admin/dashboard') }}" method="POST" class="w-full">
+        <form action="{{ route('submit_add_data_employee') }}" method="POST" class="w-full">
             @csrf
 
             <h2 class="font-light text-2xl mb-3 text-blue-500 text-center">Create Data</h2>
