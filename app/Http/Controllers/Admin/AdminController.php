@@ -14,9 +14,14 @@ use Illuminate\Support\Facades\Validator;
 class AdminController extends Controller
 {
 
-    public function index(){
-        $dataEmployee= Employee::where('admin_id', session()->get('auth_id'))
+    public function index(Request $request){
+        $admin = Admin::find(session()->get('auth_id'));
+
+        $dataEmployee= $admin->employees()->when($request->get('search') ?? false, function($q, $search) {
+            return $q->where('name', 'LIKE', "%$search%");
+        })
         ->get(['employee_code', 'name', 'is_active']);
+        // dd($dataEmployee);
 
         return view('admin.dashboard', compact('dataEmployee'));
     }
@@ -95,12 +100,14 @@ class AdminController extends Controller
     }
 
     public function submit_add_data_employee(Request $request) {
-        // $client_code = "SK";
-        $client_code = Client::with('admin')
-        ->join('admins', 'clients.id', '=', 'admins.id')
-        ->where('admins.username', session()->get('adminUsername'))
-        ->get(['client_code']);
-        // dd($client_code);
+        $find_client_code = Client::with('admin')
+        ->join('admins', 'clients.id', '=', 'admins.client_id')
+        ->where('admins.id', session()->get('auth_id'))
+        ->get('clients.client_code');
+
+        $client_code = $find_client_code[0]->client_code;
+
+
 
         $find_employeeCode = Employee::where("admin_id", session()->get('auth_id'))->orderBy('created_at', 'desc')->first();
         $last_employee_code = $find_employeeCode ?  explode('_', $find_employeeCode->employee_code) : [];
@@ -118,16 +125,40 @@ class AdminController extends Controller
             "employee_code" => $employee_Code,
             "pin" => Hash::make('12345678'),
             "name" => $validator['name'],
-            "avatar_url" => "default_profile.png",
+            "avatar_url" => "default.png",
             "is_active" => true
 
         ];
 
+
+
         Employee::create($insert_data);
 
-        return redirect()->route('dashboard_admin')->with('success', 'Berhasil Menambahkan Data Employee');
+        return redirect()->route('dashboard_admin')->with('success', 'Data Employee Berhasil Ditambahkan');
     }
 
+    public function deactive_employee($employee_code){
+        $employee_status = Employee::where('employee_code', $employee_code)
+        ->first();
+        if($employee_status->is_active == true){
+            $change_status = [
+                "is_active" => false
+            ];
+
+            $employee_status->update($change_status);
+
+            return redirect()->route('dashboard_admin')->with('success', 'Status Employee Berhasil Di Ubah');
+        }
+        else if ($employee_status->is_active == false){
+            $change_status = [
+                "is_active" => true
+            ];
+
+            $employee_status->update($change_status);
+
+            return redirect()->route('dashboard_admin')->with('success', "Status Employee Berhasil Di Ubah");
+        }
+    }
     public function admin_logout(){
         session()->flush();
         session()->invalidate();
