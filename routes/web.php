@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\licenseController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\SuperAdmin\UnitController;
 use App\Http\Controllers\TestingAdminController;
 
 /*
@@ -24,19 +25,35 @@ use App\Http\Controllers\TestingAdminController;
 // Route::get('/admin/dashboard/profile', [TestingAdminController::class, 'profile']);
 
 // just tampilan
-Route::get('/list-product', function() { return view('list-product'); });
+Route::get('/list-product', function () {
+    return view('list-product');
+});
 
 // login 1
-Route::get('/login-pin', function() { return view('login-1.login-pin'); });
-Route::get('/login-scan', function() { return view('login-1.login-scan'); });
+Route::get('/login-pin', function () {
+    return view('login-1.login-pin');
+});
+Route::get('/login-scan', function () {
+    return view('login-1.login-scan');
+});
 
 // login 2
-Route::get('/login-pin-2', function() { return view('login-2.login-pin'); });
-Route::get('/login-scan-2', function() { return view('login-2.login-scan'); });
+Route::get('/login-pin-2', function () {
+    return view('login-2.login-pin');
+});
+Route::get('/login-scan-2', function () {
+    return view('login-2.login-scan');
+});
 
-Route::get('/success-popup', function() { return view('success'); });
-Route::get('/checkout', function() { return view('checkout'); });
-Route::get('/transaction', function() { return view('transaction'); });
+Route::get('/success-popup', function () {
+    return view('success');
+});
+Route::get('/checkout', function () {
+    return view('checkout');
+});
+Route::get('/transaction', function () {
+    return view('transaction');
+});
 
 
 
@@ -58,6 +75,13 @@ Route::prefix('/superadmin')->middleware(['superadmin.auth'])->group(function ()
         Route::post('/submitupdatedata/{id}', [ClientController::class, 'submit_update_data_client'])->name('superadmin.submit_update_data_client');
         Route::post('/submitupdateexpired/{id}', [ClientController::class, 'submit_update_expired_client'])->name('superadmin.submit_update_expired_client');
     });
+    Route::prefix('dashboard/unit')->group(function () {
+        Route::get('/', [UnitController::class, 'index'])->name('dashboard_unit');
+        Route::get('/add', [UnitController::class, 'add_data_unit'])->name('add_data_unit');
+        Route::post('/submitadddata', [UnitController::class, 'submit_add_data_unit'])->name('submit_add_data_unit');
+        Route::get('{id}/edit', [UnitController::class, 'edit_data_unit'])->name('edit_data_unit');
+
+    });
 });
 
 Route::get('/', [licenseController::class, 'index'])->name('adminEmployeeLogin')->middleware(['adminemployee.auth']);
@@ -74,6 +98,11 @@ Route::prefix('/admin/dashboard')->middleware(['admin.auth'])->group(function ()
     Route::prefix('/settings')->group(function () {
         Route::get('/{username}', [AdminController::class, 'settings_admin_page'])->name('settings_admin_page');
         Route::post('/{username}/updatesetting', [AdminController::class, 'submit_update_setting_admin'])->name('submit_update_setting_admin');
+    });
+    Route::prefix('/employee')->group(function () {
+        Route::get('/add', [AdminController::class, 'add_data_employee'])->name('add_data_employee');
+        Route::post('/submitadddataemployee', [AdminController::class, 'submit_add_data_employee'])->name('submit_add_data_employee');
+        Route::post('/deactiveemployee/{employee_code}', [AdminController::class, 'deactive_employee'])->name('deactive_employee');
     });
 });
 
