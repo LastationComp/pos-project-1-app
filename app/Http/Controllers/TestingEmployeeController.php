@@ -1,0 +1,186 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class TestingEmployeeController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        //
+
+        return view('employee.transaksi');
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        //
+    }
+
+
+    public function beli( $kode ) {
+        $list_obat = [
+            [
+                'kode' => 'OBT1004',
+                'nama' => 'Sangobion',
+                'stok' => 4,
+                'catatan' => 'Sangobion adalah vitamin penambah darah dengan kandungan gerrous gluconate di dalamnya',
+            ],
+
+            [
+                'kode' => 'OBT7008',
+                'nama' => 'Benadin',
+                'stok' => 4,
+                'catatan' => 'Benadin adalah vitamin penambah darah dengan kandungan gerrous gluconate di dalamnya',
+            ]
+        ];
+
+        foreach( $list_obat as $lo ) {
+            if( array_search($kode, $lo) ) {
+                $obat = $lo;
+            }
+        }
+
+        $cart = session()->get('cart', []);
+
+        if( isset($cart[$kode]) ) {
+            $cart[$kode]['jumlah']++;
+        } else {
+            $cart[$kode] = [
+                 'kode' => $obat['kode'],
+                'nama' => $obat['nama'],
+                'stok' => $obat['stok'],
+                'catatan' => $obat['catatan'],
+                'jumlah' => 1
+            ];
+        }
+
+        session()->put('cart', $cart);
+
+        return redirect('employee/cart');     
+    }
+
+    public function cart() {
+
+        return view('employee.checkout-transaksi');
+    }
+
+    public function hapus($kode) {
+
+        $cart = session()->get('cart');
+        
+        if ( isset($cart[$kode]) ) {
+            unset($cart[$kode]);
+            session()->put('cart', $cart);
+        }
+
+        return redirect('cart');
+    }
+
+    public function batal() {
+        
+        session()->forget('cart');
+
+        return redirect('/employee');
+    }
+
+    public function tambah($kode) {
+
+        $cart = session()->get('cart');
+        $cart[$kode]['jumlah']++;
+
+        session()->put('cart', $cart);
+
+        return redirect('employee/cart');
+    }
+
+    public function kurang($kode) {
+
+        $cart = session()->get('cart');
+        
+        if ( $cart[$kode]['jumlah'] > 1 ) {
+            $cart[$kode]['jumlah']--;
+        } else {
+            unset($cart[$kode]);
+        }
+
+        // kode buatan sendiri
+
+        if( $cart == [] ) {
+            session()->forget('cart');
+        } else {
+            session()->put('cart', $cart);
+        }
+
+        // buatan sendiri
+
+        return redirect('employee/cart');
+    }
+
+    public function checkout() {
+        
+        $data = [];
+
+        foreach (session('cart') as $key => $value) {
+            $data = [
+                'kode' => $value['kode'],
+                'nama' => $value['nama'],
+                'jumlah' => $value['jumlah'],
+            ];
+
+        }
+
+        return $data;
+
+        session()->forget('cart');
+
+        return redirect('/');
+    }
+}

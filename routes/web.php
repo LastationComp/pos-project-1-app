@@ -7,6 +7,7 @@ use App\Http\Controllers\licenseController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\SuperAdmin\UnitController;
 use App\Http\Controllers\TestingAdminController;
+use App\Http\Controllers\TestingEmployeeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,11 +19,24 @@ use App\Http\Controllers\TestingAdminController;
 | be assigned to the "web" middleware groupW. Make something great!
 |
 */
+
+// ## ROUTE Alfa
+
 // ON PROGRESS
 // Route::get('/login', function() { return view('login'); })->name('login');
 // Route::resource('/admin/dashboard', TestingAdminController::class);
 // Route::get('/admin/dashboard/settings', [TestingAdminController::class, 'settings']);
 // Route::get('/admin/dashboard/profile', [TestingAdminController::class, 'profile']);
+
+Route::prefix('/employee')->group(function(){
+    Route::get('/', function(){ return redirect('employee/transaction'); })->name('/employee');
+    Route::get('/transaction', [TestingEmployeeController::class, 'index']);
+    Route::get('beli/{kode}', [TestingEmployeeController::class, 'beli']);
+    Route::get('/cart', [TestingEmployeeController::class, 'cart']);
+    Route::get('/tambah/{kode}', [TestingEmployeeController::class, 'tambah']);
+    Route::get('/kurang/{kode}', [TestingEmployeeController::class, 'kurang']);
+    Route::get('/batal', [TestingEmployeeController::class, 'batal']);
+});
 
 // just tampilan
 Route::get('/list-product', function () {
@@ -56,11 +70,10 @@ Route::get('/transaction', function () {
 });
 
 
-
-
 Route::get('/loginsuperadmin', [AuthController::class, 'login'])->name('superadmin.login');
 Route::post('/superadmin/login', [AuthController::class, 'login_super_admin'])->name('login_super_admin');
 
+// ## end of ROUTE Alfa
 
 //
 
