@@ -77,6 +77,7 @@ Route::prefix('/admin/dashboard')->middleware(['admin.auth'])->group(function ()
     });
     Route::prefix('/employee')->group(function (){
         Route::get('/add', [AdminController::class, 'add_data_employee'])->name('add_data_employee');
+        Route::post('/submitadd', [AdminController::class, 'submit_add_data_employee'])->name('submit_add_data_employee');
     });
 });
 

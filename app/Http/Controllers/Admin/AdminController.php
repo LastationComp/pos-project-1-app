@@ -93,8 +93,15 @@ class AdminController extends Controller
     public function add_data_employee (){
         return view('admin.crud_dataEmployee.create');
     }
+
     public function submit_add_data_employee(Request $request) {
-        $client_code = "SK";
+        // $client_code = "SK";
+        $client_code = Client::with('admin')
+        ->join('admins', 'clients.id', '=', 'admins.id')
+        ->where('admins.username', session()->get('adminUsername'))
+        ->get(['client_code']);
+        // dd($client_code);
+
         $find_employeeCode = Employee::where("admin_id", session()->get('auth_id'))->orderBy('created_at', 'desc')->first();
         $last_employee_code = $find_employeeCode ?  explode('_', $find_employeeCode->employee_code) : [];
         $code = count($last_employee_code, 1) != 0 ? $last_employee_code[1] : 0;
@@ -102,7 +109,7 @@ class AdminController extends Controller
         $employee_Code = $client_code . '_' . str_pad(strval($final_employee_code), 4, "0", STR_PAD_LEFT);
         // dd($employee_Code);
 
-        $validator = Validator::make($request->all(), [
+        $validator = $request->validate([
             "name" => ['required','not_regex:(^\s+|[<>/;:"#$%^&*(){}`?]|\s{2,})'],
         ]);
 
@@ -110,10 +117,15 @@ class AdminController extends Controller
             "admin_id" => session()->get('auth_id'),
             "employee_code" => $employee_Code,
             "pin" => Hash::make('12345678'),
+            "name" => $validator['name'],
+            "avatar_url" => "default_profile.png",
+            "is_active" => true
 
         ];
 
         Employee::create($insert_data);
+
+        return redirect()->route('dashboard_admin')->with('success', 'Berhasil Menambahkan Data Employee');
     }
 
     public function admin_logout(){
