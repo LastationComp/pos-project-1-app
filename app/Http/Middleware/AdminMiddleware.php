@@ -17,6 +17,7 @@ class AdminMiddleware
     {
         $checkAdmin = session()->get('role');
         if (!$checkAdmin == 'admin') return redirect()->route('adminEmployeeLogin')->with('error','kamu tidak ada akses');
+        if (!$checkAdmin == 'employee') return redirect()->route('adminEmployeeLogin')->with('error', 'kamu tidak ada akses');
         return $next($request);
     }
 }

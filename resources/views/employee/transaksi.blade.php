@@ -2,10 +2,10 @@
 
 @section('content')
     <div class="user-welcome flex flex-col gap-2">
-        <h2 class="text-emerald-500 text-2xl font-semibold">Selamat Datang Jimmy</h2>
-        <p class="text-white font-light">12-09-2023</p>
+        <h2 class="text-emerald-500 text-2xl font-semibold">Selamat Datang {{session()->get('employeeName')}}</h2>
+        <p class="text-white font-light">{{\Carbon\Carbon::Now()->toDateString()}}</p>
     </div>
-    
+
     <div class="wrapper w-[100%]  h-[90vh] overflow-auto no-scrollbar mt-5 bg-white rounded-lg border-2  shadow-md p-3">
         <div class="search-wrapper w-full flex justify-between mb-5">
             <h2 class="text-2xl font-semibold">Pencarian Produk</h2>
@@ -70,7 +70,7 @@
         </div>
 
         <div class="item p-3 rounded-lg">
-            
+
             <h2 class="text-xl font-semibold">Sangobion</h2>
             <div class="btn-group flex">
                 <a href="#" class="bg-red-500 px-3">-</a>

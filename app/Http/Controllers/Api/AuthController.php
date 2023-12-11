@@ -77,6 +77,7 @@ class AuthController extends Controller
             $check_setting = $check_admin->setting()->get(['settings.emp_can_login', 'settings.shop_open', 'settings.shop_close', 'settings.emp_can_create', 'settings.emp_can_update', 'settings.emp_can_update']);
             $time = Carbon::now()->setTimezone('Asia/Jakarta');
             $timeNow= $time->toTimeString();
+            $date = $time->toDateString();
             $shop_open = $check_setting[0]->shop_open;
             $shop_close = $check_setting[0]->shop_close;
             // dd($timeNow);
@@ -88,7 +89,7 @@ class AuthController extends Controller
             session()->put('emp_can_delete', $check_setting[0]->emp_can_delete);
         }
         $validator = Validator::make ($request->all(), [
-            "username" => ['required','min:8','not_regex:(^\s+|[<>/;:"#$%^&*(){}`?]|\s{2,})'],
+            "username" => ['required','not_regex:(^\s+|[<>/;:"#$%^&*(){}`?]|\s{2,})'],
             "password" => ["required","min:8"]
         ]);
 
@@ -108,6 +109,9 @@ class AuthController extends Controller
         }else if ($user->roles == 'employee'){
             session()->put('role', $user->roles);
             session()->put('auth_id', $user->id);
+            session()->put('employee_code', $user->username);
+            session()->put('employeeName', $user->name);
+            session()->put('avatar_url', $user->avatar);
             return redirect()->route('adminEmployeeLogin')->with('success', 'anda login sebagai employee');
         }else {
             return redirect()->route('adminEmployeeLogin')->with('error', 'test');
