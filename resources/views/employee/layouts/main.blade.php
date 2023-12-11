@@ -39,8 +39,10 @@
 </head>
 <body class="overflow-hidden">
 
+
     <div class="bg-page absolute -z-20 w-full h-full">
         <div class="w-full h-[50vh] bg-gradient-to-r from-[#28A446] to-[#28656A]"></div>
+
         <div class="w-full h-[50vh] bg-white"></div>
     </div>
 
@@ -53,13 +55,14 @@
                     <a href="">API</a>
                     <i class="fa fa-circle absolute -top-1 -right-1 text-xs"></i>
                 </div>
+
                 <div class="user flex gap-2 justify-start items-center">
                     <div class="rounded-full bg-white border border-white">
-                        <img src="https://static-00.iconduck.com/assets.00/profile-circle-icon-512x512-zxne30hp.png" alt="" width="30">
+                        <img src="{{ asset('images/'. session()->get('avatar_url'))}}" alt="" width="30">
                     </div>
 
                     <div class="flex flex-col">
-                        <h3 class="font-bold text-md">Jimmy</h3>
+                        <h3 class="font-bold text-md">{{session()->get('employeeName')}}</h3>
                         <p class="text-sm">Kasir</p>
                     </div>
                 </div>
@@ -77,6 +80,7 @@
                               <a href="#" class="text-slate-400 text-sm">Logout <i class="fa fa-key ml-2"></i></a>
                             </li>
                         </ul>
+
                     </div>
                 </div>
             </div>
@@ -89,6 +93,7 @@
                     Apotek <br>Lastation
                 </h2>
             </div>
+
 
             <ul class="flex flex-col gap-1 text-white w-full">
                 <li class="px-3 py-2 justify-between {{ Request::is('employee/transaction*') ? 'bg-gradient-to-l from-[#28A446] to-[#28656A]' : '' }} flex justiy-between items-center">
@@ -110,14 +115,17 @@
                 <li class="px-3 py-2 flex justify-between items-center {{ Request::is('employee/laporan-stok*') ? 'bg-gradient-to-l from-[#28A446] to-[#28656A]' : '' }}">
                     <i class="bi bi-journal-richtext mr-3"></i>
                     <a href="{{ url('employee/laporan-stok') }}" class="w-full">Laporan Stok </a> 
+
                 </li>
             </ul>
         </div>
     </nav>
     {{-- end of navbar --}}
 
+
     <div class="content ml-[220px] mx-5">
         @yield('content')
+
     </div>
 </body>
 </html>

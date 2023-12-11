@@ -1,9 +1,10 @@
 @extends('employee.layouts.main')
 
 @section('content')
+
 <div class="user-welcome flex flex-col gap-1 text-white mt-3">
-    <h2 class="text-2xl font-semibold">Selamat Datang Jimmy</h2>
-    <p class="font-light text-sm">12-09-2023</p>
+    <h2 class="text-2xl font-semibold">Selamat Datang {{session()->get('employeeName')}}</h2>
+    <p class="font-light text-sm">{{\Carbon\Carbon::Now()->toDateString()}}</p>
 </div>
 
 <div class="wrapper w-[100%] h-[75vh]  mt-5 bg-[#F1F1F1] rounded-lg border shadow-2xl p-3 relative">
@@ -28,6 +29,7 @@
                         <i class="bi bi-chevron-down font-bold"></i>
                     </div>
                 </button>
+
 
                 <div id="dropdown-member" class="z-10 hidden ">
                     <ul class="bg-white divide-y border" aria-labelledby="member-dropdown">
@@ -102,4 +104,5 @@
         </table>
     </div>
 </div>
+
 @endsection
