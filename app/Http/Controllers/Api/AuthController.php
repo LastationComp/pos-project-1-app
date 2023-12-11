@@ -95,7 +95,7 @@ class AuthController extends Controller
 
         $validated = $validator->validated();
 
-        $user = DB::selectOne('SELECT * FROM pos_users WHERE BINARY username = ? AND roles = BINARY ? AND license_key = ? AND is_active = ?' , [$validated['username'], strval($request->role),session()->get('license_key'), true]);
+        $user = DB::selectOne('SELECT * FROM pos_users WHERE BINARY username = ? AND roles = BINARY ? AND license_key = ? AND is_active = ?' , [$validated['username'], $request->role,session()->get('license_key'), true]);
         // dd($user);
         if(!$user) return redirect()->route('adminEmployeeLogin')->with('error', 'Akun Anda Tidak Terdaftar');
         if(!Hash::check($validated['password'],$user->password)) return redirect()->route('adminEmployeeLogin')->with('error', 'Akun Anda Tidak Terdaftar');

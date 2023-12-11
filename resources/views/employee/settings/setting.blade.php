@@ -1,7 +1,7 @@
 @extends('employee.layouts.main')
 
 @section('content')
-<form action="{{route('submit_profile_update', $data[0]->employee_code)}}" method="POST" class="mt-[150px]"  enctype="multipart/form-data">
+<form action="{{route('submit_profile_update_employee', $data[0]->employee_code)}}" method="POST" class="mt-10"  enctype="multipart/form-data">
     @csrf
     <div class="grid grid-rows-2 ">
         <div class="mx-auto ">

@@ -41,9 +41,9 @@
 
 
     <div class="bg-page absolute -z-20 w-full h-full">
-        <div class="w-full h-[50vh] bg-gradient-to-r from-[#28A446] to-[#28656A]"></div>
+        <div class="w-full h-full bg-gradient-to-r from-[#28A446] to-[#28656A]"></div>
 
-        <div class="w-full h-[50vh] bg-white"></div>
+       
     </div>
 
     {{-- navbar --}}
@@ -57,8 +57,8 @@
                 </div>
 
                 <div class="user flex gap-2 justify-start items-center">
-                    <div class="rounded-full bg-white border border-white">
-                        <img src="{{ asset('images/'. session()->get('avatar_url'))}}" alt="" width="30">
+                    <div class=" ">
+                        <img src="{{ asset('images/'. session()->get('avatar_url'))}}" class="rounded-full object-cover max-w-20 h-10" alt="" width="30">
                     </div>
 
                     <div class="flex flex-col">
@@ -74,7 +74,7 @@
                     <div id="dropdown" class="z-10 hidden">
                         <ul class="bg-white divide-y" aria-labelledby="dropdownDefaultButton">
                             <li class="px-2">
-                                <a href="#" class="text-slate-400 text-sm">Settings <i class="fa fa-cogs ml-2"></i></a>
+                                <a href="{{ route('profile_update_employee', session()->get('employee_code')) }}" class="text-slate-400 text-sm">Settings <i class="fa fa-cogs ml-2"></i></a>
                             </li>
                             <li class="px-2">
                               <a href="#" class="text-slate-400 text-sm">Logout <i class="fa fa-key ml-2"></i></a>
@@ -106,7 +106,7 @@
                 </li>
                 <li class="px-3 py-2 flex justify-between items-center {{ Request::is('employee/data-produk*') ? 'bg-gradient-to-l from-[#28A446] to-[#28656A]' : '' }}">
                     <i class="bi bi-boxes mr-3"></i>
-                    <a href="{{ url('employee/data-produk') }}" class="w-full">Data Produk </a> 
+                    <a href="{{ route('product_page') }}" class="w-full">Data Produk </a> 
                 </li>
                 <li class="px-3 py-2 flex justify-between items-center {{ Request::is('employee/riwayat-penjualan*') ? 'bg-gradient-to-l from-[#28A446] to-[#28656A]' : '' }}">
                     <i class="bi bi-calendar-week mr-3"></i>
