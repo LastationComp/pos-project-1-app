@@ -22,6 +22,8 @@
 </head>
 <body class="overflow-hidden">
 
+
+
     <div class="bg-page absolute -z-10 w-full h-full">
         <div class="w-full h-[50vh] bg-black"></div>
         <div class="w-full h-[50vh] bg-white"></div>
@@ -36,11 +38,11 @@
                 </div>
                 <div class="user flex gap-3 justify-start items-center">
                     <div class="bg-emerald-500 rounded-full">
-                        <img src="https://static-00.iconduck.com/assets.00/profile-circle-icon-512x512-zxne30hp.png" alt="" width="40">
+                        <img class="rounded-full" src="{{ asset('images/'. session()->get('avatar_url'))}}" alt="" width="40">
                     </div>
 
                     <div class="flex flex-col">
-                        <h3 class="font-semibold text-xl">Jimmy</h3>
+                        <h3 class="font-semibold text-xl">{{session()->get('employeeName')}}</h3>
                         <div>Kasir</div>
                     </div>
                 </div>
@@ -64,32 +66,32 @@
             <ul class="flex flex-col gap-1 text-white mt-5 w-full">
                 <li class="px-3 py-2 justify-between bg-white text-green-500 flex justiy-between items-center">
                     <i class="fa mr-3 fa-credit-card text-blue"></i>
-                    <a href="{{ url('employee/transaction') }}" class="w-full">Transaksi </a> 
+                    <a href="{{ url('employee/transaction') }}" class="w-full">Transaksi </a>
                 </li>
                 <li class="px-3 py-2 flex justify-between items-center ">
                     <i class="fa mr-3 fa-medkit"></i>
-                    <a href="#" class="w-full">Data Produk </a> 
+                    <a href="#" class="w-full">Data Produk </a>
                 </li>
                 <li class="px-3 py-2 flex justify-between items-center">
                     <i class="fa mr-3 fa-users"></i>
-                    <a href="#" class="w-full">Member </a> 
+                    <a href="#" class="w-full">Member </a>
                 </li>
                 <li class="px-3 py-2 flex justify-between items-center">
                     <i class="fa mr-3 fa-history"></i>
-                    <a href="#" class="w-full">Riwayat Penjualan </a> 
+                    <a href="#" class="w-full">Riwayat Penjualan </a>
                 </li>
                 <li class="px-3 py-2 flex justify-between items-center">
                     <i class="fa mr-3 fa-car"></i>
-                    <a href="#" class="w-full">Laporan Stok </a> 
+                    <a href="#" class="w-full">Laporan Stok </a>
                 </li>
             </ul>
         </div>
     </nav>
     {{-- end of navbar --}}
 
-    <div class="content ml-[200px] mx-5">
+    <div class="content ml-[200px] mx-5 ">
 
-        
+
             @yield('content')
         </div>
     </div>
