@@ -68,18 +68,25 @@ class TestingEmployeeController extends Controller
     public function beli( $kode ) {
         $list_obat = [
             [
-                'kode' => 'OBT1004',
+                'kode' => 'OBT1614120001',
                 'nama' => 'Sangobion',
                 'stok' => 4,
                 'catatan' => 'Sangobion adalah vitamin penambah darah dengan kandungan gerrous gluconate di dalamnya',
             ],
 
             [
-                'kode' => 'OBT7008',
-                'nama' => 'Benadin',
-                'stok' => 4,
-                'catatan' => 'Benadin adalah vitamin penambah darah dengan kandungan gerrous gluconate di dalamnya',
-            ]
+                'kode' => 'OBT1614120002',
+                'nama' => 'Nyanyobion',
+                'stok' => 9,
+                'catatan' => 'Nyanyobion adalah vitamin penambah darah dengan kandungan gerrous gluconate di dalamnya',
+            ],
+
+            [
+                'kode' => 'OBT1614120003',
+                'nama' => 'Nganyobion',
+                'stok' => 15,
+                'catatan' => 'Ngayobion adalah vitamin penambah darah dengan kandungan gerrous gluconate di dalamnya',
+            ],
         ];
 
         foreach( $list_obat as $lo ) {
@@ -94,7 +101,7 @@ class TestingEmployeeController extends Controller
             $cart[$kode]['jumlah']++;
         } else {
             $cart[$kode] = [
-                 'kode' => $obat['kode'],
+                'kode' => $obat['kode'],
                 'nama' => $obat['nama'],
                 'stok' => $obat['stok'],
                 'catatan' => $obat['catatan'],
@@ -182,5 +189,22 @@ class TestingEmployeeController extends Controller
         session()->forget('cart');
 
         return redirect('/');
+    }
+
+    // ---2-2
+    public function data_produk() {
+        return view('employee.data-produk');
+    }
+
+    public function member() {
+        
+    }
+
+    public function riwayat_penjualan() {
+        return view('employee.riwayat-penjualan');
+    }
+
+    public function laporan_stok() {
+        return 'laporan stok';
     }
 }
