@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\licenseController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\CrudMemberController;
+use App\Http\Controllers\CrudProdukController;
 use App\Http\Controllers\SuperAdmin\UnitController;
 use App\Http\Controllers\TestingAdminController;
 use App\Http\Controllers\TestingEmployeeController;
@@ -30,6 +32,20 @@ use App\Http\Controllers\TestingEmployeeController;
 // Route::get('/admin/dashboard/profile', [TestingAdminController::class, 'profile']);
 
 
+Route::prefix('/employee')->group(function(){
+    Route::get('/', function(){ return redirect('employee/transaction'); })->name('/employee');
+    Route::resource('/member', CrudMemberController::class);
+    Route::resource('/data-produk', CrudProdukController::class);
+    Route::get('/riwayat-penjualan', [TestingEmployeeController::class, 'riwayat_penjualan']);
+    Route::get('/laporan-stok', [TestingEmployeeController::class, 'laporan_stok']);
+    
+    Route::get('/transaction', [TestingEmployeeController::class, 'index']);
+    Route::get('beli/{kode}', [TestingEmployeeController::class, 'beli']);
+    Route::get('/cart', [TestingEmployeeController::class, 'cart']);
+    Route::get('/tambah/{kode}', [TestingEmployeeController::class, 'tambah']);
+    Route::get('/kurang/{kode}', [TestingEmployeeController::class, 'kurang']);
+    Route::get('/batal', [TestingEmployeeController::class, 'batal']);
+});
 
 // just tampilan
 Route::get('/list-product', function () {
