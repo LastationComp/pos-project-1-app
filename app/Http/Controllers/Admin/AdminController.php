@@ -100,12 +100,8 @@ class AdminController extends Controller
     }
 
     public function submit_add_data_employee(Request $request) {
-        $find_client_code = Client::with('admin')
-        ->join('admins', 'clients.id', '=', 'admins.client_id')
-        ->where('admins.id', session()->get('auth_id'))
-        ->get('clients.client_code');
 
-        $client_code = $find_client_code[0]->client_code;
+        $client_code = session()->get('client_code');
 
 
 

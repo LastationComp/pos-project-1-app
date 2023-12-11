@@ -1,16 +1,16 @@
 <?php
 
-use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Employee\EmployeeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\licenseController;
 use App\Http\Controllers\Api\AuthController;
-use App\Http\Controllers\CrudMemberController;
-use App\Http\Controllers\CrudProdukController;
-use App\Http\Controllers\SuperAdmin\UnitController;
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\TestingAdminController;
+use App\Http\Controllers\SuperAdmin\UnitController;
 use App\Http\Controllers\TestingEmployeeController;
+use App\Http\Controllers\Employee\EmployeeController;
+use App\Http\Controllers\Employee\CrudMemberController;
+use App\Http\Controllers\Employee\Product\CrudProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,20 +32,7 @@ use App\Http\Controllers\TestingEmployeeController;
 // Route::get('/admin/dashboard/profile', [TestingAdminController::class, 'profile']);
 
 
-Route::prefix('/employee')->group(function(){
-    Route::get('/', function(){ return redirect('employee/transaction'); })->name('/employee');
-    Route::resource('/member', CrudMemberController::class);
-    Route::resource('/data-produk', CrudProdukController::class);
-    Route::get('/riwayat-penjualan', [TestingEmployeeController::class, 'riwayat_penjualan']);
-    Route::get('/laporan-stok', [TestingEmployeeController::class, 'laporan_stok']);
-    
-    Route::get('/transaction', [TestingEmployeeController::class, 'index']);
-    Route::get('beli/{kode}', [TestingEmployeeController::class, 'beli']);
-    Route::get('/cart', [TestingEmployeeController::class, 'cart']);
-    Route::get('/tambah/{kode}', [TestingEmployeeController::class, 'tambah']);
-    Route::get('/kurang/{kode}', [TestingEmployeeController::class, 'kurang']);
-    Route::get('/batal', [TestingEmployeeController::class, 'batal']);
-});
+
 
 // just tampilan
 Route::get('/list-product', function () {
@@ -128,16 +115,32 @@ Route::prefix('/admin/dashboard')->middleware(['admin.auth'])->group(function ()
     });
 });
 
-Route::prefix('/employee')->middleware(['admin.auth'])->group(function(){
-    Route::get('/', function(){ return redirect('employee/transaction'); })->name('employee');
-    Route::get('/transaction', [TestingEmployeeController::class, 'index'])->name('employee_transaction');
+Route::prefix('/employee')->middleware('admin.auth')->group(function(){
+    Route::get('/', function(){ return redirect('employee/transaction'); })->name('/employee');
+    Route::prefix('/member')->group(function(){
+        Route::get('/', [CrudMemberController::class, 'index'])->name('member_page');
+        Route::get('/add', [CrudMemberController::class, 'add_data_member'])->name('add_data_member');
+        Route::post('/submitadd', [CrudMemberController::class, 'submit_add_data_member'])->name('submit_add_data_member');
+        Route::get('/{customer_code}/update', [CrudMemberController::class, 'submit_update_data_employee'])->name('submit_update_data_employee');
+        Route::post('/{customer_code}/submitupdate', [CrudMemberController::class, 'submit_update_data_member_employee'])->name('submit_update_data_member_employee');
+        Route::post('/{customer_code}/deletedata', [CrudMemberController::class, 'delete_data_member_employee'])->name('delete_data_member_employee');
+    });
+    Route::prefix('/product')->group(function() {
+        Route::get('/', [CrudProductController::class, 'index'])->name('product_page');
+    });
+    Route::get('/{username}/profile', [EmployeeController::class, 'profile_update'])->name('profile_update_employee');
+    Route::post('/{username}/updateprofile', [EmployeeController::class, 'submit_profile_update'])->name('submit_profile_update_employee');
+    Route::get('/riwayat-penjualan', [TestingEmployeeController::class, 'riwayat_penjualan']);
+    Route::get('/laporan-stok', [TestingEmployeeController::class, 'laporan_stok']);
+    
+    Route::get('/transaction', [TestingEmployeeController::class, 'index']);
     Route::get('beli/{kode}', [TestingEmployeeController::class, 'beli']);
     Route::get('/cart', [TestingEmployeeController::class, 'cart']);
     Route::get('/tambah/{kode}', [TestingEmployeeController::class, 'tambah']);
     Route::get('/kurang/{kode}', [TestingEmployeeController::class, 'kurang']);
     Route::get('/batal', [TestingEmployeeController::class, 'batal']);
-    Route::get('/{username}/profile', [EmployeeController::class, 'profile_update'])->name('profile_update');
-    Route::post('/{username}/updateprofile', [EmployeeController::class, 'submit_profile_update'])->name('submit_profile_update');
 });
+
+
 
 

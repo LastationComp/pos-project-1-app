@@ -31,9 +31,9 @@ class EmployeeController extends Controller
         $old_avatar = $update_employee->avatar_url;
         if ($request->new_password && $request->reenter_password && $request->old_password) {
             if ($request->new_password != $request->reenter_password)
-                return redirect()->route('profile_update', $username)->with('error', 'New Password not match with Reenter Password');
+                return redirect()->route('profile_update_employee', $username)->with('error', 'New Password not match with Reenter Password');
             if (!Hash::check($request->old_password, $update_employee->pin))
-                return redirect()->route('profile_update', $username)->with('error', 'Old Password not same');
+                return redirect()->route('profile_update_employee', $username)->with('error', 'Old Password not same');
         }
 
 
@@ -69,6 +69,6 @@ class EmployeeController extends Controller
             File::delete(public_path('/images'). '/' . $old_avatar);
         }
 
-        return redirect()->route('profile_update', $username)->with('success', 'success to change profile for employee');
+        return redirect()->route('profile_update_employee', $username)->with('success', 'success to change profile for employee');
     }
 }
