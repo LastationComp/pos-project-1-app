@@ -6,7 +6,7 @@
             <h2 class="text-3xl font-light capitalize">Tambah Selling Unit Product</h2>
         </div>
 
-        <div class="form-wrapper px-5 py-2 h-[75vh]">
+        <div class="form-wrapper px-5 py-2 h-[75vh] overflow-auto no-scrollbar">
             <div class="btn-group flex items-center">
                 <div class="btn-detail-obat px-3 py-1 border-t-4 rounded-t-md border-blue-500 bg-slate-200">
                     <button class="border-2 border-slate-100 bg-slate-300 px-3 py-1 rounded-md shadow-md">Tambah
@@ -16,6 +16,7 @@
             </div>
 
             <form action="{{ route('submit_add_selling_unit', $product->id) }}" method="POST"
+                
                 class="bg-slate-200 p-5 rounded-b-md h-[90%]">
                 @csrf
 

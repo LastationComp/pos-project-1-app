@@ -102,7 +102,7 @@
                 </li>
                 <li class="px-3 py-2 flex justify-between items-center {{ Request::is('employee/member*') ? 'bg-gradient-to-l from-[#28A446] to-[#28656A]' : '' }}">
                     <i class="bi bi-people mr-3"></i>
-                    <a href="{{ url('employee/member') }}" class="w-full">Member </a>
+                    <a href="{{ route('member_page') }}" class="w-full">Member </a>
                 </li>
                 <li class="px-3 py-2 flex justify-between items-center {{ Request::is('employee/product*') ? 'bg-gradient-to-l from-[#28A446] to-[#28656A]' : '' }}">
                     <i class="bi bi-boxes mr-3"></i>

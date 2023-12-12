@@ -46,15 +46,18 @@ class SellingUnitController extends Controller
         $check_selling_unit = $product->selling_units()->where('unit_id', $request->smallest_unit )->exists();
         if($check_selling_unit) return redirect()->route('edit_data_selling_unit', $selling_unit_id)->with('error', 'Selling Unit Sudah Terdaftar');
 
-        if($request->is_smallest == 'true'){
-            Selling_unit::where('product_id', $product_id)
-            ->where('unit_id', '!=', $request->smallest_unit)
-            ->update(["is_smallest" => false]);
-        }
+        
 
         $get_selling_unit = Selling_unit::where('id', $selling_unit_id)
         ->where('product_id', $product_id)->update($input_data);
 
         return redirect()->route('table_selling_unit', $product->id)->with('success', 'Data Sukses Ditambahkan');
+    }
+
+    public function delete_selling_unit($product_id, $selling_unit_id){
+        Selling_unit::where('id', $selling_unit_id)
+        ->where('product_id', $product_id)->delete();
+
+        return redirect()->route('table_selling_unit', $product_id)->with('success', 'Data Berhasil Di Hapus');
     }
 }
