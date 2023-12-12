@@ -43,7 +43,7 @@
     <div class="bg-page absolute -z-20 w-full h-full">
         <div class="w-full h-full bg-gradient-to-r from-[#28A446] to-[#28656A]"></div>
 
-       
+
     </div>
 
     {{-- navbar --}}
@@ -66,11 +66,11 @@
                         <p class="text-sm">Kasir</p>
                     </div>
                 </div>
-                
+
                 <div class="dropdown-wrapper">
                     <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" type="button" class="" ><i class="fa fa-chevron-down"></i>
                     </button>
-                    
+
                     <div id="dropdown" class="z-10 hidden">
                         <ul class="bg-white divide-y" aria-labelledby="dropdownDefaultButton">
                             <li class="px-2">
@@ -98,23 +98,23 @@
             <ul class="flex flex-col gap-1 text-white w-full">
                 <li class="px-3 py-2 justify-between {{ Request::is('employee/transaction*') ? 'bg-gradient-to-l from-[#28A446] to-[#28656A]' : '' }} flex justiy-between items-center">
                     <i class="bi bi-cash-stack mr-3"></i>
-                    <a href="{{ url('employee/transaction') }}" class="w-full">Transaksi </a> 
+                    <a href="{{ url('employee/transaction') }}" class="w-full">Transaksi </a>
                 </li>
                 <li class="px-3 py-2 flex justify-between items-center {{ Request::is('employee/member*') ? 'bg-gradient-to-l from-[#28A446] to-[#28656A]' : '' }}">
                     <i class="bi bi-people mr-3"></i>
-                    <a href="{{ url('employee/member') }}" class="w-full">Member </a> 
+                    <a href="{{ url('employee/member') }}" class="w-full">Member </a>
                 </li>
-                <li class="px-3 py-2 flex justify-between items-center {{ Request::is('employee/data-produk*') ? 'bg-gradient-to-l from-[#28A446] to-[#28656A]' : '' }}">
+                <li class="px-3 py-2 flex justify-between items-center {{ Request::is('employee/product*') ? 'bg-gradient-to-l from-[#28A446] to-[#28656A]' : '' }}">
                     <i class="bi bi-boxes mr-3"></i>
-                    <a href="{{ route('product_page') }}" class="w-full">Data Produk </a> 
+                    <a href="{{ route('product_page') }}" class="w-full">Data Produk </a>
                 </li>
                 <li class="px-3 py-2 flex justify-between items-center {{ Request::is('employee/riwayat-penjualan*') ? 'bg-gradient-to-l from-[#28A446] to-[#28656A]' : '' }}">
                     <i class="bi bi-calendar-week mr-3"></i>
-                    <a href="{{ url('employee/riwayat-penjualan') }}" class="w-full">Riwayat Penjualan </a> 
+                    <a href="{{ url('employee/riwayat-penjualan') }}" class="w-full">Riwayat Penjualan </a>
                 </li>
                 <li class="px-3 py-2 flex justify-between items-center {{ Request::is('employee/laporan-stok*') ? 'bg-gradient-to-l from-[#28A446] to-[#28656A]' : '' }}">
                     <i class="bi bi-journal-richtext mr-3"></i>
-                    <a href="{{ url('employee/laporan-stok') }}" class="w-full">Laporan Stok </a> 
+                    <a href="{{ url('employee/laporan-stok') }}" class="w-full">Laporan Stok </a>
 
                 </li>
             </ul>

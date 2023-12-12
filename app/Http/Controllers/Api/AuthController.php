@@ -66,7 +66,7 @@ class AuthController extends Controller
         if(!$user) return redirect()->route('superadmin.login')->with('error','Error saat masuk');
         if(!Hash::check($validated['password'],$user->password)) return redirect()->route('superadmin.login')->with('error','Error saat masuk');
         session()->put('auth_id' , $user->id);
-        session()->put('roles', $user->role);
+        session()->put('roles', $user->roles);
         return redirect()->route('superadmin.client');
     }
 
