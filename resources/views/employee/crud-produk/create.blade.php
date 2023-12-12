@@ -15,7 +15,7 @@
 
             </div>
 
-            <form action="{{ route('submit_add_data_product') }}" method="POST" class="bg-slate-200 p-5 rounded-b-md h-[90%]">
+            <form action="{{ route('submit_add_data_product') }}" method="POST" class="bg-slate-200 p-5 rounded-b-md h-[90%] overflow-auto no-scrollbar">
                 @csrf
 
                 <div class="detail-obat-wrapper">

@@ -162,7 +162,3 @@ Route::prefix('/employee')->middleware('admin.auth')->group(function(){
     Route::get('/kurang/{kode}', [TestingEmployeeController::class, 'kurang']);
     Route::get('/batal', [TestingEmployeeController::class, 'batal']);
 });
-
-
-
-
