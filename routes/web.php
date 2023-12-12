@@ -137,10 +137,12 @@ Route::prefix('/employee')->middleware('admin.auth')->group(function(){
         Route::post('/{id}/submitupdatesellingunit', [CrudProductController::class, 'submit_add_selling_unit'])->name('submit_add_selling_unit');
         Route::get('/{id_product}/updateproduct', [CrudProductController::class, 'update_data_product'])->name('update_data_product');
         Route::post('/{id_product}/submitupdatedata', [CrudProductController::class, 'submit_update_data_product'])->name('submit_update_data_product');
+        Route::post('/{id_product}/deleteproduct', [CrudProductController::class, 'delete_data_product'])->name('delete_data_product');
         Route::prefix('/sellingunit')->group(function () {
             Route::get('/{id_product}', [SellingUnitController::class, 'index'])->name('table_selling_unit');
             Route::get('/{id_selling_unit}/edit', [SellingUnitController::class, 'edit_data_selling_unit'])->name('edit_data_selling_unit');
             Route::post('/{product_id}/{selling_unit_id}/submitedit', [SellingUnitController::class, 'submit_edit_data_selling_unit'])->name('submit_edit_data_selling_unit');
+            Route::post('/{product_id}/{selling_unit_id}/delete', [SellingUnitController::class, 'delete_selling_unit'])->name('delete_selling_unit');
         });
     });
     Route::get('/{username}/profile', [EmployeeController::class, 'profile_update'])->name('profile_update_employee');
