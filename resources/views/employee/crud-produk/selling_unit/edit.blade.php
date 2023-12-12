@@ -11,13 +11,15 @@
                 <div class="btn-detail-obat px-3 py-1 border-t-4 rounded-t-md border-blue-500 bg-slate-200">
                     <button class="border-2 border-slate-100 bg-slate-300 px-3 py-1 rounded-md shadow-md">Detail
                         Obat</button>
+                    </div>
+                    
                 </div>
-
-            </div>
-
+                
             <div  class="bg-slate-200 p-5 rounded-b-md h-[90%]">
-                @csrf
+                <form action="{{ url('kosong') }}" method="POST" class="w-full h-[86%] overflow-y-auto no-scrollbar">
+                    @csrf
 
+                
                 <div class="detail-obat-wrapper">
                     <div class="input-group flex items-center justify-between w-[80%] mb-3 rounded-b-md">
                         <label for="name" class="text-lg font-semibold">Nama obat</label>
@@ -38,7 +40,7 @@
                             class=" w-[80%] h-[35px] rounded-md border border-black p-5">
                     </div>
                     <p class="text-xl text-slate-500 font-medium mb-2 mt-5">List Selling Unit</p>
-                    <table class="w-full text-md border-collapse rounded-corners rounded-t-xl overflow-hidden" cellpadding="7" cellspacing="0" >
+                    <table class="w-full text-md border-collapse rounded-corners rounded-t-xl" cellpadding="7" cellspacing="0" >
                         <thead>
                             <tr class=" bg-[#4B4B4B] text-white font-semibold">
                                 <td class=" border border-l-0 border-t-0  border-black capitalize text-center">no. </td>
@@ -84,6 +86,7 @@
                         class="px-3 py-1 border-2 border-slate-200 text-semibold text-white rounded-md shadow-md flex items-center w-fit bg-blue-500"><i
                             class="bi bi-box-arrow-in-left mr-2"></i> kembali</a>
                 </div>
+            </form>
             </div>
         </div>
     </div>
