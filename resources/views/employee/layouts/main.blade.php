@@ -101,7 +101,7 @@
                 </li>
                 <li class="px-3 py-2 flex justify-between items-center {{ Request::is('employee/data-produk*') ? 'bg-gradient-to-l from-[#28A446] to-[#28656A]' : '' }}">
                     <i class="bi bi-boxes mr-3"></i>
-                    <a href="{{ url('employee/data-produk') }}" class="w-full">Data Produk </a> 
+                    <a href="{{ url('employee/data-produk') }}" class="w-full">Data Obat </a> 
                 </li>
                 <li class="px-3 py-2 flex justify-between items-center {{ Request::is('employee/riwayat-penjualan*') ? 'bg-gradient-to-l from-[#28A446] to-[#28656A]' : '' }}">
                     <i class="bi bi-calendar-week mr-3"></i>

@@ -9,6 +9,7 @@ use App\Http\Controllers\CrudMemberController;
 use App\Http\Controllers\CrudProdukController;
 use App\Http\Controllers\SuperAdmin\UnitController;
 use App\Http\Controllers\TestingAdminController;
+use App\Http\Controllers\TestingDBController;
 use App\Http\Controllers\TestingEmployeeController;
 
 /*
@@ -25,6 +26,8 @@ use App\Http\Controllers\TestingEmployeeController;
 // ## ROUTE Alfa
 
 // ON PROGRESS
+Route::get('/test-db', [TestingDBController::class, 'index']);
+
 // Route::get('/login', function() { return view('login'); })->name('login');
 // Route::resource('/admin/dashboard', TestingAdminController::class);
 // Route::get('/admin/dashboard/settings', [TestingAdminController::class, 'settings']);
