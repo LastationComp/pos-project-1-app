@@ -16,8 +16,8 @@
             </div>
 
             <form action="{{ route('submit_add_selling_unit', $product->id) }}" method="POST"
-                
-                class="bg-slate-200 p-5 rounded-b-md h-[90%]">
+
+                class="bg-slate-200 p-5 rounded-b-md h-[90%] overflow-auto no-scrollbar">
                 @csrf
 
                 <div class="detail-obat-wrapper">

@@ -115,7 +115,6 @@
                 <li class="px-3 py-2 flex justify-between items-center {{ Request::is('employee/laporan-stok*') ? 'bg-gradient-to-l from-[#28A446] to-[#28656A]' : '' }}">
                     <i class="bi bi-journal-richtext mr-3"></i>
                     <a href="{{ url('employee/laporan-stok') }}" class="w-full">Laporan Stok </a>
-
                 </li>
             </ul>
         </div>
