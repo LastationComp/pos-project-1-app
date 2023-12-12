@@ -8,7 +8,7 @@
 </div>
 
 <div class="wrapper w-[100%] h-[75vh]  mt-5 bg-[#F1F1F1] rounded-lg border shadow-2xl p-3 relative">
-    <form action="{{ url('employee/beli') }}" method="POST" class="w-full h-full">
+    <form action="{{ route('submit_checkbox_product') }}" method="POST" class="w-full h-full">
     <div class="search-wrapper absolute top-0 left-0 w-full flex justify-between p-3">
             @csrf
             <h2 class="text-2xl font-bold">Pencarian Produk</h2>
@@ -56,11 +56,11 @@
                         <td class=" border border-l-0 border-t-0  border-black capitalize text-center">pilih</td>
                         <td class=" border border-l-0 border-t-0 border-black capitalize w-[15%]">kode obat</td>
                         <td class=" border border-l-0 border-t-0 border-black capitalize w-[20%]">nama obat</td>
-                        <td class=" border border-l-0 border-t-0 border-black capitalize w-[8%]">sisa stok</td>
                         <td class="  border border-l-0 border-t-0 border-r-0 border-black capitalize">catatan obat</td>
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach ($product as $item)
                     <tr class="">
                         <td class=" border border-t-0 border-black">
                             <div class="flex justify-center items-center">
@@ -68,28 +68,12 @@
                                 <input type="checkbox" name="OBT1614120001" value="OBT1614120001">
                             </div>
                         </td>
-                        <td class=" border border-l-0 border-t-0 border-black font-medium">OBT1614120001</td>
-                        <td class=" border border-l-0 border-t-0 border-black">Sangobion</td>
-                        <td class=" border border-l-0 border-t-0 border-black">
-                            <div class="rounded-full bg-red-500 text-white text-center text-sm w-fit px-5 mx-auto">4</div>
-                        </td>
-                        <td class=" border border-l-0 border-t-0 border-black"><p>{{ Str::limit('Sangobion adalah vitamin penambah darah dengan kandungan gerrous gluconate di dalamnya', 65) }}</p></td>
+                        <td class=" border border-l-0 border-t-0 border-black font-medium">{{ $item->barcode }}</td>
+                        <td class=" border border-l-0 border-t-0 border-black">{{ $item->product_name }}</td>
+                        <td class=" border border-l-0 border-t-0 border-black"><p>{{ Str::limit($item->catatan_obat, 65) }}</p></td>
                     </tr>
-
-                    <tr class="">
-                        <td class=" border border-t-0 border-black">
-                            <div class="flex justify-center items-center">
-                                {{-- <a href="{{ url('employee/beli/OBT1614120003') }}" class="px-3  bg-green-500 text-white">beli</a> --}}
-                                <input type="checkbox" name="OBT1614120003" value="OBT1614120003">
-                            </div>
-                        </td>
-                        <td class=" border border-l-0 border-t-0 border-black font-medium">OBT1614120003</td>
-                        <td class=" border border-l-0 border-t-0 border-black">Nganyobion</td>
-                        <td class=" border border-l-0 border-t-0 border-black">
-                            <div class="rounded-full bg-green-500 text-black text-center text-sm w-fit px-5 mx-auto">15</div>
-                        </td>
-                        <td class=" border border-l-0 border-t-0 border-black"><p>{{ Str::limit('Nganyobion adalah vitamin penambah darah dengan kandungan gerrous gluconate di dalamnya', 65) }}</p></td>
-                    </tr>
+                    @endforeach
+                    
                 </tbody>
             </table>
         </div>

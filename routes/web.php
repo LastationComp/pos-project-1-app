@@ -13,6 +13,8 @@ use App\Http\Controllers\TestingEmployeeController;
 use App\Http\Controllers\Employee\EmployeeController;
 use App\Http\Controllers\Employee\CrudMemberController;
 use App\Http\Controllers\Employee\Product\CrudProductController;
+use App\Http\Controllers\Employee\Transaction\TransactionController;
+use App\Models\Transaction;
 
 /*
 |--------------------------------------------------------------------------
@@ -120,7 +122,7 @@ Route::prefix('/admin/dashboard')->middleware(['admin.auth'])->group(function ()
 });
 
 Route::prefix('/employee')->middleware('admin.auth')->group(function(){
-    Route::get('/', function(){ return redirect('employee/transaction'); })->name('employee');
+    Route::get('/', function(){ return redirect()->route('transaction_page'); })->name('employee');
     Route::prefix('/member')->group(function(){
         Route::get('/', [CrudMemberController::class, 'index'])->name('member_page');
         Route::get('/add', [CrudMemberController::class, 'add_data_member'])->name('add_data_member');
@@ -145,12 +147,15 @@ Route::prefix('/employee')->middleware('admin.auth')->group(function(){
             Route::post('/{product_id}/{selling_unit_id}/delete', [SellingUnitController::class, 'delete_selling_unit'])->name('delete_selling_unit');
         });
     });
+    Route::prefix('/transaction')->group(function(){
+        Route::get('/', [TransactionController::class, 'index'])->name('transaction_page');
+        Route::post('/gotocheckout', [TransactionController::class, 'submit_checkbox_product'])->name('submit_checkbox_product');
+        Route::get('/checkout', [TransactionController::class, 'checkout_product_page'])->name('checkout_product_page');
+    });
     Route::get('/{username}/profile', [EmployeeController::class, 'profile_update'])->name('profile_update_employee');
     Route::post('/{username}/updateprofile', [EmployeeController::class, 'submit_profile_update'])->name('submit_profile_update_employee');
     Route::get('/riwayat-penjualan', [TestingEmployeeController::class, 'riwayat_penjualan']);
     Route::get('/laporan-stok', [TestingEmployeeController::class, 'laporan_stok']);
-
-    Route::get('/transaction', [TestingEmployeeController::class, 'index']);
     Route::post('beli', [TestingEmployeeController::class, 'beli']);
     Route::get('/cart', [TestingEmployeeController::class, 'cart']);
     Route::get('/tambah/{kode}', [TestingEmployeeController::class, 'tambah']);

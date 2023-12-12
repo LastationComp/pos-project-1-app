@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="wrapper w-[100%] h-[85vh]  mt-5 bg-[#F1F1F1] rounded-lg border shadow-2xl p-3 relative">
-    @if( session('cart') )
+    
         <div class="text-center border-b-2 border-emerald-500 p-3 w-full ">
             <h2 class="text-3xl font-light capitalize">Pembelian Obat</h2>
         </div>
@@ -22,29 +22,29 @@
                 </div>
 
                 <div class="list-item p-3 rounded-lg overflow-auto no-scrollbar h-full pt-14 relative -z-0 divide-y-2">
-                    @foreach ( session('cart') as $cart )
+                    
                         <div class="item flex justify-between p-3 border-slate-600">
                             <div>
-                                <h3 class="font-semibold text-xl">{{ $cart['nama'] }}</h3>
+                                <h3 class="font-semibold text-xl">Product Example</h3>
                                 <a href="#" class="text-sm">Lembar <i class="fa fa-chevron-down ml-2"></i></a>
                             </div>
 
                             <div class="flex gap-5 justify-center items-center">
                                 <div class="btn-group flex justify-center items-center gap-2">
                                     <div class="flex justify-center items-center px-2 py-1 rounded-md bg-slate-300 border border-slate-400 w-fit h-fit">
-                                        <a href="{{ url('/employee/kurang/' . $cart['kode']) }}" class="w-[18px] h-[18px] border border-black rounded-full flex justify-center items-center text-sm"><i class="fa fa-minus"></i></a>
+                                        <a href="" class="w-[18px] h-[18px] border border-black rounded-full flex justify-center items-center text-sm"><i class="fa fa-minus"></i></a>
                                     </div>
                                     <div class="px-5 rounded-md border border-slate-400 w-fit h-fit flex justify-center items-center">
-                                        <span>{{ $cart['jumlah'] }}</span>
+                                        <span>1</span>
                                     </div>
                                     <div class="flex justify-center items-center px-2 py-1 rounded-md bg-slate-300 border border-slate-400 w-fit h-fit">
-                                        <a href="{{ url('/employee/tambah/' . $cart['kode']) }}" class="w-[18px] h-[18px] border border-black rounded-full flex justify-center items-center text-sm"><i class="fa fa-plus"></i></a>
+                                        <a href="" class="w-[18px] h-[18px] border border-black rounded-full flex justify-center items-center text-sm"><i class="fa fa-plus"></i></a>
                                     </div>
                                 </div>
                                 <h3 class="text-xl font-semibold">Rp. 10. 000</h3>
                             </div>
                         </div>
-                    @endforeach
+                    
                 </div>
             </div>
 
@@ -96,9 +96,5 @@
             </div>
         </div>
 </div>
-    @else
-        <script>
-            window.location.replace('/employee');
-        </script>
-    @endif
+    
 @endsection
