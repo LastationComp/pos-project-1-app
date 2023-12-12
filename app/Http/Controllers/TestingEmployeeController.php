@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
+use App\Models\Client;
 use Illuminate\Http\Request;
 
 class TestingEmployeeController extends Controller
@@ -11,7 +13,23 @@ class TestingEmployeeController extends Controller
      */
     public function index()
     {
-        //
+        if(session()->get('role') == 'employee')
+        {
+            $check_client = Client::where('license_key', session()->get('license_key'))->first();
+            $check_admin = $check_client->admin()->first();
+            $check_setting = $check_admin->setting()->get(['settings.shop_open', 'settings.shop_close']);
+            $time = Carbon::now()->setTimezone('Asia/Jakarta');
+            $timeNow= $time->toTimeString();
+            $shop_open = $check_setting[0]->shop_open;
+            $shop_close = $check_setting[0]->shop_close;
+            $validate_time = $shop_open < $timeNow && $timeNow < $shop_close;
+            if(!$validate_time){
+                session()->flush();
+                session()->invalidate();
+                session()->regenerateToken();
+                return redirect()->route('adminEmployeeLogin')->with('error', 'Sorry, the shop already close');
+            }
+        }
 
         return view('employee.transaksi');
     }
@@ -65,7 +83,7 @@ class TestingEmployeeController extends Controller
     }
 
 
-    public function beli( $kode ) {
+    public function beli( Request $request ) {
         $list_obat = [
             [
                 'kode' => 'OBT1614120001',
@@ -89,6 +107,8 @@ class TestingEmployeeController extends Controller
             ],
         ];
 
+        
+
         foreach( $list_obat as $lo ) {
             if( array_search($kode, $lo) ) {
                 $obat = $lo;
@@ -111,7 +131,7 @@ class TestingEmployeeController extends Controller
 
         session()->put('cart', $cart);
 
-        return redirect('employee/cart');     
+        return redirect('employee/cart');
     }
 
     public function cart() {
@@ -122,7 +142,7 @@ class TestingEmployeeController extends Controller
     public function hapus($kode) {
 
         $cart = session()->get('cart');
-        
+
         if ( isset($cart[$kode]) ) {
             unset($cart[$kode]);
             session()->put('cart', $cart);
@@ -132,7 +152,7 @@ class TestingEmployeeController extends Controller
     }
 
     public function batal() {
-        
+
         session()->forget('cart');
 
         return redirect('/employee');
@@ -151,7 +171,7 @@ class TestingEmployeeController extends Controller
     public function kurang($kode) {
 
         $cart = session()->get('cart');
-        
+
         if ( $cart[$kode]['jumlah'] > 1 ) {
             $cart[$kode]['jumlah']--;
         } else {
@@ -172,7 +192,7 @@ class TestingEmployeeController extends Controller
     }
 
     public function checkout() {
-        
+
         $data = [];
 
         foreach (session('cart') as $key => $value) {

@@ -18,7 +18,7 @@ class AuthenticatedMiddleware
     {
         if(!session()->has('role')) return $next($request);
         if(session()->get('role') == 'admin') return redirect()->route('dashboard_admin');
-        // if(session()->get('role') == 'employee') return redirect()->route('adminEmployeeLogin');
-        
+        if(session()->get('role') == 'employee') return redirect()->route('employee');
+
     }
 }

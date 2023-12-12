@@ -66,7 +66,7 @@ class AuthController extends Controller
         if(!$user) return redirect()->route('superadmin.login')->with('error','Error saat masuk');
         if(!Hash::check($validated['password'],$user->password)) return redirect()->route('superadmin.login')->with('error','Error saat masuk');
         session()->put('auth_id' , $user->id);
-        session()->put('roles', $user->role);
+        session()->put('roles', $user->roles);
         return redirect()->route('superadmin.client');
     }
 
@@ -74,23 +74,28 @@ class AuthController extends Controller
         if (strval($request->role) == 'employee'){
             $check_client = Client::where('license_key', session()->get('license_key'))->first();
             $check_admin = $check_client->admin()->first();
-            $check_setting = $check_admin->setting()->get(['settings.emp_can_login', 'settings.shop_open', 'settings.shop_close']);
-            $timeNow = Carbon::now();
-            $timeNow->toTimeString();
+            $check_setting = $check_admin->setting()->get(['settings.emp_can_login', 'settings.shop_open', 'settings.shop_close', 'settings.emp_can_create', 'settings.emp_can_update', 'settings.emp_can_update']);
+            $time = Carbon::now()->setTimezone('Asia/Jakarta');
+            $timeNow= $time->toTimeString();
+            $date = $time->toDateString();
             $shop_open = $check_setting[0]->shop_open;
             $shop_close = $check_setting[0]->shop_close;
-            $validate_time = $shop_open < $shop_close && $timeNow < $shop_close;
+            // dd($timeNow);
+            $validate_time = $shop_open < $timeNow && $timeNow < $shop_close;
             if (!$validate_time) return redirect()->route('adminEmployeeLogin')->with('error', "Toko Sudah Tutup! Silahkan Login Besok");
             if ($check_setting[0]->emp_can_login == false) return redirect()->route('adminEmployeeLogin')->with('error', "akses masuk anda di nonaktifkan! \n mohon hubungi admin anda");
+            session()->put('emp_can_create', $check_setting[0]->emp_can_create);
+            session()->put('emp_can_update', $check_setting[0]->emp_can_update);
+            session()->put('emp_can_delete', $check_setting[0]->emp_can_delete);
         }
         $validator = Validator::make ($request->all(), [
-            "username" => ['required','min:8','not_regex:(^\s+|[<>/;:"#$%^&*(){}`?]|\s{2,})'],
+            "username" => ['required','not_regex:(^\s+|[<>/;:"#$%^&*(){}`?]|\s{2,})'],
             "password" => ["required","min:8"]
         ]);
 
         $validated = $validator->validated();
 
-        $user = DB::selectOne('SELECT * FROM pos_users WHERE BINARY username = ? AND roles = BINARY ? AND license_key = ? AND is_active = ?' , [$validated['username'], strval($request->role),session()->get('license_key'), true]);
+        $user = DB::selectOne('SELECT * FROM pos_users WHERE BINARY username = ? AND roles = BINARY ? AND license_key = ? AND is_active = ?' , [$validated['username'], $request->role,session()->get('license_key'), true]);
         // dd($user);
         if(!$user) return redirect()->route('adminEmployeeLogin')->with('error', 'Akun Anda Tidak Terdaftar');
         if(!Hash::check($validated['password'],$user->password)) return redirect()->route('adminEmployeeLogin')->with('error', 'Akun Anda Tidak Terdaftar');
@@ -104,6 +109,9 @@ class AuthController extends Controller
         }else if ($user->roles == 'employee'){
             session()->put('role', $user->roles);
             session()->put('auth_id', $user->id);
+            session()->put('employee_code', $user->username);
+            session()->put('employeeName', $user->name);
+            session()->put('avatar_url', $user->avatar);
             return redirect()->route('adminEmployeeLogin')->with('success', 'anda login sebagai employee');
         }else {
             return redirect()->route('adminEmployeeLogin')->with('error', 'test');

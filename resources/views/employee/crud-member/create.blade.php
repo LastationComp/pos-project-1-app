@@ -7,7 +7,7 @@
 @section('content')
 
     <div class="wrapper w-[60%] h-fit bg-[#c9c2c2] rounded-lg  relative left-1/2 -translate-x-1/2 border shadow-xl mt-20 p-3">
-        <form action="{{ url('employee/member') }}" method="POST" class="w-full h-full bg-white border shadow-xl p-5 rounded-lg">
+        <form action="{{ route("submit_add_data_member") }}" method="POST" class="w-full h-full bg-white border shadow-xl p-5 rounded-lg">
             @csrf
 
             <h2 class="capitalize text-blue-500 text-2xl font-medium mb-5">Tambah Member</h2>
@@ -31,7 +31,7 @@
 
             <div class="btn-group flex gap-3 w-fit mx-auto text-white font-semibold mt-16">
                 <button type="submit" class="px-3 py-1 rounded-md shadow-md border  bg-green-500">Tambah</button>
-                <a href="{{ url('employee/member') }}" class="px-3 py-1 rounded-md shadow-md border  bg-red-500">Batal</a>
+                <a href="{{ route('member_page') }}" class="px-3 py-1 rounded-md shadow-md border  bg-red-500">Batal</a>
             </div>
         </form>
     </div>
