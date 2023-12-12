@@ -10,9 +10,9 @@
         <div class="flex gap-5 px-5 h-[85%] justify-evenly relative mt-3">
             <div class="list-checkout-wrapper border border-black rounded-lg w-[50%] h-full relative">
                 <div class="btn-group flex gap-3 bg-slate-300 rounded-lg p-3 absolute top-0 left-0 z-10">
-                    <a href="" class="px-3 py-1 bg-green-500 text-white rounded-md border-2 border-slate-300 text-sm flex items-center"><i class="fa fa-plus mr-2"></i> Tambah</a>
+                    <a href="{{ url('employee/transaction') }}" class="px-3 py-1 bg-green-500 text-white rounded-md border-2 border-slate-300 text-sm flex items-center"><i class="fa fa-plus mr-2"></i> Tambah</a>
                     <a href="" class="px-3 py-1 bg-slate-100 rounded-md border-2 border-slate-300 text-sm flex items-center"><i class="fa fa-repeat mrf-2"></i> Reset</a>
-                    <a href="{{ url('employee/batal') }}" class="px-3 py-1 bg-red-500 text-white rounded-md border-2 border-slate-300 text-sm flex items-center"><i class="fa fa-angle-double-left mr-2"></i> Kembali</a>
+                    <a href="{{ url('employee/batal') }}" onclick="return confirm('apakah yakin ingin membatalkan transaksi?')" class="px-3 py-1 bg-red-500 text-white rounded-md border-2 border-slate-300 text-sm flex items-center"><i class="fa fa-angle-double-left mr-2"></i> Batal</a>
                     <div class="relative rounded-md flex items-center">
                         <a href="" class="absolute left-0 ml-3">
                             <i class="fa fa-search "></i>

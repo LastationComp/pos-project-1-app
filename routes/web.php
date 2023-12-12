@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\TestingAdminController;
 use App\Http\Controllers\SuperAdmin\UnitController;
+use App\Http\Controllers\TestingDBController;
 use App\Http\Controllers\TestingEmployeeController;
 use App\Http\Controllers\Employee\EmployeeController;
 use App\Http\Controllers\Employee\CrudMemberController;
@@ -27,6 +28,8 @@ use App\Http\Controllers\Employee\Product\CrudProductController;
 // ## ROUTE Alfa
 
 // ON PROGRESS
+Route::get('/test-db', [TestingDBController::class, 'index']);
+
 // Route::get('/login', function() { return view('login'); })->name('login');
 // Route::resource('/admin/dashboard', TestingAdminController::class);
 // Route::get('/admin/dashboard/settings', [TestingAdminController::class, 'settings']);
@@ -146,7 +149,7 @@ Route::prefix('/employee')->middleware('admin.auth')->group(function(){
     Route::get('/laporan-stok', [TestingEmployeeController::class, 'laporan_stok']);
 
     Route::get('/transaction', [TestingEmployeeController::class, 'index']);
-    Route::get('beli/{kode}', [TestingEmployeeController::class, 'beli']);
+    Route::post('beli', [TestingEmployeeController::class, 'beli']);
     Route::get('/cart', [TestingEmployeeController::class, 'cart']);
     Route::get('/tambah/{kode}', [TestingEmployeeController::class, 'tambah']);
     Route::get('/kurang/{kode}', [TestingEmployeeController::class, 'kurang']);

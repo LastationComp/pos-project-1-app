@@ -83,7 +83,7 @@ class TestingEmployeeController extends Controller
     }
 
 
-    public function beli( $kode ) {
+    public function beli( Request $request ) {
         $list_obat = [
             [
                 'kode' => 'OBT1614120001',
@@ -106,6 +106,8 @@ class TestingEmployeeController extends Controller
                 'catatan' => 'Ngayobion adalah vitamin penambah darah dengan kandungan gerrous gluconate di dalamnya',
             ],
         ];
+
+        
 
         foreach( $list_obat as $lo ) {
             if( array_search($kode, $lo) ) {
