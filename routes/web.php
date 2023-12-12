@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Employee\Product\SellingUnit\SellingUnitController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\licenseController;
@@ -116,7 +117,7 @@ Route::prefix('/admin/dashboard')->middleware(['admin.auth'])->group(function ()
 });
 
 Route::prefix('/employee')->middleware('admin.auth')->group(function(){
-    Route::get('/', function(){ return redirect('employee/transaction'); })->name('/employee');
+    Route::get('/', function(){ return redirect('employee/transaction'); })->name('employee');
     Route::prefix('/member')->group(function(){
         Route::get('/', [CrudMemberController::class, 'index'])->name('member_page');
         Route::get('/add', [CrudMemberController::class, 'add_data_member'])->name('add_data_member');
@@ -127,12 +128,23 @@ Route::prefix('/employee')->middleware('admin.auth')->group(function(){
     });
     Route::prefix('/product')->group(function() {
         Route::get('/', [CrudProductController::class, 'index'])->name('product_page');
+        Route::get('/addproduct', [CrudProductController::class, 'add_data_product'])->name('add_data_product');
+        Route::post('/submitaddproduct', [CrudProductController::class, 'submit_add_data_product'])->name('submit_add_data_product');
+        Route::get('/{id}/updatesellingunit', [CrudProductController::class, 'add_selling_unit'])->name('add_selling_unit');
+        Route::post('/{id}/submitupdatesellingunit', [CrudProductController::class, 'submit_add_selling_unit'])->name('submit_add_selling_unit');
+        Route::get('/{id_product}/updateproduct', [CrudProductController::class, 'update_data_product'])->name('update_data_product');
+        Route::post('/{id_product}/submitupdatedata', [CrudProductController::class, 'submit_update_data_product'])->name('submit_update_data_product');
+        Route::prefix('/sellingunit')->group(function () {
+            Route::get('/{id_product}', [SellingUnitController::class, 'index'])->name('table_selling_unit');
+            Route::get('/{id_selling_unit}/edit', [SellingUnitController::class, 'edit_data_selling_unit'])->name('edit_data_selling_unit');
+            Route::post('/{product_id}/{selling_unit_id}/submitedit', [SellingUnitController::class, 'submit_edit_data_selling_unit'])->name('submit_edit_data_selling_unit');
+        });
     });
     Route::get('/{username}/profile', [EmployeeController::class, 'profile_update'])->name('profile_update_employee');
     Route::post('/{username}/updateprofile', [EmployeeController::class, 'submit_profile_update'])->name('submit_profile_update_employee');
     Route::get('/riwayat-penjualan', [TestingEmployeeController::class, 'riwayat_penjualan']);
     Route::get('/laporan-stok', [TestingEmployeeController::class, 'laporan_stok']);
-    
+
     Route::get('/transaction', [TestingEmployeeController::class, 'index']);
     Route::get('beli/{kode}', [TestingEmployeeController::class, 'beli']);
     Route::get('/cart', [TestingEmployeeController::class, 'cart']);
