@@ -16,7 +16,7 @@
             </div>
 
             <form action="{{ route('submit_edit_data_selling_unit', ["product_id"=>$product->id, "selling_unit_id" => $selling_unit->id]) }}" method="POST"
-                class="bg-slate-200 p-5 rounded-b-md h-[90%]">
+                class="bg-slate-200 p-5 rounded-b-md h-[90%] overflow-auto no-scrollbar">
                 @csrf
 
                 <div class="detail-obat-wrapper">
