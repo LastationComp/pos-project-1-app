@@ -28,7 +28,7 @@
                             class="px-10 py-1 border-2 bg-slate-300 w-full rounded-md focus:border-slate-400 focus:outline-none">
                     </div>
                 </div>
-                <form action="{{ route('test') }}" method="POST">
+                <form action="{{ route('submit_checkout_product') }}" method="POST">
                     <div class="list-item p-3 rounded-lg overflow-auto no-scrollbar h-full pt-14 relative -z-0 divide-y-2">
                         @foreach ($selling_unit as $product)
                             <div class="item flex justify-between p-3 border-slate-600">
