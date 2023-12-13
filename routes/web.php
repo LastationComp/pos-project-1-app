@@ -93,7 +93,6 @@ Route::prefix('/superadmin')->middleware(['superadmin.auth'])->group(function ()
         Route::get('/add', [UnitController::class, 'add_data_unit'])->name('add_data_unit');
         Route::post('/submitadddata', [UnitController::class, 'submit_add_data_unit'])->name('submit_add_data_unit');
         Route::get('{id}/edit', [UnitController::class, 'edit_data_unit'])->name('edit_data_unit');
-
     });
 });
 
@@ -119,7 +118,7 @@ Route::prefix('/admin/dashboard')->middleware(['admin.auth'])->group(function ()
     });
 });
 
-Route::prefix('/employee')->middleware('admin.auth')->group(function(){
+Route::prefix('/employee')->group(function(){
     Route::get('/', function(){ return redirect('employee/transaction'); })->name('employee');
     Route::prefix('/member')->group(function(){
         Route::get('/', [CrudMemberController::class, 'index'])->name('member_page');
@@ -148,7 +147,7 @@ Route::prefix('/employee')->middleware('admin.auth')->group(function(){
     Route::get('/riwayat-penjualan', [TestingEmployeeController::class, 'riwayat_penjualan']);
     Route::get('/laporan-stok', [TestingEmployeeController::class, 'laporan_stok']);
 
-    Route::get('/transaction', [TestingEmployeeController::class, 'index']);
+    Route::get('/transaction', [TestingEmployeeController::class, 'index'])->name('');
     Route::post('/beli', [TestingEmployeeController::class, 'beli']);
     Route::get('/cart', [TestingEmployeeController::class, 'cart']);
     Route::get('/tambah/{kode}', [TestingEmployeeController::class, 'tambah']);

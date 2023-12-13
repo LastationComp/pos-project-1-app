@@ -48,11 +48,11 @@
     <nav class="">
         <header class="ml-[179px] text-white p-2 border-b border-white">
             <div class="flex gap-7 justify-end items-center mr-5">
-                <div class="border-2 border-[#FF2204] rounded-xl bg-white flex items-center justify-center text-[#FF2204] px-2 font-bold relative text-sm">
+                {{-- <div class="border-2 border-[#FF2204] rounded-xl bg-white flex items-center justify-center text-[#FF2204] px-2 font-bold relative text-sm">
                     <i class="bi bi-megaphone-fill p-1 mr-1"></i>
                     <a href="">API</a>
                     <i class="fa fa-circle absolute -top-1 -right-1 text-xs"></i>
-                </div>
+                </div> --}}
 
                 <div class="user flex gap-2 justify-start items-center">
                     <div class="bg-blue-500 w-fit h-fit rounded-full">
@@ -75,7 +75,7 @@
                                 <a href="{{ route('profile_update_employee', session()->get('employee_code')) }}" class="text-slate-400 text-sm">Settings <i class="fa fa-cogs ml-2"></i></a>
                             </li>
                             <li class="px-2">
-                              <a href="#" class="text-slate-400 text-sm">Logout <i class="fa fa-key ml-2"></i></a>
+                              <a href="{{ route('employee_logout')}}" class="text-slate-400 text-sm">Logout <i class="fa fa-key ml-2"></i></a>
                             </li>
                         </ul>
 
@@ -123,5 +123,8 @@
         @yield('content')
 
     </div>
+
+
+        @yield('content-js')
 </body>
 </html>

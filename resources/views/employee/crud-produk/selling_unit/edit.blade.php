@@ -16,7 +16,7 @@
                 </div>
                 
             <div  class="bg-slate-200 p-5 rounded-b-md h-[90%]">
-                <form action="{{ url('kosong') }}" method="POST" class="w-full h-[86%] overflow-y-auto no-scrollbar">
+                <form action="{{ url('kosong') }}" method="POST" class="w-full h-full overflow-y-auto no-scrollbar">
                     @csrf
 
                 
@@ -61,10 +61,10 @@
                                     <div class="btn-group mx-auto w-fit text-white text-sm flex gap-3">
                                         <a href="{{ route('edit_data_selling_unit', $item->id)}}" class="w-[25px] h-[25px] p-1 bg-green-500 flex justify-center items-center"><i class="bi bi-pencil-square"></i></a>
                                         @if ($item->is_smallest == false)
-                                        <form action="{{ url('employee/data-produk/Sangobion') }}" method="POST">
+                                        <form action="{{ route('delete_selling_unit', ["product_id" => $product->id, "selling_unit_id" => $item->id]) }}" method="POST">
                                             @csrf
-                                            @method('PUT')
-                                            <button onclick="confirm('yakin ingin menghapus data Sangobion ?')" type="button" class="w-[25px] h-[25px] p-1 bg-red-500 flex justify-center items-center"><i class="bi bi-trash3"></i></button>
+                                            
+                                            <button onclick="return confirm('yakin ingin menghapus data Sangobion ?')" type="submit" class="w-[25px] h-[25px] p-1 bg-red-500 flex justify-center items-center"><i class="bi bi-trash3"></i></button>
                                         </form>
                                         @endif
 

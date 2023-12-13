@@ -68,5 +68,6 @@ class Kernel extends HttpKernel
         'superadmin.auth' => \App\Http\Middleware\SuperAdminMiddleware::class,
         'adminemployee.auth' => \App\Http\Middleware\AuthenticatedMiddleware::class,
         'admin.auth' => \App\Http\Middleware\AdminMiddleware::class,
+        'employee.atuh' => \App\Http\Middleware\EmployeeMiddleware::class,
     ];
 }
