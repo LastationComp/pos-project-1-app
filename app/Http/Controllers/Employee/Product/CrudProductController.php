@@ -12,13 +12,15 @@ use App\Http\Controllers\Controller;
 
 class CrudProductController extends Controller
 {
-    public function index(){
+    public function index(Request $request){
         $data = Product::whereHas('employee', function ($query) {
             $query->whereHas('admin', function ($query){
                 $query->whereHas('client', function ($query){
                     $query->where('license_key', session()->get('license_key'));
                 });
             });
+        })->when($request->get('search') ?? false, function($q, $search) {
+            return $q->where('barcode', 'LIKE', "%$search%");
         })->get();
 
         return view('employee.data-produk', compact('data'));
