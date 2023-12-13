@@ -42,8 +42,6 @@
 
     <div class="bg-page absolute -z-20 w-full h-full">
         <div class="w-full h-full bg-gradient-to-r from-[#28A446] to-[#28656A]"></div>
-
-
     </div>
 
     {{-- navbar --}}
@@ -57,8 +55,8 @@
                 </div>
 
                 <div class="user flex gap-2 justify-start items-center">
-                    <div class=" ">
-                        <img src="{{ asset('images/'. session()->get('avatar_url'))}}" class="rounded-full object-cover max-w-20 h-10" alt="" width="30">
+                    <div class="bg-blue-500 w-fit h-fit rounded-full">
+                        <img src="{{ asset('images/'. session()->get('avatar_url'))}}" class="rounded-full w-[40px] h-[40px]" alt="">
                     </div>
 
                     <div class="flex flex-col">
@@ -93,7 +91,6 @@
                     Apotek <br>Lastation
                 </h2>
             </div>
-
 
             <ul class="flex flex-col gap-1 text-white w-full">
                 <li class="px-3 py-2 justify-between {{ Request::is('employee/transaction*') ? 'bg-gradient-to-l from-[#28A446] to-[#28656A]' : '' }} flex justiy-between items-center">

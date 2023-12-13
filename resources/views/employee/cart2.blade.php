@@ -107,6 +107,66 @@
             </table>
         </div>
     </form>
-</div>
 
+    @if( session('cart') )
+    <div class="cart-wrapper w-[80%] h-[45vh] bg-slate-300 rounded-t-lg border shadow-2xl p-5 fixed bottom-0 left-0 ml-[240px] transition-all">
+        <div class="btn-updown absolute z-50 -top-6 left-1/2 -translate-x-1/2">
+            <button class="text-xl bg-white rounded-full flex justify-center items-center w-[35px] h-[35px] shadow-sm border"><i class="fa fa-chevron-down"></i></button>
+        </div>
+        <div class="flex gap-5 px-5 h-full w-full justify-evenly relative mt-3">
+            <div class="list-checkout-wrapper border border-black rounded-lg w-full h-full relative">
+                <div class="btn-group flex gap-3 bg-slate-300 rounded-lg p-3 absolute top-0 left-0 z-10 w-full">
+                    <div class="relative rounded-md flex items-center">
+                        <a href="" class="absolute left-0 ml-3">
+                            <i class="fa fa-search "></i>
+                        </a>
+                        <input type="text" class="px-10 py-1 border-2 bg-slate-300 w-full rounded-md focus:border-slate-400 focus:outline-none">
+                    </div>
+                    <a href="{{ url('employee/transaction') }}" class="px-3 py-1 bg-green-500 text-white rounded-md border-2 border-slate-300 text-sm flex items-center"><i class="fa fa-plus mr-2"></i> Tambah</a>
+                    <a href="" class="px-3 py-1 bg-slate-100 rounded-md border-2 border-slate-300 text-sm flex items-center"><i class="fa fa-repeat mrf-2"></i> Reset</a>
+                    <a href="{{ url('employee/batal') }}" onclick="return confirm('apakah yakin ingin membatalkan transaksi?')" class="px-3 py-1 bg-red-500 text-white rounded-md border-2 border-slate-300 text-sm flex items-center"><i class="fa fa-angle-double-left mr-2"></i> Batal</a>
+                </div>
+
+                <div class="list-item p-3 rounded-lg overflow-auto no-scrollbar h-full pt-14 relative -z-0 divide-y-2">
+                    @foreach ( session('cart') as $cart )
+                        <div class="item flex justify-between p-3 border-slate-600">
+                            <div>
+                                <h3 class="font-semibold text-xl">{{ $cart['nama'] }}</h3>
+                                
+                                <select name="satuan" id="" class="bg-transparent">
+                                    <option value="lembar">Lembar</option>
+                                    <option value="biji">biji</option>
+                                </select>
+                            </div>
+
+                            <div class="flex gap-5 justify-center items-center">
+                                <div class="btn-group flex justify-center items-center gap-2">
+                                    <div class="flex justify-center items-center px-2 py-1 rounded-md bg-slate-300 border border-slate-400 w-fit h-fit">
+                                        <a href="{{ url('/employee/kurang/' . $cart['kode']) }}" class="w-[18px] h-[18px] border border-black rounded-full flex justify-center items-center text-sm"><i class="fa fa-minus"></i></a>
+                                    </div>
+                                    <div class="px-5 rounded-md border border-slate-400 w-fit h-fit flex justify-center items-center">
+                                        <span>{{ $cart['jumlah'] }}</span>
+                                    </div>
+                                    <div class="flex justify-center items-center px-2 py-1 rounded-md bg-slate-300 border border-slate-400 w-fit h-fit">
+                                        <a href="{{ url('/employee/tambah/' . $cart['kode']) }}" class="w-[18px] h-[18px] border border-black rounded-full flex justify-center items-center text-sm"><i class="fa fa-plus"></i></a>
+                                    </div>
+                                </div>
+                                <h3 class="text-xl font-semibold">Rp.` 10. 000</h3>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
+
+    <script>
+        
+        $('.btn-updown').click(function(){
+            $('.cart-wrapper').toggleClass('h-0 h-[45vh]')
+            $('.btn-updown button i').toggleClass('fa-chevron-down fa-chevron-up')
+        });
+
+    </script>
 @endsection

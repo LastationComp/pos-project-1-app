@@ -149,7 +149,7 @@ Route::prefix('/employee')->middleware('admin.auth')->group(function(){
     Route::get('/laporan-stok', [TestingEmployeeController::class, 'laporan_stok']);
 
     Route::get('/transaction', [TestingEmployeeController::class, 'index']);
-    Route::post('beli', [TestingEmployeeController::class, 'beli']);
+    Route::post('/beli', [TestingEmployeeController::class, 'beli']);
     Route::get('/cart', [TestingEmployeeController::class, 'cart']);
     Route::get('/tambah/{kode}', [TestingEmployeeController::class, 'tambah']);
     Route::get('/kurang/{kode}', [TestingEmployeeController::class, 'kurang']);
