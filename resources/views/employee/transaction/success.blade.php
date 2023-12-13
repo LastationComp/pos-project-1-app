@@ -20,7 +20,7 @@
 
     <div class="wrapper-alert absolute top-1/2 left-1/2 z-10 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[550px] bg-white p-7 rounded-lg shadow-sm">
         <div class="absolute -translate-y-16 left-1/2 -translate-x-1/2 text-white bg-[#13C39C] border-4 rounded-full border-[#25FFAE] w-[90px] h-[90px] flex items-center justify-center">
-            <i class="fa fa-check text-6xl"></i>
+            <a href="{{ route('back_to_home_transaction') }}"><i class="fa fa-check text-6xl"></i></a>
         </div> 
         <h2 class="my-5 text-center font-bold text-3xl">Success</h2>
 
@@ -30,19 +30,18 @@
             </div>
 
             <div class="text-center  font-semibold mt-3">
-                <div>Toko Anda</div>
-                <div>jl. xxxxxxx Raya. xxxxx</div>
+                <div>{{ $another_data[0]->employee->admin->client->client_name }}</div>
             </div>
 
             <div class="border-dashed border-slate-500 p-3 flex justify-between">
                 <div>
-                    <p><span class="font-semibold">Kasir :</span> Lorem</p>
-                    <p><span class="font-semibold">Waktu :</span> 16/11/2023</p>
+                    <p><span class="font-semibold">Kasir :</span> {{ $another_data[0]->employee->name }}</p>
+                    <p><span class="font-semibold">Waktu :</span>{{ $date }}</p>
                 </div>
 
                 <div>
-                    <p><span class="font-semibold">Member :</span> John Doe</p>
-                    <p class="text-center">08:52:40</p>
+                    <p><span class="font-semibold">Member :</span> {{ session()->has('customer_code') ? $another_data[0]->customer->name : '-' }}</p>
+                    <p class="text-center">{{ $time }}</p>
                 </div>
             </div>
 
@@ -58,39 +57,35 @@
                     </thead>
                     
                     <tbody class="translate-x-5" >
+                        @foreach ($another_data as $transaction)
+                        @foreach ($transaction->transaction_lists as $transaction_list)
                         <tr>
-                            <td>Sangobion</td>
-                            <td>2</td>
-                            <td>12.000</td>
-                            <td>24.000</td>
-                        </tr>
+                        <td>{{ $transaction_list->selling_unit->product->product_name }}</td>
+                        <td>{{ $transaction_list->quantity }}</td>
+                        <td>{{ $transaction_list->selling_unit->price }}</td>
+                        <td>{{ $transaction_list->total_price }}</td>
+                    </tr> 
+                        @endforeach
+                        
+                            
+                              
+                        @endforeach
+                        
 
-                        <tr>
-                            <td>Histigo</td>
-                            <td>1</td>
-                            <td>8.000</td>
-                            <td>8.000</td>
-                        </tr>
-
-                        <tr>
-                            <td>Bodrex</td>
-                            <td>1</td>
-                            <td>8.000</td>
-                            <td>8.000</td>
-                        </tr>
+                       
                     </tbody>
                 </table>
             </div>
 
             <div class="w-[50%] text-sm p-3 gap-1">
                 <div class="flex justify-between">
-                    <span class="font-semibold">Total</span><span>:</span><span>Rp. 42.000,-</span>
+                    <span class="font-semibold">Total</span><span>:</span><span>Rp. {{ $another_data[0]->total_price }}</span>
                 </div>
                 <div class="flex justify-between">
-                    <span class="font-semibold">Tunai</span><span>:</span><span>Rp. 50.000,-</span>
+                    <span class="font-semibold">Tunai</span><span>:</span><span>Rp. {{ $another_data[0]->pay }}</span>
                 </div>
                 <div class="flex justify-between">
-                    <span class="font-semibold">Kembali</span><span>:</span><span>Rp. 8.000,-</span>
+                    <span class="font-semibold">Kembali</span><span>:</span><span>Rp. {{ $another_data[0]->change }}</span>
                 </div>
             </div>
 

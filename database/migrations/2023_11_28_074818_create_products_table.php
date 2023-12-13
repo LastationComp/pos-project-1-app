@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('employee_create');
             $table->foreign('employee_create')->references('id')->on('employees')->onDelete('cascade');
             $table->string('product_name');
-            $table->string('barcode')->unique();
+            $table->string('barcode');
             $table->string('smallest_selling_unit')->nullable();
             $table->string('catatan_obat');
             $table->timestamps();

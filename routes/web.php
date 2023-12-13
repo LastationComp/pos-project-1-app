@@ -12,6 +12,7 @@ use App\Http\Controllers\TestingDBController;
 use App\Http\Controllers\TestingEmployeeController;
 use App\Http\Controllers\Employee\EmployeeController;
 use App\Http\Controllers\Employee\CrudMemberController;
+use App\Http\Controllers\Employee\HistoryTransaction\HistoryController;
 use App\Http\Controllers\Employee\Product\CrudProductController;
 use App\Http\Controllers\Employee\Transaction\TransactionController;
 use App\Models\Transaction;
@@ -95,7 +96,6 @@ Route::prefix('/superadmin')->middleware(['superadmin.auth'])->group(function ()
         Route::get('/add', [UnitController::class, 'add_data_unit'])->name('add_data_unit');
         Route::post('/submitadddata', [UnitController::class, 'submit_add_data_unit'])->name('submit_add_data_unit');
         Route::get('{id}/edit', [UnitController::class, 'edit_data_unit'])->name('edit_data_unit');
-
     });
 });
 
@@ -121,9 +121,11 @@ Route::prefix('/admin/dashboard')->middleware(['admin.auth'])->group(function ()
     });
 });
 
-Route::prefix('/employee')->middleware('employee.atuh')->group(function(){
-    Route::get('/', function(){ return redirect()->route('transaction_page'); })->name('employee');
-    Route::prefix('/member')->group(function(){
+Route::prefix('/employee')->middleware('employee.auth')->group(function () {
+    Route::get('/', function () {
+        return redirect()->route('transaction_page');
+    })->name('employee');
+    Route::prefix('/member')->group(function () {
         Route::get('/', [CrudMemberController::class, 'index'])->name('member_page');
         Route::get('/add', [CrudMemberController::class, 'add_data_member'])->name('add_data_member');
         Route::post('/submitadd', [CrudMemberController::class, 'submit_add_data_member'])->name('submit_add_data_member');
@@ -131,7 +133,7 @@ Route::prefix('/employee')->middleware('employee.atuh')->group(function(){
         Route::post('/{customer_code}/submitupdate', [CrudMemberController::class, 'submit_update_data_member_employee'])->name('submit_update_data_member_employee');
         Route::post('/{customer_code}/deletedata', [CrudMemberController::class, 'delete_data_member_employee'])->name('delete_data_member_employee');
     });
-    Route::prefix('/product')->group(function() {
+    Route::prefix('/product')->group(function () {
         Route::get('/', [CrudProductController::class, 'index'])->name('product_page');
         Route::get('/addproduct', [CrudProductController::class, 'add_data_product'])->name('add_data_product');
         Route::post('/submitaddproduct', [CrudProductController::class, 'submit_add_data_product'])->name('submit_add_data_product');
@@ -147,22 +149,25 @@ Route::prefix('/employee')->middleware('employee.atuh')->group(function(){
             Route::post('/{product_id}/{selling_unit_id}/delete', [SellingUnitController::class, 'delete_selling_unit'])->name('delete_selling_unit');
         });
     });
-    Route::prefix('/transaction')->group(function(){
+    Route::prefix('/transaction')->group(function () {
         Route::get('/', [TransactionController::class, 'index'])->name('transaction_page');
         Route::post('/gotocheckout', [TransactionController::class, 'submit_checkbox_product'])->name('submit_checkbox_product');
         Route::get('/checkout', [TransactionController::class, 'checkout_product_page'])->name('checkout_product_page');
         Route::get('/cancel', [TransactionController::class, 'cancel_transaction'])->name('cancel_transaction');
         Route::post('/submitcheckout', [TransactionController::class, 'submit_checkout_product'])->name('submit_checkout_product');
+        Route::middleware(['transaction.auth'])->group(function () {
+            Route::get('/confirmation_checkout', [TransactionController::class, 'confirmation_checkout_page'])->name('confirmation_checkout_page');
+            Route::get('/backtocheckproduct', [TransactionController::class, 'back_to_check_product'])->name('back_to_check_product');
+            Route::post('/submitpayment', [TransactionController::class, 'submit_payment'])->name('submit_payment');
+            Route::get('/payment-success', [TransactionController::class, 'success_payment'])->name('success_payment');
+        });
+        Route::get('returntohome', [TransactionController::class, 'back_to_home_transaction'])->name('back_to_home_transaction');
+    });
+    Route::prefix('/history')->group(function () {
+        Route::get('/', [HistoryController::class, 'index'])->name('history_page');
+        Route::get('/{id}', [HistoryController::class, 'detail_history_transaction'])->name('detail_history_transaction');
     });
     Route::get('/logout', [EmployeeController::class, 'employee_logout'])->name('employee_logout');
     Route::get('/{username}/profile', [EmployeeController::class, 'profile_update'])->name('profile_update_employee');
     Route::post('/{username}/updateprofile', [EmployeeController::class, 'submit_profile_update'])->name('submit_profile_update_employee');
-    Route::get('/riwayat-penjualan', [TestingEmployeeController::class, 'riwayat_penjualan']);
-    Route::get('/laporan-stok', [TestingEmployeeController::class, 'laporan_stok']);
-    Route::post('beli', [TestingEmployeeController::class, 'beli']);
-    Route::get('/cart', [TestingEmployeeController::class, 'cart']);
-    Route::get('/tambah/{kode}', [TestingEmployeeController::class, 'tambah']);
-    Route::get('/kurang/{kode}', [TestingEmployeeController::class, 'kurang']);
-    Route::get('/batal', [TestingEmployeeController::class, 'batal']);
-    Route::post('/test', [TransactionController::class, 'test'])->name('test');
 });

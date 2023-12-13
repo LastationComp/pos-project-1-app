@@ -108,9 +108,9 @@
                     <i class="bi bi-boxes mr-3"></i>
                     <a href="{{ route('product_page') }}" class="w-full">Data Produk </a>
                 </li>
-                <li class="px-3 py-2 flex justify-between items-center {{ Request::is('employee/riwayat-penjualan*') ? 'bg-gradient-to-l from-[#28A446] to-[#28656A]' : '' }}">
+                <li class="px-3 py-2 flex justify-between items-center {{ Request::is('employee/history*') ? 'bg-gradient-to-l from-[#28A446] to-[#28656A]' : '' }}">
                     <i class="bi bi-calendar-week mr-3"></i>
-                    <a href="{{ url('employee/riwayat-penjualan') }}" class="w-full">Riwayat Penjualan </a>
+                    <a href="{{ route('history_page') }}" class="w-full">Riwayat Penjualan </a>
                 </li>
                 <li class="px-3 py-2 flex justify-between items-center {{ Request::is('employee/laporan-stok*') ? 'bg-gradient-to-l from-[#28A446] to-[#28656A]' : '' }}">
                     <i class="bi bi-journal-richtext mr-3"></i>
