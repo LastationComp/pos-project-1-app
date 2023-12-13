@@ -8,20 +8,20 @@
                 <h2 class="text-3xl font-light capitalize">Data Obat</h2>
             </div>
 
-            <div class="search-wrapper w-full mt-3">
+            <form action="{{ route('product_page') }}" method="GET" class="search-wrapper w-full mt-3">
                 <div class="flex w-[70%] gap-2">
                     <div class="relative border rounded-md flex items-center">
-                        <a href="" class="absolute left-0 ml-3">
+                        <button type="submit" class="absolute left-0 ml-3">
                             <i class="fa fa-search text-sm"></i>
-                        </a>
+                        </button>
 
-                        <input type="text"
+                        <input type="seaarch" name="search"
                             class="px-10 py-1 border-r-[2px] border-b-[1px] text-sm border-white bg-white shadow-md w-full rounded-md focus: focus:border-slate-400 focus:outline-none"
-                            placeholder="search">
+                            placeholder="Search Kode Obat">
                     </div>
 
 
-                    <a href=""
+                    <a href="{{ route('product_page') }}"
                         class=" border border-white rounded-lg px-3 py-1 flex justify-center items-center text-sm bg-slate-300 shadow-md"><i
                             class="bi bi-arrow-clockwise mr-2"></i> refresh</a>
                     <a href="{{ route('add_data_product') }}"
@@ -29,12 +29,12 @@
                             class="bi bi-plus mr-2"></i> Tambah</a>
 
                 </div>
-            </div>
+            </form>
 
         </div>
 
         <div class="table-wrapper w-full h-[90%] overflow-auto no-scrollbar pt-28 -z-0">
-            <p class="text-sm text-slate-500 font-light mb-2">Menampilkan 1 - 10 data dari total 10M data</p>
+            {{-- <p class="text-sm text-slate-500 font-light mb-2">Menampilkan 1 - 10 data dari total 10M data</p> --}}
 
             <table class="w-full text-md border-collapse rounded-corners rounded-t-xl overflow-auto no-scrollbar"
                 cellpadding="7" cellspacing="0">
@@ -89,7 +89,7 @@
             </table>
         </div>
 
-        <div class="pagination mt-5 flex items-center w-full absolute bottom-3 left-3">
+        {{-- <div class="pagination mt-5 flex items-center w-full absolute bottom-3 left-3">
             <a href="" class=""><i class="bi px-3 py-1 bg-slate-400 bi-arrow-left"></i></a>
             <div class="page bg-slate-300 ">
                 <a href="" class="border border-slate-400 px-3">1</a>
@@ -99,6 +99,6 @@
                 <a href="" class="border border-slate-400 px-3">5</a>
             </div>
             <a href="" class=""><i class="bi px-3 py-1 bg-slate-400 bi-arrow-right"></i></a>
-        </div>
+        </div> --}}
     </div>
 @endsection

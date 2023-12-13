@@ -71,4 +71,12 @@ class EmployeeController extends Controller
 
         return redirect()->route('profile_update_employee', $username)->with('success', 'success to change profile for employee');
     }
+
+    public function employee_logout(){
+        session()->flush();
+        session()->invalidate();
+        session()->regenerateToken();
+
+        return redirect('/')->with('success', 'logout successfully');
+    }
 }

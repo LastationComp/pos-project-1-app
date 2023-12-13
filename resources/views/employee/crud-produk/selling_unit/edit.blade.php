@@ -16,7 +16,7 @@
                 </div>
                 
             <div  class="bg-slate-200 p-5 rounded-b-md h-[90%]">
-                <form action="{{ url('kosong') }}" method="POST" class="w-full h-[86%] overflow-y-auto no-scrollbar">
+                <form action="{{ url('kosong') }}" method="POST" class="w-full h-full overflow-y-auto no-scrollbar">
                     @csrf
 
                 

@@ -10,13 +10,15 @@ use Illuminate\Database\Schema\Builder;
 
 class CrudMemberController extends Controller
 {
-    public function index(){
+    public function index(Request $request){
         $data = Customer::whereHas('employee', function ($query) {
             $query->whereHas('admin', function ($query){
                 $query->whereHas('client', function ($query){
                     $query->where('license_key', session()->get('license_key'));
                 });
             });
+        })->when($request->get('search') ?? false, function($q, $search) {
+            return $q->where('customer_code', 'LIKE', "%$search%");
         })->get();
         return view('employee.member', ['data' => $data]);
     }
