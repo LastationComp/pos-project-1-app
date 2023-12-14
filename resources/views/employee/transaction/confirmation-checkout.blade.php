@@ -52,83 +52,7 @@
                     </div>
                 </div>
 
-                <div class="2-full item flex justify-between p-3 border-slate-600">
-                    <div>
-                        <h3 class="font-semibold text-xl">{{ $transaction_list->selling_unit->product->product_name }}</h3>
-                        <span class="text-md font-normal text-black">{{ $transaction_list->quantity }} x {{ $transaction_list->selling_unit->unit->name }}</span>
-                    </div>
-
-                    <div class="flex gap-5 justify-between   items-center">
-                        <div class="btn-group flex justify-center items-center gap-2">
-                            <span class="font-bold">Rp. </span><input class="font-bold" value="{{ $transaction_list->total_price }}" type="number" disabled>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="2-full item flex justify-between p-3 border-slate-600">
-                    <div>
-                        <h3 class="font-semibold text-xl">{{ $transaction_list->selling_unit->product->product_name }}</h3>
-                        <span class="text-md font-normal text-black">{{ $transaction_list->quantity }} x {{ $transaction_list->selling_unit->unit->name }}</span>
-                    </div>
-
-                    <div class="flex gap-5 justify-between   items-center">
-                        <div class="btn-group flex justify-center items-center gap-2">
-                            <span class="font-bold">Rp. </span><input class="font-bold" value="{{ $transaction_list->total_price }}" type="number" disabled>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="2-full item flex justify-between p-3 border-slate-600">
-                    <div>
-                        <h3 class="font-semibold text-xl">{{ $transaction_list->selling_unit->product->product_name }}</h3>
-                        <span class="text-md font-normal text-black">{{ $transaction_list->quantity }} x {{ $transaction_list->selling_unit->unit->name }}</span>
-                    </div>
-
-                    <div class="flex gap-5 justify-between   items-center">
-                        <div class="btn-group flex justify-center items-center gap-2">
-                            <span class="font-bold">Rp. </span><input class="font-bold" value="{{ $transaction_list->total_price }}" type="number" disabled>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="2-full item flex justify-between p-3 border-slate-600">
-                    <div>
-                        <h3 class="font-semibold text-xl">{{ $transaction_list->selling_unit->product->product_name }}</h3>
-                        <span class="text-md font-normal text-black">{{ $transaction_list->quantity }} x {{ $transaction_list->selling_unit->unit->name }}</span>
-                    </div>
-
-                    <div class="flex gap-5 justify-between   items-center">
-                        <div class="btn-group flex justify-center items-center gap-2">
-                            <span class="font-bold">Rp. </span><input class="font-bold" value="{{ $transaction_list->total_price }}" type="number" disabled>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="2-full item flex justify-between p-3 border-slate-600">
-                    <div>
-                        <h3 class="font-semibold text-xl">{{ $transaction_list->selling_unit->product->product_name }}</h3>
-                        <span class="text-md font-normal text-black">{{ $transaction_list->quantity }} x {{ $transaction_list->selling_unit->unit->name }}</span>
-                    </div>
-
-                    <div class="flex gap-5 justify-between   items-center">
-                        <div class="btn-group flex justify-center items-center gap-2">
-                            <span class="font-bold">Rp. </span><input class="font-bold" value="{{ $transaction_list->total_price }}" type="number" disabled>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="2-full item flex justify-between p-3 border-slate-600">
-                    <div>
-                        <h3 class="font-semibold text-xl">{{ $transaction_list->selling_unit->product->product_name }}</h3>
-                        <span class="text-md font-normal text-black">{{ $transaction_list->quantity }} x {{ $transaction_list->selling_unit->unit->name }}</span>
-                    </div>
-
-                    <div class="flex gap-5 justify-between   items-center">
-                        <div class="btn-group flex justify-center items-center gap-2">
-                                <span class="font-bold">Rp. </span><input class="font-bold" value="{{ $transaction_list->total_price }}" type="number" disabled>
-                        </div>
-                    </div>
-                </div>
+                
                 @endforeach
         </div>
     </div>
@@ -140,17 +64,17 @@
             <div class="flex flex-col gap-3">
                 <div class="input-group flex w-full justify-between items-center">
                     <label class="text-md font-semibold" for="member" class="w-[30%]">Member</label>
-                    <input type="text" name="member" id="member" class="w-[80%] h-[35px] border rounded-md border-black p-3" value="{{ $transaction_list->transaction->customer->name }}" disabled>
+                    <input type="text" name="member" id="member" class="w-[80%] h-[35px] border rounded-md border-black p-3" value="{{ $customers[0]->name }}" disabled>
                 </div>
 
                 <div class="input-group flex w-full justify-between items-center">
                     <label class="text-md font-semibold" for="no" class="w-[30%]">No</label>
-                    <input type="text" name="no" id="no" class="w-[80%] h-[35px] border rounded-md border-black p-3" value="{{ $transaction_list->transaction->customer->phone }}" disabled>
+                    <input type="text" name="no" id="no" class="w-[80%] h-[35px] border rounded-md border-black p-3" value="{{ $customers[0]->phone }}" disabled>
                 </div>
 
                 <div class="input-group flex w-full justify-between items-center">
                     <label class="text-md font-semibold" for="point" class="w-[30%]">Point</label>
-                    <input type="text" name="point" id="point" class="w-[80%] h-[35px] border rounded-md border-black p-3" value="{{ $transaction_list->transaction->customer->point }}" disabled>
+                    <input type="text" name="point" id="point" class="w-[80%] h-[35px] border rounded-md border-black p-3" value="{{ $customers[0]->point }}" disabled>
                 </div>
             </div>  
             @endif

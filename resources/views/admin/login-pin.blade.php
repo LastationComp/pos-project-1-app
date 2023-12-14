@@ -92,8 +92,7 @@
             <div class="flex flex-col">
                 <img src="https://img.freepik.com/free-vector/qr-code-concept-illustration_114360-5853.jpg?size=626&ext=jpg&ga=GA1.1.1103412834.1697761862&semt=ais "
                     alt="" class="mx-auto rounded-xl mb-5" width="300">
-                <button class="bg-white rounded-full mx-auto text-center px-4 py-2 text-sm flex items-center">Login with
-                    Barcode <i class="fa fa-chevron-right text-xl ml-4 font-bold text-slate-500"></i></button>
+                
             </div>
         </div>
     </div>
