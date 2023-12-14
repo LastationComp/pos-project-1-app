@@ -38,6 +38,7 @@ class licenseController extends Controller
         if ($expired) return redirect()->route('adminEmployeeLogin')->with('error', 'The License Key you entered is already expired, please contact the owner of website');
         session()->put('license_key', $license_key->license_key);
         session()->put('client_code', $license_key->client_code);
+        session()->put('client_name', $license_key->client_name);
         return redirect()->route('adminEmployeeLogin')->with('success', 'License Key has been entered successfully');
     }
 }
