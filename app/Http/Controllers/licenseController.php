@@ -31,7 +31,7 @@ class licenseController extends Controller
             'license_key' => 'required'
         ]);
 
-        $license_key = Client::where('license_key', $validated['license_key'])->where('is_active', truegit )->first();
+        $license_key = Client::where('license_key', $validated['license_key'])->where('is_active', true)->first();
         if (!$license_key) return redirect()->route('adminEmployeeLogin')->with('error', 'The License Key you entered is not registered');
         $expired = ($license_key->expired_at <= Carbon::now()) || ($license_key->is_active == false);
         // dd($expired);
