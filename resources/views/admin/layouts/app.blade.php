@@ -54,19 +54,6 @@
                     class="font-semibold text-center px-4 py-2 mr-5 bg-white text-black rounded-md text-sm">LogOut</a>
             </div>
         </div>
-
-        <div class="sidebar fixed left-0 top-0 h-full bg-blue-500 p-3 z-10 rounded-br-full">
-            <div class="sidebar-wrapper h-full">
-                <ul class="flex flex-col translate-y-20 mt-10 gap-5">
-                    <li class="bg-white rounded-full w-[30px] h-[30px] flex justify-center items-center"><a
-                            href="" class=""><i class="fa fa-th-large "></i></a></li>
-                    <li class="text-white rounded-full w-[30px] h-[30px] flex justify-center items-center"><a
-                            href="" class=""><i class="fa fa-clock "></i></a></li>
-                    <li class="text-white rounded-full w-[30px] h-[30px] flex justify-center items-center"><a
-                            href="" class=""><i class="fa fa-trash "></i></a></li>
-                </ul>
-            </div>
-        </div>
     </nav>
 
     @yield('content')
