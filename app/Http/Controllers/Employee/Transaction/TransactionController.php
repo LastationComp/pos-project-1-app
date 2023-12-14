@@ -154,8 +154,9 @@ class TransactionController extends Controller
     }
 
     public function confirmation_checkout_page(){
+        $transaction_id = session()->get('transaction_id');
         $get_selling_unit_id = session()->get('cart_selling_unit');
-        $transaction_list = Transaction_list::whereIn('selling_unit_id', $get_selling_unit_id)->get();
+        $transaction_list = Transaction_list::whereIn('selling_unit_id', $get_selling_unit_id)->where('transaction_id', $transaction_id)->get();
         $selling_unit = $transaction_list->load('selling_unit.unit', 'selling_unit.product', 'transaction.customer');
         
         // dd($selling_unit);
@@ -186,7 +187,10 @@ class TransactionController extends Controller
         $another_data = $transaction->load('employee.admin.client', 'customer', 'transaction_lists.selling_unit.product', 'transaction_lists.selling_unit.unit');
         $Date = Carbon::now()->toDateString();
         $time = Carbon::now()->setTimezone('Asia/Jakarta')->toTimeString();
+        session()->forget('cart_selling_unit');
+        session()->forget('customer_code');
         session()->forget('transaction_id');
+        session()->forget('cart_product');
         // dd($another_data);
         return view('employee.transaction.success', [
             "another_data" => $another_data, 
@@ -206,11 +210,10 @@ class TransactionController extends Controller
     }
 
     public function back_to_check_product(){
-        session()->forget('cart_selling_unit');
         session()->forget('customer_code');
         $transaction_id = session()->get('transaction_id');
         Transaction::find($transaction_id)->delete();
-        
+        session()->forget('transaction_id');
         return redirect()->route('checkout_product_page')->with('error', "Anda Membatalkan Transaksi");
     }
 

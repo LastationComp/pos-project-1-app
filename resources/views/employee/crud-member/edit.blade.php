@@ -35,7 +35,7 @@
             </div>
 
             <div class="btn-group flex gap-3 w-fit mx-auto text-white font-semibold mt-16">
-                <button type="submit" class="px-3 py-1 rounded-md shadow-md border  bg-green-500">Update</button>
+                <button type="submit" onclick="return confirm('Apakah Anda Yakin Ingin Melakukan Pembaruan Data?')" class="px-3 py-1 rounded-md shadow-md border  bg-green-500">Update</button>
                 <a href="{{ route('member_page') }}" class="px-3 py-1 rounded-md shadow-md border  bg-red-500">Batal</a>
             </div>
         </form>

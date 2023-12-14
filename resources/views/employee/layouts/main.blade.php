@@ -93,6 +93,7 @@
                 </h2>
             </div>
 
+
             <ul class="flex flex-col gap-1 text-white w-full">
                 <li class="px-3 py-2 justify-between {{ Request::is('employee/transaction*') ? 'bg-gradient-to-l from-[#28A446] to-[#28656A]' : '' }} flex justiy-between items-center">
                     <a href="{{ url('employee/transaction') }}" class="w-full"><i class="bi bi-cash-stack mr-2"></i> Transaksi </a>
@@ -111,7 +112,10 @@
                     <a href="{{ url('employee/laporan-stok') }}" class="w-full"><i class="bi bi-journal-richtext mr-2"></i> Laporan Stok </a>
                 </li>
             </ul>
+            @endif
         </div>
+        
+        
     </nav>
     {{-- end of navbar --}}
 

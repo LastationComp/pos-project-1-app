@@ -80,6 +80,7 @@ class AuthController extends Controller
             $date = $time->toDateString();
             $shop_open = $check_setting[0]->shop_open;
             $shop_close = $check_setting[0]->shop_close;
+            
             // dd($timeNow);
             $validate_time = $shop_open < $timeNow && $timeNow < $shop_close;
             // if (!$validate_time) return redirect()->route('adminEmployeeLogin')->with('error', "Toko Sudah Tutup! Silahkan Login Besok");

@@ -24,12 +24,15 @@
             <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Dashboard Super
                 Admin</span>
                 <ul class="flex justify-center gap-4 items-center">
+                    @if (Session::has('auth_id') && session()->get('roles') == 'super_admin')
                     <li class="{{ Request::is('superadmin/dashboard/client') ? 'border-b-2 border-green-400' : '' }}">
                         <a href="{{ route('superadmin.client') }}" class="font-medium text-lg text-blue-600 dark:text-blue-500">Client</a>
                     <li>
                     <li class="{{ Request::is('superadmin/dashboard/unit') ? 'border-b-2 border-green-400' : '' }}">
                         <a href="{{ route('dashboard_unit') }}" class="font-medium text-lg text-blue-600 dark:text-blue-500">Unit</a>
-                    </li>
+                    </li>   
+                    @endif
+                    
                 </ul>
             <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
                 @if (Session::has('auth_id') && session()->get('roles') == 'super_admin')
