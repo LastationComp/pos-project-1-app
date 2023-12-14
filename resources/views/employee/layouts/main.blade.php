@@ -47,7 +47,7 @@
 
     {{-- navbar --}}
     <nav class="">
-        <header class="ml-[179px] text-white p-2 border-b border-white">
+        <header class="{{ session()->has('transaction_id') ? '' : 'ml-[179px]' }}  text-white p-2 border-b border-white">
             <div class="flex gap-7 justify-end items-center mr-5">
                 {{-- <div class="border-2 border-[#FF2204] rounded-xl bg-white flex items-center justify-center text-[#FF2204] px-2 font-bold relative text-sm">
                     <i class="bi bi-megaphone-fill p-1 mr-1"></i>
@@ -66,7 +66,7 @@
                     </div>
                 </div>
 
-                <div class="dropdown-wrapper">
+                <div class="dropdown-wrapper  {{ session()->has('transaction_id') ? 'opacity-0' : '' }}">
                     <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" type="button" class="" ><i class="fa fa-chevron-down"></i>
                     </button>
 
@@ -85,7 +85,7 @@
             </div>
         </header>
 
-        <div class="sidebar fixed left-0 top-0 h-[100vh] bg-black outfit">
+        <div class="sidebar fixed left-0 top-0 {{ session()->has('transaction_id') ? 'hidden' : 'h-[100vh]' }} bg-black outfit">
             <div class="logo-wrapper flex items-center mx-7 my-3">
                 <div><img src="{{ asset('img/Lastation.png') }}" width="30" alt=""></div>
                 <h2 class="text-white text-xl font-extrabold m-3 leading-5">
@@ -103,8 +103,9 @@
                 <li class="px-3 py-2 flex justify-between items-center {{ Request::is('employee/product*') ? 'bg-gradient-to-l from-[#28A446] to-[#28656A]' : '' }}">
                     <a href="{{ route('product_page') }}" class="w-full"><i class="bi bi-boxes mr-2"></i> Data Produk </a>
                 </li>
-                <li class="px-3 py-2 flex justify-between items-center {{ Request::is('employee/riwayat-penjualan*') ? 'bg-gradient-to-l from-[#28A446] to-[#28656A]' : '' }}">
-                    <a href="{{ url('employee/riwayat-penjualan') }}" class="w-full"><i class="bi bi-calendar-week mr-2"></i> Riwayat Penjualan </a>
+                <li class="px-3 py-2 flex justify-between items-center {{ Request::is('employee/history*') ? 'bg-gradient-to-l from-[#28A446] to-[#28656A]' : '' }}">
+                    <i class="bi bi-calendar-week mr-3"></i>
+                    <a href="{{ route('history_page') }}" class="w-full">Riwayat Penjualan </a>
                 </li>
                 <li class="px-3 py-2 flex justify-between items-center {{ Request::is('employee/laporan-stok*') ? 'bg-gradient-to-l from-[#28A446] to-[#28656A]' : '' }}">
                     <a href="{{ url('employee/laporan-stok') }}" class="w-full"><i class="bi bi-journal-richtext mr-2"></i> Laporan Stok </a>
@@ -114,10 +115,11 @@
     </nav>
     {{-- end of navbar --}}
 
+    {{ session()->get('transaction_id') }}
 
-    <div class="content ml-[240px] mx-5">
+
+    <div class="content {{ session()->has('transaction_id') ? 'w-[80%] mx-auto' : 'ml-[240px] mx-5' }}">
         @yield('content')
-
     </div>
 
 

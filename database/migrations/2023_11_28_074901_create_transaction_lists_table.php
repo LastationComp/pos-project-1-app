@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
             $table->foreign('employee_id')->references('id')->on('employees')->onDelete('cascade');
             $table->string('no_ref')->unique();
-            $table->decimal('total_price');
+            $table->float('total_price');
             $table->timestamps();
         });
     }

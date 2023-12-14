@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreign('unit_id')->references('id')->on('units')->onDelete('cascade');
             $table->boolean('is_smallest')->default(false);
             $table->integer('stock');
-            $table->decimal('price');
+            $table->float('price');
             $table->timestamps();
         });
     }
