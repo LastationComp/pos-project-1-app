@@ -88,8 +88,8 @@
         <div class="sidebar fixed left-0 top-0 {{ session()->has('transaction_id') ? 'hidden' : 'h-[100vh]' }} bg-black outfit">
             <div class="logo-wrapper flex items-center mx-7 my-3">
                 <div><img src="{{ asset('img/Lastation.png') }}" width="30" alt=""></div>
-                <h2 class="text-white text-xl font-extrabold m-3 leading-5">
-                    Apotek <br>Lastation
+                <h2 class="text-white text-md font-extrabold m-3 leading-5 w-[110px]">
+                    Apotek <br>{{ session()->get('client_name') }}
                 </h2>
             </div>
 
