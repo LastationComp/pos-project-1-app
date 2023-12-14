@@ -44,16 +44,6 @@
                 </form>
             </div>
         </div>
-
-        <div class="sidebar fixed left-0 top-0 h-full bg-blue-500 p-3 z-10 rounded-br-full">
-            <div class="sidebar-wrapper h-full">
-                <ul class="flex flex-col translate-y-20 mt-10 gap-5">
-                    <li class="{{ Request::is('admin/dashboard') ? 'bg-white text-black' : 'text-white' }} rounded-full w-[30px] h-[30px] flex justify-center items-center transition-all"><a href="{{ url('admin/dashboard') }}" class=""><i class="fa fa-desktop "></i></a></li>
-                    <li class="{{ Request::is('admin/profile') ? 'bg-white text-black' : 'text-white' }} rounded-full w-[30px] h-[30px] flex justify-center items-center transition-all"><a href="{{ url('admin/profile') }}" class=""><i class="fa fa-users "></i></a></li>
-                    <li class="{{ Request::is('admin/settings') ? 'bg-white text-black' : 'text-white' }} rounded-full w-[30px] h-[30px] flex justify-center items-center transition-all"><a href="{{ url('admin/settings') }}" class=""><i class="fa fa-cog "></i></a></li>
-                </ul>
-            </div>
-        </div>
     </nav>
 
     <div class="content ml-[54px] p-5">
