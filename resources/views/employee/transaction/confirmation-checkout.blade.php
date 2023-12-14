@@ -48,7 +48,7 @@
 
                     <div class="flex gap-5 justify-between   items-center">
                         <div class="btn-group flex justify-center items-center gap-2">
-                                <span class="font-bold">Rp. </span><input class="font-bold" value="{{ $transaction_list->total_price }}" type="number" disabled>
+                            <span class="font-bold">Rp. </span><input class="font-bold" value="{{ $transaction_list->total_price }}" type="number" disabled>
                         </div>
                     </div>
                 </div>
