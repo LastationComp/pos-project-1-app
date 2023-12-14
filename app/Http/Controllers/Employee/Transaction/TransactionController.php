@@ -196,7 +196,6 @@ class TransactionController extends Controller
             "another_data" => $another_data, 
             "date" => $Date,
             "time" => $time
-
         ]);
     }
 

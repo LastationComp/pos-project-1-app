@@ -77,7 +77,7 @@
                 </table>
             </div>
 
-            <div class="w-[50%] text-sm p-3 gap-1">
+            <div class="w-[70%] text-sm p-3 gap-1">
                 <div class="flex justify-between">
                     <span class="font-semibold">Total</span><span>:</span><span>Rp. {{ $another_data[0]->total_price }}</span>
                 </div>
