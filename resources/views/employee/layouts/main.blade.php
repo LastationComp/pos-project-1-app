@@ -85,7 +85,7 @@
                 </div>
             </div>
         </header>
-
+        
         <div class="sidebar fixed left-0 top-0 h-[100vh] bg-black">
             <div class="logo-wrapper flex items-center mx-7 my-3">
                 <div><img src="{{ asset('img/Lastation.png') }}" width="30" alt=""></div>
@@ -94,7 +94,7 @@
                 </h2>
             </div>
 
-
+            @if (!session()->has('transaction_id'))
             <ul class="flex flex-col gap-1 text-white w-full">
                 <li class="px-3 py-2 justify-between {{ Request::is('employee/transaction*') ? 'bg-gradient-to-l from-[#28A446] to-[#28656A]' : '' }} flex justiy-between items-center">
                     <i class="bi bi-cash-stack mr-3"></i>
@@ -117,7 +117,10 @@
                     <a href="{{ url('employee/laporan-stok') }}" class="w-full">Laporan Stok </a>
                 </li>
             </ul>
+            @endif
         </div>
+        
+        
     </nav>
     {{-- end of navbar --}}
 

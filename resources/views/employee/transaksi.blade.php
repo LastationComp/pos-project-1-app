@@ -27,32 +27,7 @@
                 <div class="flex w-[70%] gap-2 justify-end">
                     
 
-                    <div
-                        class="relative rounded-md py-1 pr-7 pl-3 flex items-center gap-3 border-r-[2px] border-b-[1px] text-sm border-white bg-[#BBBBBB] shadow-md">
-                        <button id="member-dropdown" data-dropdown-toggle="dropdown-member" class="flex items-center gap-2">
-                            <span class="bi bi-people"></span>
-                            <span
-                                class="w-[.3px] h-[17px] rounded-full border-r-2 border border-l-0 border-t-0 border-black"></span>
-                            <span class="font-light text-sm">kode member</span>
-                            <div class="absolute right-0 top-0 bg-slate-300 rounded-r-md h-full flex items-center px-1">
-                                <i class="bi bi-chevron-down font-bold"></i>
-                            </div>
-                        </button>
-
-
-                        <div id="dropdown-member" class="z-10 hidden ">
-                            <ul class="bg-white divide-y border" aria-labelledby="member-dropdown">
-                                <li class="px-2">
-                                    <a href="#" class="text-slate-400 text-sm">member <i
-                                            class="bi bi-person-fill-check ml-2"></i></a>
-                                </li>
-                                <li class="px-2">
-                                    <a href="#" class="text-slate-400 text-sm">non member <i
-                                            class="bi bi-clipboard-x ml-2"></i></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+                    
 
                     <button type="submit"
                         class="px-3 py-1 rounded-md  pl-3 flex items-center gap-3 border-r-[2px] border-b-[1px] text-sm border-white bg-[#BBBBBB] shadow-md">check
