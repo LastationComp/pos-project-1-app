@@ -1,21 +1,21 @@
 <?php
 
-use App\Http\Controllers\Employee\Product\SellingUnit\SellingUnitController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\FixingController;
 use App\Http\Controllers\licenseController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\TestingDBController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\TestingAdminController;
 use App\Http\Controllers\SuperAdmin\UnitController;
-use App\Http\Controllers\TestingDBController;
 use App\Http\Controllers\TestingEmployeeController;
 use App\Http\Controllers\Employee\EmployeeController;
 use App\Http\Controllers\Employee\CrudMemberController;
-use App\Http\Controllers\Employee\HistoryTransaction\HistoryController;
 use App\Http\Controllers\Employee\Product\CrudProductController;
 use App\Http\Controllers\Employee\Transaction\TransactionController;
-use App\Models\Transaction;
+use App\Http\Controllers\Employee\HistoryTransaction\HistoryController;
+use App\Http\Controllers\Employee\Product\SellingUnit\SellingUnitController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,14 +32,6 @@ use App\Models\Transaction;
 
 // ON PROGRESS
 Route::get('/test-db', [TestingDBController::class, 'index']);
-
-// Route::get('/login', function() { return view('login'); })->name('login');
-// Route::resource('/admin/dashboard', TestingAdminController::class);
-// Route::get('/admin/dashboard/settings', [TestingAdminController::class, 'settings']);
-// Route::get('/admin/dashboard/profile', [TestingAdminController::class, 'profile']);
-
-
-
 
 // just tampilan
 Route::get('/list-product', function () {
@@ -73,12 +65,16 @@ Route::get('/transaction', function () {
 });
 
 
-Route::get('/loginsuperadmin', [AuthController::class, 'login'])->name('superadmin.login')->middleware(['adminemployee.auth']);
-Route::post('/superadmin/login', [AuthController::class, 'login_super_admin'])->name('login_super_admin');
-
 // ## end of ROUTE Alfa
 
-//
+// problem route
+Route::post('/submit_checkbox_product', function(){ return 'submit_checkbox_product'; })->name('submit_checkbox_product');
+Route::get('/employee_logout', [FixingController::class, '/logout'])->name('employee_logout');
+Route::post('/delete_data_product', function(){ return 'delete_data_product'; })->name('delete_data_product');
+// problem route end of
+
+Route::get('/loginsuperadmin', [AuthController::class, 'login'])->name('superadmin.login');
+Route::post('/superadmin/login', [AuthController::class, 'login_super_admin'])->name('login_super_admin');
 
 Route::prefix('/superadmin')->middleware(['superadmin.auth'])->group(function () {
     Route::get('/logout', [AuthController::class, 'logout'])->name('superadmin.logout');
@@ -102,6 +98,7 @@ Route::prefix('/superadmin')->middleware(['superadmin.auth'])->group(function ()
 Route::get('/', [licenseController::class, 'index'])->name('adminEmployeeLogin')->middleware(['adminemployee.auth']);
 Route::post('/checklicensekey', [licenseController::class, 'check_license_key'])->name('check_license_key');
 Route::post('/loginadminemployee', [AuthController::class, 'login_admin_employee'])->name('login_admin_employee');
+
 
 Route::prefix('/admin/dashboard')->middleware(['admin.auth'])->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('dashboard_admin');

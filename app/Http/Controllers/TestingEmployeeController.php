@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\Client;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class TestingEmployeeController extends Controller
@@ -23,15 +24,17 @@ class TestingEmployeeController extends Controller
             $shop_open = $check_setting[0]->shop_open;
             $shop_close = $check_setting[0]->shop_close;
             $validate_time = $shop_open < $timeNow && $timeNow < $shop_close;
-            if(!$validate_time){
-                session()->flush();
-                session()->invalidate();
-                session()->regenerateToken();
-                return redirect()->route('adminEmployeeLogin')->with('error', 'Sorry, the shop already close');
-            }
+            // if(!$validate_time){
+            //     session()->flush();
+            //     session()->invalidate();
+            //     session()->regenerateToken();
+            //     return redirect()->route('adminEmployeeLogin')->with('error', 'Sorry, the shop already close');
+            // }
         }
 
-        return view('employee.transaksi');
+        $product = Product::all();
+
+        return view('employee.transaksi', ['product' => $product]);
     }
 
     /**
@@ -96,7 +99,7 @@ class TestingEmployeeController extends Controller
                 'kode' => 'OBT1614120002',
                 'nama' => 'Nyanyobion',
                 'stok' => 9,
-                'catatan' => 'Nyanyobion adalah vitamin penambah darah dengan kandungan gerrous gluconate di dalamnya',
+                'catatan' => 'Nyanyobion adalah vitamin penam bah darah dengan kandungan gerrous gluconate di dalamnya',
             ],
 
             [
@@ -106,28 +109,26 @@ class TestingEmployeeController extends Controller
                 'catatan' => 'Ngayobion adalah vitamin penambah darah dengan kandungan gerrous gluconate di dalamnya',
             ],
         ];
-
         
+        $cart = session()->get('cart', []);
 
-        foreach( $list_obat as $lo ) {
-            if( array_search($kode, $lo) ) {
-                $obat = $lo;
+        foreach( $list_obat as $obat ) {
+            $kode_obat = $obat['kode'];
+            
+            if( array_search( $request->$kode_obat, $obat ) ) {
+                if( isset($cart[$request->$kode_obat]) ) {
+                } else {
+                    $cart[] = [
+                        'kode' => $obat['kode'],
+                        'nama' => $obat['nama'],
+                        'stok' => $obat['stok'],
+                        'catatan' => $obat['catatan'],
+                        'jumlah' => 1
+                    ];
+                }
             }
         }
 
-        $cart = session()->get('cart', []);
-
-        if( isset($cart[$kode]) ) {
-            $cart[$kode]['jumlah']++;
-        } else {
-            $cart[$kode] = [
-                'kode' => $obat['kode'],
-                'nama' => $obat['nama'],
-                'stok' => $obat['stok'],
-                'catatan' => $obat['catatan'],
-                'jumlah' => 1
-            ];
-        }
 
         session()->put('cart', $cart);
 
@@ -135,8 +136,16 @@ class TestingEmployeeController extends Controller
     }
 
     public function cart() {
+        // return session()->get('cart');
 
-        return view('employee.checkout-transaksi');
+        // session()->forget('cart');
+        // foreach( session()->get('cart') as $cart ) {
+        //     echo $cart['kode'];
+        // }
+
+        // return false;
+
+        return view('employee.cart2');
     }
 
     public function hapus($kode) {
@@ -161,8 +170,13 @@ class TestingEmployeeController extends Controller
     public function tambah($kode) {
 
         $cart = session()->get('cart');
-        $cart[$kode]['jumlah']++;
 
+        foreach( $cart as $crt ) {
+            if( $crt['kode'] == $kode  ) {
+                $crt['jumlah']++;
+            }
+        }
+        
         session()->put('cart', $cart);
 
         return redirect('employee/cart');

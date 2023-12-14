@@ -1,6 +1,7 @@
 @extends('employee.layouts.main')
 
 @section('content')
+
 <div class="wrapper w-[100%] h-[85vh]  mt-5 bg-[#F1F1F1] rounded-lg border shadow-2xl p-3 relative">
     
         <div class="text-center border-b-2 border-emerald-500 p-3 w-full ">
@@ -51,7 +52,8 @@
                         </div>
                     </div>
                 </div>
-                @endforeach
+
+            @endforeach
         </div>
     </div>
 

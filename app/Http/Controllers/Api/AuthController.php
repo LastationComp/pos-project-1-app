@@ -83,7 +83,7 @@ class AuthController extends Controller
             
             // dd($timeNow);
             $validate_time = $shop_open < $timeNow && $timeNow < $shop_close;
-            if (!$validate_time) return redirect()->route('adminEmployeeLogin')->with('error', "Toko Sudah Tutup! Silahkan Login Besok");
+            // if (!$validate_time) return redirect()->route('adminEmployeeLogin')->with('error', "Toko Sudah Tutup! Silahkan Login Besok");
             if ($check_setting[0]->emp_can_login == false) return redirect()->route('adminEmployeeLogin')->with('error', "akses masuk anda di nonaktifkan! \n mohon hubungi admin anda");
             session()->put('emp_can_create', $check_setting[0]->emp_can_create);
             session()->put('emp_can_update', $check_setting[0]->emp_can_update);
@@ -108,12 +108,13 @@ class AuthController extends Controller
             session()->put('adminUsername', $user->username);
             return redirect()->route('adminEmployeeLogin')->with('success', 'anda login sebagai admin');
         }else if ($user->roles == 'employee'){
+            
             session()->put('role', $user->roles);
             session()->put('auth_id', $user->id);
             session()->put('employee_code', $user->username);
             session()->put('employeeName', $user->name);
             session()->put('avatar_url', $user->avatar);
-            return redirect()->route('adminEmployeeLogin')->with('success', 'anda login sebagai employee');
+            return redirect()->route('employee')->with('success', 'anda login sebagai employee');
         }else {
             return redirect()->route('adminEmployeeLogin')->with('error', 'test');
         }
