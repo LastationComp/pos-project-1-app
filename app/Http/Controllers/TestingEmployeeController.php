@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\Client;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class TestingEmployeeController extends Controller
@@ -31,7 +32,9 @@ class TestingEmployeeController extends Controller
             // }
         }
 
-        return view('employee.transaksi');
+        $product = Product::all();
+
+        return view('employee.transaksi', ['product' => $product]);
     }
 
     /**

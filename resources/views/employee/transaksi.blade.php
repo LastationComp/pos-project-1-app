@@ -24,32 +24,6 @@
                 @csrf
                 <h2 class="text-2xl font-bold">Pencarian Produk</h2>
 
-<<<<<<< HEAD
-        <div class="table-wrapper w-full h-full overflow-auto no-scrollbar mt-10">
-            <table class="w-full mt-5 text-md border-collapse rounded-corners rounded-t-xl overflow-hidden" cellpadding="7" cellspacing="0" border="5">
-                <thead>
-                    <tr class=" bg-[#4B4B4B] text-white font-semibold">
-                        <td class=" border border-l-0 border-t-0  border-black capitalize text-center">pilih</td>
-                        <td class=" border border-l-0 border-t-0 border-black capitalize w-[15%]">kode obat</td>
-                        <td class=" border border-l-0 border-t-0 border-black capitalize w-[20%]">nama obat</td>
-                        <td class=" border border-l-0 border-t-0 border-black capitalize w-[8%]">sisa stok</td>
-                        <td class="  border border-l-0 border-t-0 border-r-0 border-black capitalize">catatan obat</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    
-                    <tr class="">
-                        <td class=" border border-t-0 border-black">
-                            <div class="flex justify-center items-center">
-                                {{-- <a href="{{ url('employee/beli/OBT1614120001') }}" class="px-3  bg-green-500 text-white">beli</a> --}}
-                                <input type="checkbox"  
-                                @if (session('cart'))
-                                @foreach ( session()->get('cart') as $cart )
-                                    {{ $cart['kode'] == 'OBT1614120001' ? 'disabled checked' :  '' }}
-                                @endforeach
-                                @endif 
-                                name="OBT1614120001" value="OBT1614120001" class="accent-white">
-=======
                 <div class="flex w-[70%] gap-2 justify-end">
                     
 
@@ -62,38 +36,9 @@
                             <span class="font-light text-sm">kode member</span>
                             <div class="absolute right-0 top-0 bg-slate-300 rounded-r-md h-full flex items-center px-1">
                                 <i class="bi bi-chevron-down font-bold"></i>
->>>>>>> 496b2c473b119a31668ff93b3368d11f04747fd7
                             </div>
                         </button>
 
-<<<<<<< HEAD
-                    <tr class="">
-                        <td class=" border border-t-0 border-black">
-                            <div class="flex justify-center items-center">
-                                {{-- <a href="{{ url('employee/beli/OBT1614120003') }}" class="px-3  bg-green-500 text-white">beli</a> --}}
-                                <input type="checkbox"  
-                                @if (session('cart'))
-                                @foreach ( session()->get('cart') as $cart )
-                                    {{ $cart['kode'] == 'OBT1614120003' ? 'disabled checked' :  '' }}
-                                @endforeach
-                                @endif 
-                                name="OBT1614120003" value="OBT1614120003" class="accent-white">
-                            </div>
-                        </td>
-                        <td class=" border border-l-0 border-t-0 border-black font-medium">OBT1614120003</td>
-                        <td class=" border border-l-0 border-t-0 border-black">Nganyobion</td>
-                        <td class=" border border-l-0 border-t-0 border-black">
-                            <div class="rounded-full bg-green-500 text-black text-center text-sm w-fit px-5 mx-auto">15</div>
-                        </td>
-                        <td class=" border border-l-0 border-t-0 border-black"><p>{{ Str::limit('Nganyobion adalah vitamin penambah darah dengan kandungan gerrous gluconate di dalamnya', 65) }}</p></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </form>
-</div>
-=======
->>>>>>> 496b2c473b119a31668ff93b3368d11f04747fd7
 
                         <div id="dropdown-member" class="z-10 hidden ">
                             <ul class="bg-white divide-y border" aria-labelledby="member-dropdown">

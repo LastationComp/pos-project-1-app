@@ -107,12 +107,13 @@ class AuthController extends Controller
             session()->put('adminUsername', $user->username);
             return redirect()->route('adminEmployeeLogin')->with('success', 'anda login sebagai admin');
         }else if ($user->roles == 'employee'){
+            
             session()->put('role', $user->roles);
             session()->put('auth_id', $user->id);
             session()->put('employee_code', $user->username);
             session()->put('employeeName', $user->name);
             session()->put('avatar_url', $user->avatar);
-            return redirect()->route('adminEmployeeLogin')->with('success', 'anda login sebagai employee');
+            return redirect()->route('employee')->with('success', 'anda login sebagai employee');
         }else {
             return redirect()->route('adminEmployeeLogin')->with('error', 'test');
         }

@@ -109,8 +109,6 @@ class CrudProductController extends Controller
         Selling_unit::create($input_selling_unit);
 
         return redirect()->route('product_page')->with('success', 'Selling Unit Sukses Ditambah');
-
-
     }
 
     public function update_data_product($id_product) {
