@@ -139,7 +139,7 @@ class CrudProductController extends Controller
     }
 
     public function delete_data_product($id_product){
-        $check_can_delete_product = session()->get('emp_can_delete');
+        $check_can_delete_product = session()->get('emp_can_create');
         if($check_can_delete_product == false) return redirect()->back()->with('error', 'Pegawai Dilarang Menghapus Data, Silahkan Hubungi Admin Anda');
 
         $license_key = session()->get('license_key');

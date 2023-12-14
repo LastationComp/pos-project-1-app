@@ -51,7 +51,7 @@
                     <td class=" border border-l-0 border-t-0 border-black text-center font-light">
                         <div class="btn-group flex gap-3 text-white w-fit mx-auto">
                             <a href="{{ route('detail_history_transaction', $item->id) }}" class="bg-sky-500 px-3 rounded-md border border-white">detail</a>
-                            <a href="" class="bg-slate-500 px-3 rounded-md border border-white">print</a>
+                            
                         </div>
                     </td>
                 </tr>

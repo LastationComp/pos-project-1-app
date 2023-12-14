@@ -30,40 +30,7 @@ use App\Http\Controllers\Employee\Product\SellingUnit\SellingUnitController;
 
 // ## ROUTE Alfa
 
-// ON PROGRESS
-Route::get('/test-db', [TestingDBController::class, 'index']);
 
-// just tampilan
-Route::get('/list-product', function () {
-    return view('list-product');
-});
-
-// login 1
-Route::get('/login-pin', function () {
-    return view('login-1.login-pin');
-});
-Route::get('/login-scan', function () {
-    return view('login-1.login-scan');
-});
-
-// login 2
-Route::get('/login-pin-2', function () {
-    return view('login-2.login-pin');
-});
-Route::get('/login-scan-2', function () {
-    return view('login-2.login-scan');
-});
-
-Route::get('/success-popup', function () {
-    return view('success');
-});
-Route::get('/checkout', function () {
-    return view('checkout');
-});
-
-Route::get('/transaction', function () {
-    return view('transaction');
-});
 
 
 // ## end of ROUTE Alfa
@@ -93,6 +60,7 @@ Route::prefix('/superadmin')->middleware(['superadmin.auth'])->group(function ()
         Route::get('/add', [UnitController::class, 'add_data_unit'])->name('add_data_unit');
         Route::post('/submitadddata', [UnitController::class, 'submit_add_data_unit'])->name('submit_add_data_unit');
         Route::get('{id}/edit', [UnitController::class, 'edit_data_unit'])->name('edit_data_unit');
+        Route::post('{id}/submitedit', [UnitController::class, 'submit_edit_unit'])->name('submit_edit_unit');
     });
 });
 
@@ -128,7 +96,7 @@ Route::prefix('/employee')->middleware('employee.auth')->group(function () {
             Route::get('/', [CrudMemberController::class, 'index'])->name('member_page');
             Route::get('/add', [CrudMemberController::class, 'add_data_member'])->name('add_data_member');
             Route::post('/submitadd', [CrudMemberController::class, 'submit_add_data_member'])->name('submit_add_data_member');
-            Route::get('/{customer_code}/update', [CrudMemberController::class, 'submit_update_data_employee'])->name('submit_update_data_employee');
+            Route::get('/{customer_code}/update', [CrudMemberController::class, 'update_data_member'])->name('update_data_member');
             Route::post('/{customer_code}/submitupdate', [CrudMemberController::class, 'submit_update_data_member_employee'])->name('submit_update_data_member_employee');
             Route::post('/{customer_code}/deletedata', [CrudMemberController::class, 'delete_data_member_employee'])->name('delete_data_member_employee');
         });

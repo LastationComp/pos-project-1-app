@@ -88,8 +88,8 @@
         <div class="sidebar fixed left-0 top-0 {{ session()->has('transaction_id') ? 'hidden' : 'h-[100vh]' }} bg-black outfit">
             <div class="logo-wrapper flex items-center mx-7 my-3">
                 <div><img src="{{ asset('img/Lastation.png') }}" width="30" alt=""></div>
-                <h2 class="text-white text-xl font-extrabold m-3 leading-5">
-                    Apotek <br>Lastation
+                <h2 class="text-white text-md font-extrabold m-3 leading-5 w-[110px]">
+                    Apotek <br>{{ session()->get('client_name') }}
                 </h2>
             </div>
 
@@ -108,9 +108,7 @@
                     <i class="bi bi-calendar-week mr-3"></i>
                     <a href="{{ route('history_page') }}" class="w-full">Riwayat Penjualan </a>
                 </li>
-                <li class="px-3 py-2 flex justify-between items-center {{ Request::is('employee/laporan-stok*') ? 'bg-gradient-to-l from-[#28A446] to-[#28656A]' : '' }}">
-                    <a href="{{ url('employee/laporan-stok') }}" class="w-full"><i class="bi bi-journal-richtext mr-2"></i> Laporan Stok </a>
-                </li>
+                
             </ul>
         </div>
         
