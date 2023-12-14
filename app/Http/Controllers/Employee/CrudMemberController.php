@@ -65,12 +65,13 @@ class CrudMemberController extends Controller
         ];
 
         $employee = Employee::find(session()->get('auth_id'));
+        $customer = $employee->customers()->first();
+        if($customer && $customer->email == $validator['email']) return redirect()->route('add_data_member')->with('error', 'email sudah terdaftar');
         $employee->customers()->create($data);
-
         return redirect()->route('member_page')->with('success', 'Data Member Successfully Inserted');
     }
 
-    public function submit_update_data_employee($customer_code){
+    public function update_data_member($customer_code){
         $data = Customer::where('customer_code', $customer_code)->first();
         if(!$data) return abort(403);
 
@@ -87,7 +88,9 @@ class CrudMemberController extends Controller
         ]);
 
         $customer_update = Customer::where('customer_code', $customer_code)->first();
+        $customer_check = Customer::where('customer_code','!=', $customer_code)->first();
         if(!$customer_update) return abort(403);
+        if($customer_check && $customer_check->email == $validator['email']) return redirect()->route('update_data_member',$customer_code)->with('error', 'email sudah terdaftar');
 
         $input_data = [
             "point" => $validator['point'],

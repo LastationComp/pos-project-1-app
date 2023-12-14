@@ -41,7 +41,7 @@ class AuthController extends Controller
 
     public function logout(){
         Session::flush();
-
+       
         return redirect()->route('superadmin.login')->with('success', 'Anda Berhasil Logout');
     }
 
@@ -74,7 +74,7 @@ class AuthController extends Controller
         if (strval($request->role) == 'employee'){
             $check_client = Client::where('license_key', session()->get('license_key'))->first();
             $check_admin = $check_client->admin()->first();
-            $check_setting = $check_admin->setting()->get(['settings.emp_can_login', 'settings.shop_open', 'settings.shop_close', 'settings.emp_can_create', 'settings.emp_can_update', 'settings.emp_can_update']);
+            $check_setting = $check_admin->setting()->get(['settings.emp_can_login', 'settings.shop_open', 'settings.shop_close', 'settings.emp_can_create', 'settings.emp_can_update', 'settings.emp_can_delete']);
             $time = Carbon::now()->setTimezone('Asia/Jakarta');
             $timeNow= $time->toTimeString();
             $date = $time->toDateString();
@@ -83,7 +83,7 @@ class AuthController extends Controller
             
             // dd($timeNow);
             $validate_time = $shop_open < $timeNow && $timeNow < $shop_close;
-            // if (!$validate_time) return redirect()->route('adminEmployeeLogin')->with('error', "Toko Sudah Tutup! Silahkan Login Besok");
+            if (!$validate_time) return redirect()->route('adminEmployeeLogin')->with('error', "Toko Sudah Tutup! Silahkan Login Besok");
             if ($check_setting[0]->emp_can_login == false) return redirect()->route('adminEmployeeLogin')->with('error', "akses masuk anda di nonaktifkan! \n mohon hubungi admin anda");
             session()->put('emp_can_create', $check_setting[0]->emp_can_create);
             session()->put('emp_can_update', $check_setting[0]->emp_can_update);

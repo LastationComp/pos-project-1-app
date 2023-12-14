@@ -33,6 +33,16 @@
                             <p class="ml-6">{{ $message }}</p>
                         </div>
                     @endif
+                    @if ($errors->any())
+        <div class="relative px-4 py-3 leading-normal text-red-700 bg-red-100 rounded-lg mb-3 w-1/2" role="alert">
+            
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
                     <div class="input-group flex items-center justify-between w-[80%] mb-3 rounded-b-md">
                         <label for="name" class="text-lg font-semibold">Nama obat</label>
                         <input name="name" id="name" type="text" value="{{ $product->product_name }}" disabled

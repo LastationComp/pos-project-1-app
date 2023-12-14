@@ -14,7 +14,7 @@ class SellingUnitController extends Controller
         $get_product = Product::find($id_product);
         if(!$get_product) return abort(403);
         $get_selling_unit = Selling_unit::where('product_id', $id_product)
-        ->join('units', 'selling_units.unit_id', '=', 'units.id')
+        ->join('units', 'selling_units.unit_id', '=', 'units.id')->orderBy('created_at')
         ->get(['selling_units.*', 'units.name']);
         return view('employee.crud-produk.selling_unit.edit', ["selling_unit" => $get_selling_unit, "product" => $get_product]);
     }
@@ -32,12 +32,12 @@ class SellingUnitController extends Controller
     public function submit_edit_data_selling_unit(Request $request, $product_id, $selling_unit_id){
         $validator = $request->validate([
             "stock" => ["required"],
-            "price" => ["required"]
+            "price" => ["required"],
+            "smallest_unit" => ['required']
         ]);
 
         $input_data = [
             "unit_id" => $request->smallest_unit,
-            "is_smallest" => $request->is_smallest == 'true' ? true : false,
             "stock" => $validator['stock'],
             "price" => $validator['price']
         ];

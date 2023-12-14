@@ -34,7 +34,20 @@ class UnitController extends Controller
 
     public function edit_data_unit($id){
         $data = Unit::find($id);
+        if(!$data) return abort(403);
 
         return view('superAdmin.units.editunit',compact('data') );
+    }
+
+    public function submit_edit_unit(Request $request, $id){
+        $data = Unit::where('id', $id)->first();
+
+        $input_data = [
+            "name" => $request->name
+        ];
+        
+        $data->update($input_data);
+
+        return redirect()->route('dashboard_unit')->with('success', 'Data Sukses Diubahh');
     }
 }

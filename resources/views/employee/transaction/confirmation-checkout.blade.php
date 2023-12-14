@@ -1,7 +1,6 @@
 @extends('employee.layouts.main')
 
 @section('content')
-
 <div class="wrapper w-[100%] h-[85vh]  mt-5 bg-[#F1F1F1] rounded-lg border shadow-2xl p-3 relative">
     
         <div class="text-center border-b-2 border-emerald-500 p-3 w-full ">
@@ -48,12 +47,11 @@
 
                     <div class="flex gap-5 justify-between   items-center">
                         <div class="btn-group flex justify-center items-center gap-2">
-                            <span class="font-bold">Rp. </span><input class="font-bold" value="{{ $transaction_list->total_price }}" type="number" disabled>
+                                <span class="font-bold">Rp. </span><input class="font-bold" value="{{ $transaction_list->total_price }}" type="number" disabled>
                         </div>
                     </div>
                 </div>
-
-            @endforeach
+                @endforeach
         </div>
     </div>
 

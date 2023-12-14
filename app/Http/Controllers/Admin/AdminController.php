@@ -157,6 +157,7 @@ class AdminController extends Controller
     }
     public function admin_logout(){
         session()->flush();
+        session()->put('license_Key');
         session()->invalidate();
         session()->regenerateToken();
 

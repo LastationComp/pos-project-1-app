@@ -48,7 +48,9 @@
                             </td>
                             <th scope="row"
                                 class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
-                                <div class="text-base font-semibold">{{ $item->license_key }}</div>
+                                <div id="licensekey_{{ $item->id }}" class="text-base font-semibold">{{ $item->license_key }}</div>
+                                {{-- <input type="text" class="" name="" id="licensekey_{{ $item->id }}" value="{{ $item->license_key }}"> --}}
+                                <button  value="copy" onclick="copy('licensekey_{{ $item->id }}')"  class="font-medium text-blue-600 dark:text-blue-500 hover:underline ml-3">Copy!</button>
                             </th>
                             <td class="px-6 py-4">
                                 {{ $item->client_name }}
@@ -80,4 +82,18 @@
         </div>
 
     </div>
+@endsection
+@section('js')
+    <script>
+         
+  const copy = async (id) => {
+    let text = document.getElementById(id).innerHTML;
+    try {
+      await navigator.clipboard.writeText(text);
+      console.log('Content copied to clipboard');
+    } catch (err) {
+      console.error('Failed to copy: ', err);
+    }
+  }
+    </script>
 @endsection

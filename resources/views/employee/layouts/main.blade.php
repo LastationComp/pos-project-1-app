@@ -108,9 +108,7 @@
                     <i class="bi bi-calendar-week mr-3"></i>
                     <a href="{{ route('history_page') }}" class="w-full">Riwayat Penjualan </a>
                 </li>
-                <li class="px-3 py-2 flex justify-between items-center {{ Request::is('employee/laporan-stok*') ? 'bg-gradient-to-l from-[#28A446] to-[#28656A]' : '' }}">
-                    <a href="{{ url('employee/laporan-stok') }}" class="w-full"><i class="bi bi-journal-richtext mr-2"></i> Laporan Stok </a>
-                </li>
+                
             </ul>
         </div>
         
