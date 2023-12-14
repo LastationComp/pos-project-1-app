@@ -115,6 +115,24 @@ class ClientController extends Controller
 
     }
 
+    public function change_status_client($id){
+       $client =  Client::where('id', $id)->first();
+       if($client->is_active == true){
+            $change_status = [
+                "is_active" => false
+            ];
+       }
+       else if ($client->is_active == false){
+        $change_status = [
+            "is_active" => true
+        ];
+       }
+
+       $client->update($change_status);
+
+       return redirect()->route('superadmin.client')->with('success', 'Status Sukses Diganti');
+    }
+
     public function submit_update_expired_client (Request $request, $id){
 
 

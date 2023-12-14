@@ -84,7 +84,7 @@ Route::prefix('/superadmin')->middleware(['superadmin.auth'])->group(function ()
         Route::get('/{id}/update', [ClientController::class, 'update_data_client'])->name('superadmin.update_data_client');
         Route::get('/{id}/update/expired', [ClientController::class, 'update_expired_client'])->name('superadmin.update_expired_client');
         Route::post('/submitadddata', [ClientController::class, 'submit_add_data_client'])->name('superadmin.submit_add_data_client');
-        Route::post('/submitupdatedata/{id}', [ClientController::class, 'submit_update_data_client'])->name('superadmin.submit_update_data_client');
+        Route::post('/submitupdatedata/{id}', [ClientController::class, 'change_status_client'])->name('change_status_client');
         Route::post('/submitupdateexpired/{id}', [ClientController::class, 'submit_update_expired_client'])->name('superadmin.submit_update_expired_client');
     });
     Route::prefix('dashboard/unit')->group(function () {
