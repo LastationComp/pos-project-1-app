@@ -125,36 +125,42 @@ Route::prefix('/employee')->middleware('employee.auth')->group(function () {
     Route::get('/', function () {
         return redirect()->route('transaction_page');
     })->name('employee');
-    Route::prefix('/member')->group(function () {
-        Route::get('/', [CrudMemberController::class, 'index'])->name('member_page');
-        Route::get('/add', [CrudMemberController::class, 'add_data_member'])->name('add_data_member');
-        Route::post('/submitadd', [CrudMemberController::class, 'submit_add_data_member'])->name('submit_add_data_member');
-        Route::get('/{customer_code}/update', [CrudMemberController::class, 'submit_update_data_employee'])->name('submit_update_data_employee');
-        Route::post('/{customer_code}/submitupdate', [CrudMemberController::class, 'submit_update_data_member_employee'])->name('submit_update_data_member_employee');
-        Route::post('/{customer_code}/deletedata', [CrudMemberController::class, 'delete_data_member_employee'])->name('delete_data_member_employee');
+    Route::middleware(['CheckTransaction.auth'])->group(function (){
+        Route::prefix('/member')->group(function () {
+            Route::get('/', [CrudMemberController::class, 'index'])->name('member_page');
+            Route::get('/add', [CrudMemberController::class, 'add_data_member'])->name('add_data_member');
+            Route::post('/submitadd', [CrudMemberController::class, 'submit_add_data_member'])->name('submit_add_data_member');
+            Route::get('/{customer_code}/update', [CrudMemberController::class, 'submit_update_data_employee'])->name('submit_update_data_employee');
+            Route::post('/{customer_code}/submitupdate', [CrudMemberController::class, 'submit_update_data_member_employee'])->name('submit_update_data_member_employee');
+            Route::post('/{customer_code}/deletedata', [CrudMemberController::class, 'delete_data_member_employee'])->name('delete_data_member_employee');
+        });
     });
-    Route::prefix('/product')->group(function () {
-        Route::get('/', [CrudProductController::class, 'index'])->name('product_page');
-        Route::get('/addproduct', [CrudProductController::class, 'add_data_product'])->name('add_data_product');
-        Route::post('/submitaddproduct', [CrudProductController::class, 'submit_add_data_product'])->name('submit_add_data_product');
-        Route::get('/{id}/updatesellingunit', [CrudProductController::class, 'add_selling_unit'])->name('add_selling_unit');
-        Route::post('/{id}/submitupdatesellingunit', [CrudProductController::class, 'submit_add_selling_unit'])->name('submit_add_selling_unit');
-        Route::get('/{id_product}/updateproduct', [CrudProductController::class, 'update_data_product'])->name('update_data_product');
-        Route::post('/{id_product}/submitupdatedata', [CrudProductController::class, 'submit_update_data_product'])->name('submit_update_data_product');
-        Route::post('/{id_product}/deleteproduct', [CrudProductController::class, 'delete_data_product'])->name('delete_data_product');
-        Route::prefix('/sellingunit')->group(function () {
-            Route::get('/{id_product}', [SellingUnitController::class, 'index'])->name('table_selling_unit');
-            Route::get('/{id_selling_unit}/edit', [SellingUnitController::class, 'edit_data_selling_unit'])->name('edit_data_selling_unit');
-            Route::post('/{product_id}/{selling_unit_id}/submitedit', [SellingUnitController::class, 'submit_edit_data_selling_unit'])->name('submit_edit_data_selling_unit');
-            Route::post('/{product_id}/{selling_unit_id}/delete', [SellingUnitController::class, 'delete_selling_unit'])->name('delete_selling_unit');
+    Route::middleware(['CheckTransaction.auth'])->group(function () {
+        Route::prefix('/product')->group(function () {
+            Route::get('/', [CrudProductController::class, 'index'])->name('product_page');
+            Route::get('/addproduct', [CrudProductController::class, 'add_data_product'])->name('add_data_product');
+            Route::post('/submitaddproduct', [CrudProductController::class, 'submit_add_data_product'])->name('submit_add_data_product');
+            Route::get('/{id}/updatesellingunit', [CrudProductController::class, 'add_selling_unit'])->name('add_selling_unit');
+            Route::post('/{id}/submitupdatesellingunit', [CrudProductController::class, 'submit_add_selling_unit'])->name('submit_add_selling_unit');
+            Route::get('/{id_product}/updateproduct', [CrudProductController::class, 'update_data_product'])->name('update_data_product');
+            Route::post('/{id_product}/submitupdatedata', [CrudProductController::class, 'submit_update_data_product'])->name('submit_update_data_product');
+            Route::post('/{id_product}/deleteproduct', [CrudProductController::class, 'delete_data_product'])->name('delete_data_product');
+            Route::prefix('/sellingunit')->group(function () {
+                Route::get('/{id_product}', [SellingUnitController::class, 'index'])->name('table_selling_unit');
+                Route::get('/{id_selling_unit}/edit', [SellingUnitController::class, 'edit_data_selling_unit'])->name('edit_data_selling_unit');
+                Route::post('/{product_id}/{selling_unit_id}/submitedit', [SellingUnitController::class, 'submit_edit_data_selling_unit'])->name('submit_edit_data_selling_unit');
+                Route::post('/{product_id}/{selling_unit_id}/delete', [SellingUnitController::class, 'delete_selling_unit'])->name('delete_selling_unit');
+            });
         });
     });
     Route::prefix('/transaction')->group(function () {
-        Route::get('/', [TransactionController::class, 'index'])->name('transaction_page');
-        Route::post('/gotocheckout', [TransactionController::class, 'submit_checkbox_product'])->name('submit_checkbox_product');
-        Route::get('/checkout', [TransactionController::class, 'checkout_product_page'])->name('checkout_product_page');
-        Route::get('/cancel', [TransactionController::class, 'cancel_transaction'])->name('cancel_transaction');
-        Route::post('/submitcheckout', [TransactionController::class, 'submit_checkout_product'])->name('submit_checkout_product');
+        Route::middleware(['CheckTransaction.auth'])->group(function () {
+            Route::get('/', [TransactionController::class, 'index'])->name('transaction_page');
+            Route::post('/gotocheckout', [TransactionController::class, 'submit_checkbox_product'])->name('submit_checkbox_product');
+            Route::get('/checkout', [TransactionController::class, 'checkout_product_page'])->name('checkout_product_page');
+            Route::get('/cancel', [TransactionController::class, 'cancel_transaction'])->name('cancel_transaction');
+            Route::post('/submitcheckout', [TransactionController::class, 'submit_checkout_product'])->name('submit_checkout_product');
+        });
         Route::middleware(['transaction.auth'])->group(function () {
             Route::get('/confirmation_checkout', [TransactionController::class, 'confirmation_checkout_page'])->name('confirmation_checkout_page');
             Route::get('/backtocheckproduct', [TransactionController::class, 'back_to_check_product'])->name('back_to_check_product');
