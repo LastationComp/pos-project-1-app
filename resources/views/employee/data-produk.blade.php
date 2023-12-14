@@ -32,11 +32,15 @@
             </form>
 
         </div>
-        @if ($message = Session::get('success'))
-                <div class="alert alert-success" id="success-msg" role="alert">
-                    {{ $message }}
-                </div>
-            @endif
+        
+
+        <div class="table-wrapper w-full h-[90%] overflow-auto no-scrollbar pt-28 -z-0">
+            {{-- <p class="text-sm text-slate-500 font-light mb-2">Menampilkan 1 - 10 data dari total 10M data</p> --}}
+            @if ($message = Session::get('success'))
+        <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+            <span class="font-medium">{{ $message }}</span>
+          </div>
+        @endif
             @if ($message = Session::get('error'))
             <div class="relative px-4 py-3 leading-normal text-red-700 bg-red-100 rounded-lg mb-3 w-1/2" role="alert">
                 <span class="absolute inset-y-0 left-0 flex items-center ml-4">
@@ -54,9 +58,6 @@
                     </ul>
                 </div>
             @endif
-
-        <div class="table-wrapper w-full h-[90%] overflow-auto no-scrollbar pt-28 -z-0">
-            {{-- <p class="text-sm text-slate-500 font-light mb-2">Menampilkan 1 - 10 data dari total 10M data</p> --}}
 
             <table class="w-full text-md border-collapse rounded-corners rounded-t-xl overflow-auto no-scrollbar"
                 cellpadding="7" cellspacing="0">
@@ -92,7 +93,7 @@
                                         @csrf
                                         
 
-                                        <button onclick="return confirm('yakin ingin menghapus data {{ $item->product_name }} ?')" type="button"
+                                        <button type="submit" onclick="return confirm('yakin ingin menghapus data {{ $item->product_name }} ?')" type="button"
                                             class="w-[25px] h-[25px] p-1 bg-red-500 flex justify-center items-center"><i
                                                 class="bi bi-trash3"></i></button>
                                     </form>

@@ -16,8 +16,7 @@
                 </div>
                 
             <div  class="bg-slate-200 p-5 rounded-b-md h-[90%]">
-                <form action="{{ url('kosong') }}" method="POST" class="w-full h-full overflow-y-auto no-scrollbar">
-                    @csrf
+                
 
                 
                 <div class="detail-obat-wrapper">
@@ -86,7 +85,7 @@
                         class="px-3 py-1 border-2 border-slate-200 text-semibold text-white rounded-md shadow-md flex items-center w-fit bg-blue-500"><i
                             class="bi bi-box-arrow-in-left mr-2"></i> kembali</a>
                 </div>
-            </form>
+           
             </div>
         </div>
     </div>
