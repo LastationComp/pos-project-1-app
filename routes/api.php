@@ -20,5 +20,3 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('/pecel/segoayam/register', [AuthController::class,'register_super_admin'])->name('register_super_admin');
-Route::post('/pecel/segoayam/login', [AuthController::class,'login_super_admin'])->name('login_super_admin');
-Route::get('/pecel/segoayam/user', [AuthController::class,'get_authenticator'])->name('get_authenticator');

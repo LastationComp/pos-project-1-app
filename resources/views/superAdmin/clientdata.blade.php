@@ -34,7 +34,7 @@
                         <th scope="col" class="px-6 py-3">
                             Expired
                         </th>
-                        <th scope="col" class="px-6 py-3">
+                        <th scope="col" class="px-6 py-3 flex justify-center">
                             Action
                         </th>
                     </tr>
@@ -58,7 +58,7 @@
                             </td>
                             <td class="px-6 py-4">
                                 <div class="flex items-center">
-                                    <div class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div>
+                                    <div class="h-2.5 w-2.5 rounded-full {{ !$item->is_active ? 'bg-red-500' : 'bg-green-500' }}  me-2"></div>
                                     {{(!$item->is_active ? 'offline' : 'online')}}
                                 </div>
                             </td>
@@ -66,7 +66,11 @@
                                 {{$item->expired_at}}
                             </td>
                             <td class="px-6 py-4">
-                                
+                                <form action="{{ route('change_status_client', $item->id) }}" method="POST" class="mb-2">
+                                    @csrf
+                                    <button type="submit" onclick="return confirm('Anda Yakin Ingin Mengubah Status Client')" class="font-medium text-blue-600 dark:text-blue-500 hover:underline ml-3">Change Status</button>
+                                </form>
+                                    
                                     <a href="/superadmin/dashboard/client/{{$item->id}}/update/expired" class="font-medium text-blue-600 dark:text-blue-500 hover:underline ml-3">Update Expired</a>
                             </td>
                         </tr>
