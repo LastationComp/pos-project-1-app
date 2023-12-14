@@ -73,7 +73,7 @@
         @endif
             <table class="w-full text-md border-collapse rounded-corners rounded-t-xl overflow-hidden" cellpadding="7"
                 cellspacing="0" border="5">
-                <thead>
+                <thead classs="sticky top-0 w-full">
                     <tr class=" bg-[#4B4B4B] text-white font-semibold">
                         <td class=" border border-l-0 border-t-0  border-black capitalize text-center">no. </td>
                         <td class=" border border-l-0 border-t-0 border-black capitalize w-[25%]">nama member</td>

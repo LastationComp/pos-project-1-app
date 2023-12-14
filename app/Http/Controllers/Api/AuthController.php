@@ -82,8 +82,8 @@ class AuthController extends Controller
             $shop_close = $check_setting[0]->shop_close;
             
             // dd($timeNow);
-            $validate_time = $shop_open < $timeNow && $timeNow < $shop_close;
-            if (!$validate_time) return redirect()->route('adminEmployeeLogin')->with('error', "Toko Sudah Tutup! Silahkan Login Besok");
+            // $validate_time = $shop_open < $timeNow && $timeNow < $shop_close;
+            // if (!$validate_time) return redirect()->route('adminEmployeeLogin')->with('error', "Toko Sudah Tutup! Silahkan Login Besok");
             if ($check_setting[0]->emp_can_login == false) return redirect()->route('adminEmployeeLogin')->with('error', "akses masuk anda di nonaktifkan! \n mohon hubungi admin anda");
             session()->put('emp_can_create', $check_setting[0]->emp_can_create);
             session()->put('emp_can_update', $check_setting[0]->emp_can_update);

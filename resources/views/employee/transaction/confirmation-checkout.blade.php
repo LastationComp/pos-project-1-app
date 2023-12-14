@@ -8,6 +8,7 @@
             <h2 class="text-3xl font-light capitalize">Konfirmasi Pembelian</h2>
         </div>
        
+        <div class="alert-group m-2">
         @if ($message = Session::get('success'))
                 <div class="alert alert-success" id="success-msg" role="alert">
                     {{ $message }}
@@ -30,6 +31,7 @@
                 </ul>
             </div>
         @endif
+        </div>
 
 <div class="flex gap-5 px-5 h-[75%] justify-evenly relative mt-3">
     <div class="list-checkout-wrapper border border-black rounded-lg w-[50%] h-full relative ">
@@ -48,84 +50,6 @@
                     <div class="flex gap-5 justify-between   items-center">
                         <div class="btn-group flex justify-center items-center gap-2">
                             <span class="font-bold">Rp. </span><input class="font-bold" value="{{ $transaction_list->total_price }}" type="number" disabled>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="2-full item flex justify-between p-3 border-slate-600">
-                    <div>
-                        <h3 class="font-semibold text-xl">{{ $transaction_list->selling_unit->product->product_name }}</h3>
-                        <span class="text-md font-normal text-black">{{ $transaction_list->quantity }} x {{ $transaction_list->selling_unit->unit->name }}</span>
-                    </div>
-
-                    <div class="flex gap-5 justify-between   items-center">
-                        <div class="btn-group flex justify-center items-center gap-2">
-                            <span class="font-bold">Rp. </span><input class="font-bold" value="{{ $transaction_list->total_price }}" type="number" disabled>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="2-full item flex justify-between p-3 border-slate-600">
-                    <div>
-                        <h3 class="font-semibold text-xl">{{ $transaction_list->selling_unit->product->product_name }}</h3>
-                        <span class="text-md font-normal text-black">{{ $transaction_list->quantity }} x {{ $transaction_list->selling_unit->unit->name }}</span>
-                    </div>
-
-                    <div class="flex gap-5 justify-between   items-center">
-                        <div class="btn-group flex justify-center items-center gap-2">
-                            <span class="font-bold">Rp. </span><input class="font-bold" value="{{ $transaction_list->total_price }}" type="number" disabled>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="2-full item flex justify-between p-3 border-slate-600">
-                    <div>
-                        <h3 class="font-semibold text-xl">{{ $transaction_list->selling_unit->product->product_name }}</h3>
-                        <span class="text-md font-normal text-black">{{ $transaction_list->quantity }} x {{ $transaction_list->selling_unit->unit->name }}</span>
-                    </div>
-
-                    <div class="flex gap-5 justify-between   items-center">
-                        <div class="btn-group flex justify-center items-center gap-2">
-                            <span class="font-bold">Rp. </span><input class="font-bold" value="{{ $transaction_list->total_price }}" type="number" disabled>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="2-full item flex justify-between p-3 border-slate-600">
-                    <div>
-                        <h3 class="font-semibold text-xl">{{ $transaction_list->selling_unit->product->product_name }}</h3>
-                        <span class="text-md font-normal text-black">{{ $transaction_list->quantity }} x {{ $transaction_list->selling_unit->unit->name }}</span>
-                    </div>
-
-                    <div class="flex gap-5 justify-between   items-center">
-                        <div class="btn-group flex justify-center items-center gap-2">
-                            <span class="font-bold">Rp. </span><input class="font-bold" value="{{ $transaction_list->total_price }}" type="number" disabled>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="2-full item flex justify-between p-3 border-slate-600">
-                    <div>
-                        <h3 class="font-semibold text-xl">{{ $transaction_list->selling_unit->product->product_name }}</h3>
-                        <span class="text-md font-normal text-black">{{ $transaction_list->quantity }} x {{ $transaction_list->selling_unit->unit->name }}</span>
-                    </div>
-
-                    <div class="flex gap-5 justify-between   items-center">
-                        <div class="btn-group flex justify-center items-center gap-2">
-                            <span class="font-bold">Rp. </span><input class="font-bold" value="{{ $transaction_list->total_price }}" type="number" disabled>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="2-full item flex justify-between p-3 border-slate-600">
-                    <div>
-                        <h3 class="font-semibold text-xl">{{ $transaction_list->selling_unit->product->product_name }}</h3>
-                        <span class="text-md font-normal text-black">{{ $transaction_list->quantity }} x {{ $transaction_list->selling_unit->unit->name }}</span>
-                    </div>
-
-                    <div class="flex gap-5 justify-between   items-center">
-                        <div class="btn-group flex justify-center items-center gap-2">
-                                <span class="font-bold">Rp. </span><input class="font-bold" value="{{ $transaction_list->total_price }}" type="number" disabled>
                         </div>
                     </div>
                 </div>
