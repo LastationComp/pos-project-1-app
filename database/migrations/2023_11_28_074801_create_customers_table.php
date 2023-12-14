@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('phone');
-            $table->integer('int')->default(0);
+            $table->integer('point')->default(0);
             $table->timestamps();
         });
     }
