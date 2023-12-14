@@ -112,7 +112,6 @@
                     <a href="{{ url('employee/laporan-stok') }}" class="w-full"><i class="bi bi-journal-richtext mr-2"></i> Laporan Stok </a>
                 </li>
             </ul>
-            @endif
         </div>
         
         
