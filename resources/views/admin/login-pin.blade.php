@@ -96,7 +96,9 @@
 
         <div class="right-slide w-[50%] h-[100vh] flex flex-col gap-5 justify-center items-center bg-[#283845]">
             <div class="flex flex-col">
+
                 <img src="https://i.gifer.com/6pp1.gif" alt="" class="mx-auto rounded-xl mb-5">
+
             </div>
         </div>
     </div>

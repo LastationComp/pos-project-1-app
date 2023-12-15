@@ -53,6 +53,7 @@
                         </div>
                     </div>
                 </div>
+
                 @endforeach
         </div>
     </div>
@@ -64,17 +65,17 @@
             <div class="flex flex-col gap-3">
                 <div class="input-group flex w-full justify-between items-center">
                     <label class="text-md font-semibold" for="member" class="w-[30%]">Member</label>
-                    <input type="text" name="member" id="member" class="w-[80%] h-[35px] border rounded-md border-black p-3" value="{{ $transaction_list->transaction->customer->name }}" disabled>
+                    <input type="text" name="member" id="member" class="w-[80%] h-[35px] border rounded-md border-black p-3" value="{{ $customers[0]->name }}" disabled>
                 </div>
 
                 <div class="input-group flex w-full justify-between items-center">
                     <label class="text-md font-semibold" for="no" class="w-[30%]">No</label>
-                    <input type="text" name="no" id="no" class="w-[80%] h-[35px] border rounded-md border-black p-3" value="{{ $transaction_list->transaction->customer->phone }}" disabled>
+                    <input type="text" name="no" id="no" class="w-[80%] h-[35px] border rounded-md border-black p-3" value="{{ $customers[0]->phone }}" disabled>
                 </div>
 
                 <div class="input-group flex w-full justify-between items-center">
                     <label class="text-md font-semibold" for="point" class="w-[30%]">Point</label>
-                    <input type="text" name="point" id="point" class="w-[80%] h-[35px] border rounded-md border-black p-3" value="{{ $transaction_list->transaction->customer->point }}" disabled>
+                    <input type="text" name="point" id="point" class="w-[80%] h-[35px] border rounded-md border-black p-3" value="{{ $customers[0]->point }}" disabled>
                 </div>
             </div>  
             @endif

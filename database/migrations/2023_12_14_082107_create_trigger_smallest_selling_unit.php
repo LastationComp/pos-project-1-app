@@ -48,8 +48,37 @@ END
             '
         );
 
+        DB::unprepared(
+            'CREATE TRIGGER `QTY_UPDATE` AFTER UPDATE ON `transaction_list`
+            FOR EACH ROW
+            BEGIN
+            UPDATE `selling_units` a
+    SET
+    a.`stock` = a.`stock` - NEW.quantity
+    WHERE
+    a.`id` = NEW.selling_unit_id;
+            END'
+        );
+
+        DB::unprepared(
+            'CREATE TRIGGER `transactions_after_ins_tr1` AFTER INSERT ON `transactions`
+            FOR EACH ROW BEGIN
+               IF (NOT NEW.customer_id IS NULL) THEN
+               
+               UPDATE `customers` a
+               SET
+               a.`point` = a.`point` + ROUND(NEW.total_price / 100)
+               WHERE
+               a.id = NEW.customer_id;
+               END IF;
+           END
+           '
+        );
+
         
     }
+
+   
 
     /**
      * Reverse the migrations.
@@ -63,5 +92,13 @@ END
         DB::unprepared('
         DROP TRIGGER `AFTER UPDATE`
         ');
+
+        DB::unprepared(
+            'DROP TRIGGER `QTY_UPDATE`'
+        );
+
+        DB::unprepared(
+            'DROP TRIGGER `transactions_after_ins_tr1`'
+        );
     }
 };

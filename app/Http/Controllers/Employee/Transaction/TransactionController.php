@@ -106,6 +106,7 @@ class TransactionController extends Controller
                 })->get();
             if (count($check_customer) == 0) return redirect()->route('checkout_product_page')->with('error', 'Data Member Tidak Ditemukan');
             session()->put('customer_code', $customer_kode);
+            session()->put('customer_id', $check_customer[0]->id);
         }
 
 
@@ -139,7 +140,6 @@ class TransactionController extends Controller
         $get_milisecond = Carbon::now()->valueOf();
         $no_ref = intval($get_milisecond.rand(1,9999));
         $data_transaction = [
-            "customer_id" =>  $check_customer[0]->id ?? null,
             "employee_id" => $employee_id,
             "no_ref" => $no_ref,
             "total_price" => $total_all_price,
@@ -154,13 +154,22 @@ class TransactionController extends Controller
     }
 
     public function confirmation_checkout_page(){
+        $customer_id = session()->get('customer_id');
+        $license_Key = session()->get('license_key');
         $transaction_id = session()->get('transaction_id');
         $get_selling_unit_id = session()->get('cart_selling_unit');
         $transaction_list = Transaction_list::whereIn('selling_unit_id', $get_selling_unit_id)->where('transaction_id', $transaction_id)->get();
-        $selling_unit = $transaction_list->load('selling_unit.unit', 'selling_unit.product', 'transaction.customer');
+        $selling_unit = $transaction_list->load('selling_unit.unit', 'selling_unit.product');
+        $customer = Customer::where('id', $customer_id)
+        ->whereHas('employee.admin.client', function($query) use($license_Key) {
+            $query->where('license_key', $license_Key);
+        })->get();
         
         // dd($selling_unit);
-        return view('employee.transaction.confirmation-checkout', ['transaction_list' => $selling_unit]);
+        return view('employee.transaction.confirmation-checkout', [
+            'transaction_list' => $selling_unit,
+            'customers' => $customer
+        ]);
     }
 
     public function submit_payment(Request $request){
@@ -169,15 +178,18 @@ class TransactionController extends Controller
         $change = $request->kembali;
         $total_price = $request->total_price;
         $check = $pay < $total_price;
+        $customer_id = session()->get('customer_id');
         if($check) return redirect()->route('confirmation_checkout_page')->with('error', 'Jumlah yang dibayarkan kurang dari total harga');
-
         $transaction_id = session()->get('transaction_id');
         $transaction_input = [
             "pay" => $pay,
-            "change" => $change
+            "change" => $change,
+            "customer_id" => $customer_id
         ];
         Transaction::where('id', $transaction_id)->update($transaction_input);
-        Transaction_list::where('transaction_id', $transaction_id);
+        Transaction_list::where('transaction_id', $transaction_id)->update([
+            "transaction_id" => $transaction_id
+        ]);
         return redirect()->route('success_payment');
     }
 
@@ -188,7 +200,7 @@ class TransactionController extends Controller
         $Date = Carbon::now()->toDateString();
         $time = Carbon::now()->setTimezone('Asia/Jakarta')->toTimeString();
         session()->forget('cart_selling_unit');
-        session()->forget('customer_code');
+        
         session()->forget('transaction_id');
         session()->forget('cart_product');
         // dd($another_data);
