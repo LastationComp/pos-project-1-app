@@ -8,23 +8,22 @@
         </div>
 
         <div class="flex gap-5 px-5 h-[85%] justify-evenly relative mt-3">
-            <div class="list-checkout-wrapper border border-black rounded-lg w-[50%] h-full relative">
-                <div class="btn-group flex gap-3 bg-slate-300 rounded-lg p-3 absolute top-0 left-0 z-10 w-full">
-                    <a href="{{ route('transaction_page') }}"
-                        class="px-3 py-1 bg-green-500 text-white rounded-md border-2 border-slate-300 text-sm flex items-center"><i
-                            class="fa fa-plus mr-2"></i> Tambah</a>
-                    
+            <div class="list-checkout-wrapper border border-slate-400 shadow-md rounded-md w-[50%] h-full relative">
+                <div class="btn-group flex gap-3 bg-slate-300 rounded-md p-3 absolute top-0 left-0 z-10 w-full">
                     <a href="{{ route('cancel_transaction') }}"
                         onclick="return confirm('apakah yakin ingin membatalkan transaksi?')"
                         class="px-3 py-1 bg-red-500 text-white rounded-md border-2 border-slate-300 text-sm flex items-center"><i
                             class="fa fa-angle-double-left mr-2"></i> Batal</a>
+                    <a href="{{ route('transaction_page') }}"
+                        class="px-3 py-1 bg-green-500 text-white rounded-md border-2 border-slate-300 text-sm flex items-center"><i
+                            class="fa fa-plus mr-2"></i> Tambah</a>
                 </div>
                 <form action="{{ route('submit_checkout_product') }}" method="POST">
-                    <div class="list-item p-3 rounded-lg overflow-auto no-scrollbar h-full pt-14 relative -z-0 divide-y-2">
+                    <div class="list-item p-3 rounded-lg overflow-auto no-scrollbar h-full pt-14 relative -z-0 divide-y-2 divide-slate-400">
                         @foreach ($selling_unit as $product)
-                            <div class="item flex justify-between p-3 border-slate-600">
+                            <div class="item flex justify-between p-3 border-slate-600 mb-3">
                                 <div>
-                                    <h3 class="font-semibold text-xl">{{ $product->product_name }} ({{ $product->barcode }})</h3>
+                                    <h3 class="font-medium text-xl">{{ $product->product_name }} <span class="text-xs italic">( {{ $product->barcode }} )</span></h3>
                                     <select class="text-sm" name="sel_unit_{{ $product->id }}">
                                         @foreach ($product->selling_units as $selling_units)
                                             <option value="{{ $selling_units->id }}">
@@ -64,28 +63,26 @@
 
                 <div class="flex flex-col gap-3 mb-5">
                     <div>
-                        <span class="text-red-400 font-medium">
+                        <span class="text-red-500 font-medium text-sm">
                             @if ( $message = Session::get('error'))
                             {{ $message }}
                             @else
-                            *Isi jika pembeli adalah member
+                            * Khusus untuk member
                             @endif</span>
                     </div>
                     <div class="input-group flex w-full justify-between items-center">
                         <label class="text-md font-semibold" for="kode" class="w-[30%]">Kode Member</label>
                         <input type="text" name="kode" id="kode"
-                            class="w-[80%] h-[35px] border rounded-md border-black p-3">
+                            class="w-[70%] h-[35px] border rounded-md border-black p-3">
                     </div>
 
-
+                    <div class="flex items-center justify-end">
+                        <button type="submit"
+                        class=" focus:outline-none text-white bg-sky-500 hover:bg-green-600 focus:ring-4 focus:ring-green-300 font-medium rounded-md text-sm px-3 py-2 me-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                        <i class="bi bi-send mr-3"></i> Submit</button>
+                    </div>
                 </div>
-                <div class="flex justify-center items-center">
-                    <button type="submit"
-                        class=" focus:outline-none text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Submit</button>
-                </div>
-
-
-
+                
                 </form>
             </div>
 

@@ -38,7 +38,7 @@
 
     </style>
 </head>
-<body class="overflow-hidden font-rubik">
+<body class="overflow-hidden tracking-wide">
 
 
     <div class="bg-page absolute -z-20 w-full h-full">
@@ -47,8 +47,8 @@
 
     {{-- navbar --}}
     <nav class="">
-        <header class="{{ session()->has('transaction_id') ? '' : 'ml-[179px]' }}  text-white p-2 border-b border-white">
-            <div class="flex gap-7 justify-end items-center mr-5">
+        <header class="{{ session()->has('transaction_id') ? '' : 'ml-[179px]' }}  text-white p-2 border-b border-slate-300">
+            <div class="flex gap-10 justify-end items-center mr-5">
                 {{-- <div class="border-2 border-[#FF2204] rounded-xl bg-white flex items-center justify-center text-[#FF2204] px-2 font-bold relative text-sm">
                     <i class="bi bi-megaphone-fill p-1 mr-1"></i>
                     <a href="">API</a>
@@ -56,13 +56,13 @@
                 </div> --}}
 
                 <div class="user flex gap-2 justify-start items-center">
-                    <div class="bg-blue-500 w-fit h-fit rounded-full">
-                        <img src="{{ asset('images/'. session()->get('avatar_url'))}}" class="rounded-full w-[40px] h-[40px]" alt="">
+                    <div class="bg-sky-500 w-[35px] h-[35px] rounded-full">
+                        <div class="rounded-full w-full h-full bg-cover bg-center" style="background-image: url( {{ asset('images/'. session()->get('avatar_url')) }} );" ></div>
                     </div>
 
                     <div class="flex flex-col">
-                        <h3 class="text-md font-bold">{{session()->get('employeeName')}}</h3>
-                        <p class="text-sm font-medium">Kasir</p>
+                        <h3 class="text-md font-semibold">{{session()->get('employeeName')}}</h3>
+                        <p class="text-xs font-medium italic text-slate-300">Kasir</p>
                     </div>
                 </div>
 

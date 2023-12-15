@@ -1,31 +1,31 @@
 @extends('layout_superAdmin.app')
 
 @section('content')
-    <div class="container flex justify-center py-[200px]">
+    <div class="container flex justify-center items-center h-[100vh]">
         <div
-            class="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
+            class="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700 text-sm">
             @if ($message = Session::get('success'))
-                <div class="alert alert-success" id="success-msg" role="alert">
+                <div class="alert alert-success px-4 py-3 bg-green-500 text-white" id="success-msg" role="alert">
                     {{ $message }}
                 </div>
             @endif
             @if ($message = Session::get('error'))
-                <div class="alert alert-success" id="success-msg" role="alert">
-                    {{ $message }}
+                <div class="alert alert-success px-4 py-3 bg-red-100 text-red-700 text-sm" id="success-msg" role="alert">
+                    * {{ $message }}
                 </div>
             @endif
             @if ($errors->any())
-                <div class="alert alert-danger">
+                <div class="alert alert-danger px-4 py-3 bg-red-100 text-red-700 text-sm">
                     <ul>
                         @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
+                            <li>* {{ $error }}</li>
                         @endforeach
                     </ul>
                 </div>
             @endif
             <form class="space-y-6" action="{{ route('login_super_admin') }}" method="POST">
                 @csrf
-                <h5 class="text-xl font-medium text-gray-900 dark:text-white">Login Into Super Admin Dashboard</h5>
+                <h5 class="text-xl font-semibold font-mono text-gray-900 dark:text-white text-center">Super Admin Login </h5>
                 <div>
                     <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your
                         Username</label>
