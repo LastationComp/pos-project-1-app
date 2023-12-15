@@ -8,6 +8,7 @@
             <h2 class="text-3xl font-light capitalize">Konfirmasi Pembelian</h2>
         </div>
        
+        <div class="alert-group m-2">
         @if ($message = Session::get('success'))
                 <div class="alert alert-success" id="success-msg" role="alert">
                     {{ $message }}
@@ -30,6 +31,7 @@
                 </ul>
             </div>
         @endif
+        </div>
 
 <div class="flex gap-5 px-5 h-[75%] justify-evenly relative mt-3">
     <div class="list-checkout-wrapper border border-black rounded-lg w-[50%] h-full relative ">
@@ -52,7 +54,6 @@
                     </div>
                 </div>
 
-                
                 @endforeach
         </div>
     </div>

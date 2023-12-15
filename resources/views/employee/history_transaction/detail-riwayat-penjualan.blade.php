@@ -28,7 +28,7 @@
 
     </div>
     
-    <div class="table-wrapper w-[70%] h-[90%] overflow-auto no-scrollbar pt-40 -z-0">
+    <div class="table-wrapper w-[70%] h-[75%] overflow-auto no-scrollbar mt-28 -z-0">
         <table class="w-full text-md border-collapse rounded-corners rounded-t-xl overflow-hidden text-sm" cellpadding="7" cellspacing="0" border="5">
             <thead>
                 <tr class=" bg-[#4B4B4B] text-white font-semibold">
